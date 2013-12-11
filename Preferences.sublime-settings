@@ -1,0 +1,14 @@
+{
+    "tab_size": 4,
+  	"translate_tabs_to_spaces": true,
+	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
+	"scroll_past_end": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"soda_folder_icons": true,
+	"theme": "Soda Dark 3.sublime-theme",
+	"font_face": "Source Code Pro",
+	"font_size": 13
+}
