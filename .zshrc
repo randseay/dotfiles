@@ -23,3 +23,4 @@ antigen apply
 
 # Apply my custom things
 export PATH=/Users/nickzaccardi/bin:$PATH
+alias gs="git status"

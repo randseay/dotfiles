@@ -9,7 +9,22 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
 
-
-set number
 colorscheme zellner
+
+" Tab stuff
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+filetype plugin on
+
+" Key mappings
+map <C-K> :NERDTreeToggle<CR>
