@@ -13,9 +13,11 @@ endif
 set nocompatible 
 filetype off 
 
+" Start the vundle stuff
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" Install all the packages I like
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
@@ -34,11 +36,13 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
-"Programming
+"Programming helpers
 syntax enable
 set number
 set background=dark
 colorscheme solarized 
+
+" Fix backspace
 set backspace=indent,eol,start
 
 " Tab stuff
@@ -49,6 +53,11 @@ set expandtab
 
 filetype plugin on
 
-" Key mappings
+" >> Key mappings << "
 map <C-K> :NERDTreeToggle<CR>
+
+" Type jj to get out of insert mode
 inoremap jj <esc>
+
+" Save having to hit shift
+nnoremap a A
