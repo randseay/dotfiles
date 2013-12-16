@@ -27,7 +27,6 @@ Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
 Bundle "hallison/vim-markdown"
-Bundle "altercation/vim-colors-solarized"
 Bundle "file:///Users/nickzaccardi/j/utils/inow-snippets/.git"
 Bundle "altercation/vim-colors-solarized"
 
