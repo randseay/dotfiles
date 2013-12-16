@@ -28,6 +28,8 @@ Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
 Bundle "hallison/vim-markdown"
 Bundle "altercation/vim-colors-solarized"
+Bundle "file:///Users/nickzaccardi/j/utils/inow-snippets/.git"
+Bundle "altercation/vim-colors-solarized"
 
 " If this is a fresh install, install the packages
 if iCanHazVundle == 0
@@ -36,9 +38,8 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
-"Programming helpers
+" Make VIM colorful
 syntax enable
-set number
 set background=dark
 colorscheme solarized 
 
@@ -50,8 +51,12 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set softtabstop=4
 
-filetype plugin on
+" Helpful programming stuff
+set number
+filetype plugin indent on
+set foldmethod=indent
 
 " >> Key mappings << "
 map <C-K> :NERDTreeToggle<CR>
