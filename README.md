@@ -12,12 +12,12 @@ Unlike some other folks dotfiles repositories, there is no bash/zsh/python/ruby/
 git clone --recursive git@github.com:nZac/dotfiles.git ~/dotfiles
 ```
 
-# To use my vimrc file just symlink it into place
+### To use my vimrc file just symlink it into place
 ```bash
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 ```
 
-# To use the zsh configuration you will need a few other things, like antigen and virtualenv_wrapper if you want to use my theme.
+### To use the zsh configuration you will need a few other things, like antigen and virtualenv_wrapper if you want to use my theme.
 ```bash
 # Make sure you have pip installed
 which pip
@@ -42,5 +42,5 @@ chsh -s /path/to/zsh
 
 If you have questions let me know and I can try to help as best I can
 
-## License
+### License
 Do what ever you want with these files, it is nothing more than a compilation of a lot of smart peoples work, I own none of it.
