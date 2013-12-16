@@ -34,5 +34,5 @@ antigen theme https://gist.github.com/7885406.git personal
 antigen apply
 
 # Apply my custom things
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 alias gs="git status"
