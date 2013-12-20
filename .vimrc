@@ -26,6 +26,7 @@ call vundle#rc()
 " Install all the packages I like
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -35,6 +36,13 @@ Bundle "honza/vim-snippets"
 Bundle "hallison/vim-markdown"
 Bundle "file:///Users/nickzaccardi/j/utils/inow-snippets/.git"
 Bundle "altercation/vim-colors-solarized"
+Bundle "mattn/emmet-vim"
+Bundle "bling/vim-airline"
+Bundle "fholgado/minibufexpl.vim"
+
+" Turn on Powerline
+set laststatus=2
+let g:airline_powerline_fonts=1
 
 " If this is a fresh install, install the packages
 if iCanHazVundle == 0
@@ -47,6 +55,7 @@ endif
 syntax enable
 set background=dark
 colorscheme solarized 
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 
 " Fix backspace
 set backspace=indent,eol,start
