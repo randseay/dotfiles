@@ -73,10 +73,18 @@ filetype plugin indent on
 set foldmethod=indent
 
 " >> Key mappings << "
+
+" Similar to sublime text
 map <C-K> :NERDTreeToggle<CR>
 
 " Type jj to get out of insert mode
 inoremap jj <esc>
 
-" Save having to hit shift
-nnoremap a A
+" close the current buffer without closing the split
+nmap ,d :b#<bar>bd#<CR>
+
+" easier moving around in splits and stuff
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
