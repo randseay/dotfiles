@@ -55,7 +55,7 @@ endif
 syntax enable
 set background=dark
 colorscheme solarized 
-set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+set guifont="Source Code Pro for Powerline Regular:h10"
 
 " Fix backspace
 set backspace=indent,eol,start
