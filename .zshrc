@@ -36,3 +36,4 @@ antigen apply
 # Apply my custom things
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 alias gs="git status"
+alias lla="ls -la"
