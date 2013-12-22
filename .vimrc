@@ -39,6 +39,7 @@ Bundle "altercation/vim-colors-solarized"
 Bundle "mattn/emmet-vim"
 Bundle "bling/vim-airline"
 Bundle "fholgado/minibufexpl.vim"
+Bundle "davidhalter/jedi-vim"
 
 " Turn on Powerline
 set laststatus=2
@@ -55,7 +56,7 @@ endif
 syntax enable
 set background=dark
 colorscheme solarized 
-set guifont="Source Code Pro for Powerline Regular:h10"
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 
 
 " Fix backspace
 set backspace=indent,eol,start
