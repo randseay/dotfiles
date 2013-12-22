@@ -40,6 +40,7 @@ Bundle "mattn/emmet-vim"
 Bundle "bling/vim-airline"
 Bundle "fholgado/minibufexpl.vim"
 Bundle "davidhalter/jedi-vim"
+Bundle "ervandew/supertab"
 
 " Turn on Powerline
 set laststatus=2
