@@ -56,6 +56,8 @@ endif
 " Make VIM colorful
 syntax enable
 set background=dark
+set t_Co=256
+let g:solarized_termcolors=256
 colorscheme solarized 
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 
 
