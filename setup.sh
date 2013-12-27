@@ -19,3 +19,9 @@ echo "linking up the gitconfig"
 ln -sfv $DOTFILES/.global_gitignore $HOME/.global_gitignore
 git config --global core.excludesfile ~/.global_gitignore
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    defaults write -g ApplePressAndHoldEnabled -bool false
+    defaults write -g KeyRepeat .01
+    defualts write -g InitialKeyReapt 1.5
+    defaults write com.apple.dock expose-animation-duration ; killall Dock
+fi
