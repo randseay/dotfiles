@@ -1,5 +1,12 @@
 source $HOME/dotfiles/antigen/antigen.zsh
 
+# Apply my custom things
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+
+# Setup some environment variables 
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/j
+
 # Load oh-my-zsh library.
 antigen use oh-my-zsh
 
@@ -33,7 +40,7 @@ antigen theme https://gist.github.com/7885406.git personal
 # Tell antigen that you're done.
 antigen apply
 
-# Apply my custom things
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+# Setup some helpful aliases
 alias gs="git status"
 alias lla="ls -la"
+
