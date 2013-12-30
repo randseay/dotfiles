@@ -31,6 +31,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
@@ -75,6 +76,7 @@ set softtabstop=4
 
 " Helpful programming stuff
 set number
+filetype plugin on
 filetype plugin indent on
 set foldmethod=indent
 
