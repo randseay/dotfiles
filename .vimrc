@@ -15,6 +15,8 @@ if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+let mapleader = ","
+
 " Continue with your regularly scheduled programming
 set nocompatible 
 filetype off 
@@ -85,7 +87,7 @@ map <C-K> :NERDTreeToggle<CR>
 inoremap jj <esc>
 
 " close the current buffer without closing the split
-nmap ,d :b#<bar>bd#<CR>
+nmap <leader>d :b#<bar>bd#<CR>
 
 " easier moving around in splits and stuff
 nmap <C-h> <C-w>h
