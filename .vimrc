@@ -15,6 +15,8 @@ if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+let mapleader = ","
+
 " Continue with your regularly scheduled programming
 set nocompatible 
 filetype off 
@@ -29,6 +31,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
@@ -73,6 +76,7 @@ set softtabstop=4
 
 " Helpful programming stuff
 set number
+filetype plugin on
 filetype plugin indent on
 set foldmethod=indent
 
@@ -85,7 +89,7 @@ map <C-K> :NERDTreeToggle<CR>
 inoremap jj <esc>
 
 " close the current buffer without closing the split
-nmap ,d :b#<bar>bd#<CR>
+nmap <leader>d :b#<bar>bd#<CR>
 
 " easier moving around in splits and stuff
 nmap <C-h> <C-w>h
