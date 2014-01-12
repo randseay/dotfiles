@@ -31,7 +31,6 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdcommenter'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
@@ -44,6 +43,11 @@ Bundle "bling/vim-airline"
 Bundle "fholgado/minibufexpl.vim"
 Bundle "davidhalter/jedi-vim"
 Bundle "ervandew/supertab"
+Bundle "elzr/vim-json"
+
+" Some bundles need different things
+filetype on
+Bundle 'scrooloose/nerdcommenter'
 
 " Turn on Powerline
 set laststatus=2
@@ -83,16 +87,24 @@ set foldmethod=indent
 " >> Key mappings << "
 
 " Similar to sublime text
-map <C-K> :NERDTreeToggle<CR>
+map <leader>k :NERDTreeToggle<CR>
 
 " Type jj to get out of insert mode
 inoremap jj <esc>
 
 " close the current buffer without closing the split
-nmap <leader>d :b#<bar>bd#<CR>
+map <leader>e :b#<bar>bd#<CR>
 
 " easier moving around in splits and stuff
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+set splitright
+
+" Make vim equalize when resized
+autocmd VimResized * wincmd =
+
+" use the system clipboard
+set clipboard=unnamed
