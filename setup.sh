@@ -13,6 +13,8 @@ ln -sfv $DOTFILES/.zshrc $HOME/.zshrc
 echo "setting up vim"
 ln -sfv $DOTFILES/.vimrc $HOME/.vimrc
 
+mkdir -p $HOME/.vim/spell/
+ln -sfv $DOTFILES/vim/spell/en.utf-8.spl $HOME/.vim/spell/
 vim +BundleInstall +qall
 
 echo "linking up the gitconfig"

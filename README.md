@@ -1,9 +1,9 @@
 # My Personal Dotfiles
 
-## Disclamer
+## Disclaimer
 Many before me have published dotfiles for others to look at and in an effort to give back... not that I think anyone should use these... I thought it might be good to put mine out there.
 
-I am new to VIM, so my vimrc probably isn't all that awsome though over time I hope it improves.
+I am new to VIM, so my vimrc probably isn't all that awesome though over time I hope it improves.
 
 ## Installing the files
 Unlike some other folks dotfiles repositories, there is no bash/zsh/python/ruby/insert-language-here script that will automatically install these.  My process is simple though...

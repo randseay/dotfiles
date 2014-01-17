@@ -101,6 +101,10 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" better save command
+inoremap <leader>s <esc>:w<CR>i
+
+" natural splitting
 set splitright
 
 " Make vim equalize when resized
@@ -108,3 +112,7 @@ autocmd VimResized * wincmd =
 
 " use the system clipboard
 set clipboard=unnamed
+
+" setup spell checking
+set spell spelllang=en
+setlocal spell spelllang=en_us
