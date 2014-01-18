@@ -115,4 +115,4 @@ set clipboard=unnamed
 
 " setup spell checking
 set spell spelllang=en
-setlocal spell spelllang=en_us
+setlocal spell spelllang=en
