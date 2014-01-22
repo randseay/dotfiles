@@ -40,6 +40,9 @@ antigen theme https://gist.github.com/7885406.git personal
 # Tell antigen that you're done.
 antigen apply
 
+# Set up pyenv
+eval "$(pyenv init -)"
+
 # Setup some helpful aliases
 alias gs="git status"
 alias lla="ls -la"

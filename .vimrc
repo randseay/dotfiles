@@ -116,3 +116,5 @@ set clipboard=unnamed
 " setup spell checking
 set spell spelllang=en
 setlocal spell spelllang=en
+set cc=80,100,120
+
