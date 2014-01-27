@@ -48,6 +48,7 @@ Bundle "elzr/vim-json"
 " Some bundles need different things
 filetype on
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'suan/vim-instant-markdown'
 
 " Turn on Powerline
 set laststatus=2
