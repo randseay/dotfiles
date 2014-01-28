@@ -44,6 +44,7 @@ Bundle "fholgado/minibufexpl.vim"
 Bundle "davidhalter/jedi-vim"
 Bundle "ervandew/supertab"
 Bundle "elzr/vim-json"
+Bundle "wincent/Command-T"
 
 " Some bundles need different things
 filetype on
