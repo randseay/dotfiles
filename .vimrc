@@ -105,6 +105,8 @@ nmap <C-l> <C-w>l
 " better save command
 inoremap <leader>s <esc>:w<CR>i
 
+" switch to previous buffer
+map <leader>b <esc>:b#<CR>
 " natural splitting
 set splitright
 
