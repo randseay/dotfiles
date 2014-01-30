@@ -44,7 +44,7 @@ Bundle "fholgado/minibufexpl.vim"
 Bundle "davidhalter/jedi-vim"
 Bundle "ervandew/supertab"
 Bundle "elzr/vim-json"
-Bundle "wincent/Command-T"
+Bundle "stephpy/vim-yaml"
 
 " Some bundles need different things
 filetype on
@@ -84,7 +84,6 @@ set softtabstop=4
 set number
 filetype plugin on
 filetype plugin indent on
-set foldmethod=indent
 
 " >> Key mappings << "
 
@@ -119,4 +118,16 @@ set clipboard=unnamed
 set spell spelllang=en
 setlocal spell spelllang=en
 set cc=80,100,120
+
+" File specific settings
+augroup vagrant
+    au!
+    au BufRead,BufNewFile Vagrantfile set filetype=ruby
+    set smartindent
+    set tabstop=2
+    set shiftwidth=2
+    set expandtab
+    set softtabstop=2
+augroup END
+
 
