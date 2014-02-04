@@ -50,6 +50,7 @@ Bundle "stephpy/vim-yaml"
 filetype on
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'suan/vim-instant-markdown'
+Bundle 'Rykka/riv.vim'
 
 " Turn on Powerline
 set laststatus=2
@@ -119,7 +120,10 @@ set clipboard=unnamed
 " setup spell checking
 set spell spelllang=en
 setlocal spell spelllang=en
-set cc=80,100,120
+
+" Column setup and text wrap
+set cc=80
+set tw=80
 
 " File specific settings
 augroup vagrant
