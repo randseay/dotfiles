@@ -42,6 +42,7 @@ antigen apply
 
 # Set up pyenv
 eval "$(pyenv init -)"
+pyenv virtualenvwrapper_lazy
 
 # Setup some helpful aliases
 alias gs="git status"
