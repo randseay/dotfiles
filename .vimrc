@@ -45,6 +45,7 @@ Bundle "davidhalter/jedi-vim"
 Bundle "ervandew/supertab"
 Bundle "elzr/vim-json"
 Bundle "stephpy/vim-yaml"
+Bundle "dahu/Insertlessly"
 
 " Some bundles need different things
 filetype on
@@ -85,10 +86,38 @@ set softtabstop=4
 set number
 filetype plugin on
 filetype plugin indent on
+set fileformat=unix
 
-" >> Key mappings << "
+" Turn off auto folding on save for rst files
+let g:riv_fold_auto_update = 0
 
-" Similar to sublime text
+" natural splitting
+set splitright
+
+" Make vim equalize when resized
+autocmd VimResized * wincmd =
+
+" use the system clipboard
+set clipboard=unnamed
+
+" setup spell checking
+set spell spelllang=en
+setlocal spell spelllang=en
+
+" File specific settings
+augroup vagrant
+    au!
+    au BufRead,BufNewFile Vagrantfile set filetype=ruby
+    set smartindent
+    set tabstop=2
+    set shiftwidth=2
+    set expandtab
+    set softtabstop=2
+augroup END
+
+autocmd FileType rst setlocal cc=80 tw=80 
+
+" Have NERDTree open similar to Sublime Text
 map <leader>k :NERDTreeToggle<CR>
 
 " Type jj to get out of insert mode
@@ -108,32 +137,10 @@ inoremap <leader>s <esc>:w<CR>i
 
 " switch to previous buffer
 map <leader>b <esc>:b#<CR>
-" natural splitting
-set splitright
 
-" Make vim equalize when resized
-autocmd VimResized * wincmd =
-
-" use the system clipboard
-set clipboard=unnamed
-
-" setup spell checking
-set spell spelllang=en
-setlocal spell spelllang=en
-
-" Column setup and text wrap
-set cc=80
-set tw=80
-
-" File specific settings
-augroup vagrant
-    au!
-    au BufRead,BufNewFile Vagrantfile set filetype=ruby
-    set smartindent
-    set tabstop=2
-    set shiftwidth=2
-    set expandtab
-    set softtabstop=2
-augroup END
-
-
+" Make return far more powerful
+" Two hits, gives you a newline and you are in the same mode you started in
+" One is the same as <ESC>to 
+" Thanks to o11c in #vim on freenode for the tip
+" imap <CR> <Esc>
+" nnoremap <CR> a<CR>
