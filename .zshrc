@@ -44,6 +44,11 @@ antigen apply
 eval "$(pyenv init -)"
 pyenv virtualenvwrapper_lazy
 
+# Setup gopath
+export GOPATH=$HOME/j/oss/gocode
+
+export PATH=$PATH:$GOPATH/bin
+
 # Setup some helpful aliases
 alias gs="git status"
 alias lla="ls -la"
