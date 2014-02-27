@@ -1,4 +1,4 @@
-" Auto Install Vundle 
+" Auto Install Vundle
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
@@ -7,7 +7,7 @@ if !filereadable(vundle_readme)
     silent !mkdir -p ~/.vim/bundle
     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
     let iCanHazVundle=0
-endif 
+endif
 
 " Reload .vimrc on save
 " Thanks JeffreyWay...
@@ -18,8 +18,8 @@ endif
 let mapleader = ","
 
 " Continue with your regularly scheduled programming
-set nocompatible 
-filetype off 
+set nocompatible
+filetype off
 
 " Start the vundle stuff
 set rtp+=~/.vim/bundle/vundle/
@@ -46,11 +46,13 @@ Bundle "ervandew/supertab"
 Bundle "elzr/vim-json"
 Bundle "stephpy/vim-yaml"
 Bundle "dahu/Insertlessly"
+Bundle "tpope/vim-surround"
+Bundle "tpope/vim-unimpaired"
+
 
 " Some bundles need different things
 filetype on
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'suan/vim-instant-markdown'
 Bundle 'Rykka/riv.vim'
 
 " Turn on Powerline
@@ -69,8 +71,8 @@ syntax enable
 set background=dark
 set t_Co=256
 let g:solarized_termcolors=256
-colorscheme solarized 
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 
+colorscheme solarized
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
 " Fix backspace
 set backspace=indent,eol,start
@@ -115,7 +117,7 @@ augroup vagrant
     set softtabstop=2
 augroup END
 
-autocmd FileType rst setlocal cc=80 tw=80 
+autocmd FileType rst setlocal cc=80 tw=80
 
 " Have NERDTree open similar to Sublime Text
 map <leader>k :NERDTreeToggle<CR>
@@ -140,7 +142,7 @@ map <leader>b <esc>:b#<CR>
 
 " Make return far more powerful
 " Two hits, gives you a newline and you are in the same mode you started in
-" One is the same as <ESC>to 
+" One is the same as <ESC>to
 " Thanks to o11c in #vim on freenode for the tip
 " imap <CR> <Esc>
 " nnoremap <CR> a<CR>
