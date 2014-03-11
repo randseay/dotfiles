@@ -121,6 +121,7 @@ autocmd FileType rst setlocal cc=80 tw=80
 
 " Have NERDTree open similar to Sublime Text
 map <leader>k :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
 
 " Type jj to get out of insert mode
 inoremap jj <esc>
@@ -134,15 +135,9 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" better save command
-inoremap <leader>s <esc>:w<CR>i
-
 " switch to previous buffer
-map <leader>b <esc>:b#<CR>
+nnoremap <leader>b <esc>:b#<CR>
 
-" Make return far more powerful
-" Two hits, gives you a newline and you are in the same mode you started in
-" One is the same as <ESC>to
-" Thanks to o11c in #vim on freenode for the tip
-" imap <CR> <Esc>
-" nnoremap <CR> a<CR>
+" reformat text a lot easier
+nnoremap <leader>0 <esc>0gq}
+nnoremap <leader>} <esc>gq}
