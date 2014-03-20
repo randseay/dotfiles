@@ -62,6 +62,7 @@ set expandtab
 set softtabstop=4
 set number
 set t_Co=256
+set fileformat=unix
 
 "------------------------------------------------------------------------------
 " Syntax Highlighting and Color
@@ -79,7 +80,6 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 " Helpful programming stuff
 filetype plugin on
 filetype plugin indent on
-set fileformat=unix
 
 " Turn off auto folding on save for rst files
 let g:riv_fold_auto_update = 0
