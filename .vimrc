@@ -25,7 +25,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'airblade/vim-gitgutter'
+Bundle 'mhinz/vim-signify'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle "MarcWeber/vim-addon-mw-utils"
