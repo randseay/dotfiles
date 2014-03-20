@@ -91,8 +91,6 @@ let g:solarized_termcolors=256
 colorscheme solarized
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
-
-
 " Helpful programming stuff
 filetype plugin on
 filetype plugin indent on
@@ -100,8 +98,6 @@ filetype plugin indent on
 " Turn off auto folding on save for rst files
 let g:riv_fold_auto_update = 0
 
-" natural splitting
-set splitright
 
 " Make vim equalize when resized
 autocmd VimResized * wincmd =
@@ -117,14 +113,9 @@ setlocal spell spelllang=en
 augroup vagrant
     au!
     au BufRead,BufNewFile Vagrantfile set filetype=ruby
-    set smartindent
-    set tabstop=2
-    set shiftwidth=2
-    set expandtab
-    set softtabstop=2
 augroup END
 
-autocmd FileType rst setlocal cc=80 tw=80
+autocmd FileType rst,markdown setlocal textwidth=80
 
 " Have NERDTree open similar to Sublime Text
 map <leader>k :NERDTreeToggle<CR>
