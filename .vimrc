@@ -97,40 +97,35 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 "------------------------------------------------------------------------------
 filetype plugin on
 filetype plugin indent on
-let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
+autocmd FileType rst,markdown setlocal textwidth=80 " Wrap markdown rst files @ 80
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby " Vagrant is ruby :(
 
+"------------------------------------------------------------------------------
+" Editor Settings
+"------------------------------------------------------------------------------
 autocmd VimResized * wincmd = " Make vim equalize when resized
 
-
-" setup spell checking
-
-" File specific settings
-augroup vagrant
-    au!
-    au BufRead,BufNewFile Vagrantfile set filetype=ruby
-augroup END
-
-autocmd FileType rst,markdown setlocal textwidth=80
-
-" Have NERDTree open similar to Sublime Text
-map <leader>k :NERDTreeToggle<CR>
+"------------------------------------------------------------------------------
+" Plugin  Settings
+"------------------------------------------------------------------------------
 let NERDTreeIgnore = ['\.pyc$']
+let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
 
-" Type jj to get out of insert mode
+"------------------------------------------------------------------------------
+" General Remappings
+"------------------------------------------------------------------------------
 inoremap jj <esc>
-
-" close the current buffer without closing the split
-map <leader>e :b#<bar>bd#<CR>
-
-" easier moving around in splits and stuff
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" switch to previous buffer
-nnoremap <leader>b <esc>:b#<CR>
+"------------------------------------------------------------------------------
+" Leader mappings
+"------------------------------------------------------------------------------
+nnoremap <leader>k :NERDTreeToggle<CR> " Toggle NERDTree
+nnoremap <leader>e :b#<bar>bd#<CR> " close current buffer without closing split
+nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
+nnoremap <leader>} <esc>gq} " Reformat paragraph
 
-" reformat text a lot easier
-nnoremap <leader>0 <esc>0gq}
-nnoremap <leader>} <esc>gq}
+
