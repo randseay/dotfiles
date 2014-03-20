@@ -67,6 +67,7 @@ set t_Co=256
 set scrolloff=999
 set showmatch
 set showmode
+set spell spelllang=en
 set splitbelow
 set splitright
 set title
@@ -91,23 +92,17 @@ let g:solarized_termcolors=256
 colorscheme solarized
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
-" Helpful programming stuff
+"------------------------------------------------------------------------------
+" File Type Specific
+"------------------------------------------------------------------------------
 filetype plugin on
 filetype plugin indent on
+let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
 
-" Turn off auto folding on save for rst files
-let g:riv_fold_auto_update = 0
+autocmd VimResized * wincmd = " Make vim equalize when resized
 
-
-" Make vim equalize when resized
-autocmd VimResized * wincmd =
-
-" use the system clipboard
-set clipboard=unnamed
 
 " setup spell checking
-set spell spelllang=en
-setlocal spell spelllang=en
 
 " File specific settings
 augroup vagrant
