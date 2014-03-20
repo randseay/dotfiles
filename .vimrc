@@ -60,6 +60,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
+set number
+set t_Co=256
 
 "------------------------------------------------------------------------------
 " Syntax Highlighting and Color
@@ -68,7 +70,6 @@ set laststatus=2
 let g:airline_powerline_fonts=1
 syntax enable
 set background=dark
-set t_Co=256
 let g:solarized_termcolors=256
 colorscheme solarized
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
@@ -76,7 +77,6 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
 
 " Helpful programming stuff
-set number
 filetype plugin on
 filetype plugin indent on
 set fileformat=unix
