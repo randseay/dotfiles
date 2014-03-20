@@ -9,12 +9,6 @@ if !filereadable(vundle_readme)
     let iCanHazVundle=0
 endif
 
-" Reload .vimrc on save
-" Thanks JeffreyWay...
-if has("autocmd")
-    autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-
 let mapleader = ","
 
 " Continue with your regularly scheduled programming
