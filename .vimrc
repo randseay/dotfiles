@@ -134,5 +134,7 @@ nnoremap <leader>k :NERDTreeToggle<CR> " Toggle NERDTree
 nnoremap <leader>e :b#<bar>bd#<CR> " close current buffer without closing split
 nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
 nnoremap <leader>} <esc>gq} " Reformat paragraph
+map <leader>y "*y
+map <leader>p "*p
 
 
