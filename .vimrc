@@ -1,3 +1,10 @@
+"
+"
+"
+"
+
+
+
 "------------------------------------------------------------------------------
 " VUNDLE SETTINGS
 "------------------------------------------------------------------------------
@@ -18,7 +25,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
@@ -27,17 +33,11 @@ Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
 Bundle "hallison/vim-markdown"
-Bundle "file:///Users/nickzaccardi/j/utils/inow-snippets/.git"
 Bundle "altercation/vim-colors-solarized"
 Bundle "mattn/emmet-vim"
 Bundle "bling/vim-airline"
 Bundle "fholgado/minibufexpl.vim"
-Bundle "davidhalter/jedi-vim"
-Bundle "ervandew/supertab"
-Bundle "elzr/vim-json"
-Bundle "stephpy/vim-yaml"
 Bundle "dahu/Insertlessly"
-Bundle "tpope/vim-surround"
 Bundle "tpope/vim-unimpaired"
 
 filetype on
@@ -54,38 +54,39 @@ endif
 " GENERAL SETTINGS
 "------------------------------------------------------------------------------
 let mapleader = ";"
-set autoread
-set backspace=2
-set colorcolumn=80
-set cursorline
-set fileformat=unix
-set hidden
-set laststatus=2
-set listchars=tab:›\ ,eol:¬,trail:⋅
-set number
-set t_Co=256
-set scrolloff=999
-set showmatch
-set showmode
-set spell spelllang=en
-set splitbelow
-set splitright
-set title
-set visualbell
+set autoread                " Auto-reload changed files
+set backspace=2             " Fix backspace to not be stupid
+set colorcolumn=80          " Highlight column 80
+set cursorline              " Highlight the line of the cursor
+set confirm                 " Confirm before switching from an unsaved buffer
+set fileformat=unix         " We are a unix only shop
+set hidden                  " Allow switching buffers without saving.see confirm
+set laststatus=2            " Always show two status  lines
+set listchars=tab:›\ ,eol:¬,trail:⋅ " remap hidden characters
+set number                  " Show line numbers
+set t_Co=256                " 256 colors, go iTerm 2 baby!
+set scrolloff=999           " Always keep the cursor in the middle  of the page
+set showmatch               " Highlight the opposing bracket
+set showmode                " Show the mode of the current buffer (visual, insert)
+set spell spelllang=en      " Set spelling to be English
+set splitbelow              " Splits should open below
+set splitright              " Splits should open right
+set title                   " Show the title in MacVim
+set visualbell              " Who doesn't like a visual bell?!?
 
 
 "------------------------------------------------------------------------------
 " Tab Settings
 "------------------------------------------------------------------------------
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set expandtab               " Expand tabs to spaces
+set tabstop=4               " Number of spaces a file counts for
+set softtabstop=4           " Soft-tab width in spaces
+set shiftwidth=4            " Number of spaces for each >>
 
 "------------------------------------------------------------------------------
 " Syntax Highlighting and Color
 "------------------------------------------------------------------------------
-syntax on
+syntax on       " turn on syntax highlightingp
 let g:airline_powerline_fonts=1
 set background=dark
 let g:solarized_termcolors=256
@@ -115,10 +116,16 @@ let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
 " General Remappings
 "------------------------------------------------------------------------------
 inoremap jj <esc>
+
+" Navigating splits is much easier
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+" using visual up/down instead of linewise very helpful for wrapped text
+map j gj
+map k gk
 
 "------------------------------------------------------------------------------
 " Leader mappings
