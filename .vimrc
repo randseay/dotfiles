@@ -9,7 +9,7 @@ if !filereadable(vundle_readme)
     let iCanHazVundle=0
 endif
 
-let mapleader = ","
+let mapleader = ";"
 
 " Continue with your regularly scheduled programming
 set nocompatible
