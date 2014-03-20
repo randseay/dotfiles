@@ -58,9 +58,11 @@ set autoread
 set backspace=2
 set colorcolumn=80
 set cursorline
+set fileformat=unix
 set hidden
 set laststatus=2
 set listchars=tab:›\ ,eol:¬,trail:⋅
+set number
 set t_Co=256
 set scrolloff=999
 set showmatch
@@ -70,13 +72,14 @@ set splitright
 set title
 set visualbell
 
-set smartindent
-set tabstop=4
-set shiftwidth=4
+
+"------------------------------------------------------------------------------
+" Tab Settings
+"------------------------------------------------------------------------------
 set expandtab
+set tabstop=4
 set softtabstop=4
-set number
-set fileformat=unix
+set shiftwidth=4
 
 "------------------------------------------------------------------------------
 " Syntax Highlighting and Color
