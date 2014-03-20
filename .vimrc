@@ -54,22 +54,35 @@ endif
 " GENERAL SETTINGS
 "------------------------------------------------------------------------------
 let mapleader = ";"
-set backspace=indent,eol,start
+set autoread
+set backspace=2
+set colorcolumn=80
+set cursorline
+set hidden
+set laststatus=2
+set listchars=tab:›\ ,eol:¬,trail:⋅
+set t_Co=256
+set scrolloff=999
+set showmatch
+set showmode
+set splitbelow
+set splitright
+set title
+set visualbell
+
 set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
 set number
-set t_Co=256
 set fileformat=unix
 
 "------------------------------------------------------------------------------
 " Syntax Highlighting and Color
 "------------------------------------------------------------------------------
-set laststatus=2
+syntax on
 let g:airline_powerline_fonts=1
-syntax enable
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
