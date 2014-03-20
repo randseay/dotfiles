@@ -1,4 +1,6 @@
-" Auto Install Vundle
+"------------------------------------------------------------------------------
+" VUNDLE SETTINGS
+"------------------------------------------------------------------------------
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
@@ -9,17 +11,12 @@ if !filereadable(vundle_readme)
     let iCanHazVundle=0
 endif
 
-let mapleader = ";"
-
-" Continue with your regularly scheduled programming
 set nocompatible
 filetype off
 
-" Start the vundle stuff
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" Install all the packages I like
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
@@ -43,24 +40,32 @@ Bundle "dahu/Insertlessly"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-unimpaired"
 
-
-" Some bundles need different things
 filetype on
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Rykka/riv.vim'
 
-" Turn on Powerline
-set laststatus=2
-let g:airline_powerline_fonts=1
-
-" If this is a fresh install, install the packages
 if iCanHazVundle == 0
     echo "Installing Vundle packages"
     echo ""
     :BundleInstall
 endif
 
-" Make VIM colorful
+"------------------------------------------------------------------------------
+" GENERAL SETTINGS
+"------------------------------------------------------------------------------
+let mapleader = ";"
+set backspace=indent,eol,start
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+
+"------------------------------------------------------------------------------
+" Syntax Highlighting and Color
+"------------------------------------------------------------------------------
+set laststatus=2
+let g:airline_powerline_fonts=1
 syntax enable
 set background=dark
 set t_Co=256
@@ -68,15 +73,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
-" Fix backspace
-set backspace=indent,eol,start
 
-" Tab stuff
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set softtabstop=4
 
 " Helpful programming stuff
 set number
