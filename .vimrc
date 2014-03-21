@@ -24,21 +24,27 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+
+" Must have plugins
 Bundle 'gmarik/vundle'
+Bundle 'tomtom/tlib_vim'
 Bundle 'mhinz/vim-signify'
 Bundle 'scrooloose/nerdtree'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'dahu/Insertlessly'
+
+" Plugins that are nice
+Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'scrooloose/syntastic'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
-Bundle "hallison/vim-markdown"
-Bundle "altercation/vim-colors-solarized"
-Bundle "mattn/emmet-vim"
-Bundle "bling/vim-airline"
-Bundle "fholgado/minibufexpl.vim"
-Bundle "dahu/Insertlessly"
-Bundle "tpope/vim-unimpaired"
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+Bundle 'hallison/vim-markdown'
+Bundle 'mattn/emmet-vim'
+Bundle 'kien/ctrlp.vim'
+"Bundle 'fholgado/minibufexpl.vim'
+Bundle 'godlygeek/tabular'
 
 filetype on
 Bundle 'scrooloose/nerdcommenter'
@@ -87,10 +93,10 @@ set shiftwidth=4            " Number of spaces for each >>
 " Syntax Highlighting and Color
 "------------------------------------------------------------------------------
 syntax on       " turn on syntax highlightingp
-let g:airline_powerline_fonts=1
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+let g:airline_powerline_fonts=1
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
 "------------------------------------------------------------------------------
@@ -130,11 +136,17 @@ map k gk
 "------------------------------------------------------------------------------
 " Leader mappings
 "------------------------------------------------------------------------------
-nnoremap <leader>k :NERDTreeToggle<CR> " Toggle NERDTree
 nnoremap <leader>e :b#<bar>bd#<CR> " close current buffer without closing split
 nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
 nnoremap <leader>} <esc>gq} " Reformat paragraph
 map <leader>y "*y
 map <leader>p "*p
 
+"------------------------------------------------------------------------------
+" Plugin mappings
+"------------------------------------------------------------------------------
+nnoremap <leader>t :CtrlP<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>l :CtrlPLine<cr>
+nnoremap <leader>k :NERDTreeToggle<CR> " Toggle NERDTree
 
