@@ -1,8 +1,17 @@
+" 01101110 01011010 01100001 01100011
 "
+"            /$$$$$$$$
+"           |_____ $$
+" /$$$$$$$      /$$/   /$$$$$$   /$$$$$$$
+" | $$__  $$    /$$/   |____  $$ /$$_____/
+" | $$  \ $$   /$$/     /$$$$$$$| $$
+" | $$  | $$  /$$/     /$$__  $$| $$
+" | $$  | $$ /$$$$$$$$|  $$$$$$$|  $$$$$$$
+" |__/  |__/|________/ \_______/ \_______/
 "
-"
-"
-
+" By: Nick Zaccardi
+" Project: Dotfiles
+" License: GNU GPLv3 (https://www.gnu.org/copyleft/gpl.html)
 
 
 "------------------------------------------------------------------------------
@@ -43,7 +52,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'hallison/vim-markdown'
 Bundle 'mattn/emmet-vim'
 Bundle 'kien/ctrlp.vim'
-"Bundle 'fholgado/minibufexpl.vim'
+Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
 
 filetype on
@@ -117,6 +126,8 @@ autocmd VimResized * wincmd = " Make vim equalize when resized
 "------------------------------------------------------------------------------
 let NERDTreeIgnore = ['\.pyc$']
 let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
+let g:miniBufExplBRSplit = 0 " put MBE on top
+let g:miniBufExplBuffersNeeded = 1
 
 "------------------------------------------------------------------------------
 " General Remappings
@@ -136,7 +147,7 @@ map k gk
 "------------------------------------------------------------------------------
 " Leader mappings
 "------------------------------------------------------------------------------
-nnoremap <leader>e :b#<bar>bd#<CR> " close current buffer without closing split
+nnoremap <leader>e :MBEbd<CR> " close current buffer without closing split
 nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
 nnoremap <leader>} <esc>gq} " Reformat paragraph
 map <leader>y "*y
