@@ -36,22 +36,24 @@ call vundle#rc()
 
 " Must have plugins
 Bundle 'gmarik/vundle'
-Bundle 'tomtom/tlib_vim'
 Bundle 'mhinz/vim-signify'
-Bundle 'scrooloose/nerdtree'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'dahu/Insertlessly'
+Bundle 'kien/ctrlp.vim'
 
-" Plugins that are nice
+" Utility plugins
+Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
+
+" Plugins that are nice in order of use
+Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 Bundle 'hallison/vim-markdown'
 Bundle 'mattn/emmet-vim'
-Bundle 'kien/ctrlp.vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
 
@@ -128,6 +130,17 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
 let g:miniBufExplBRSplit = 0 " put MBE on top
 let g:miniBufExplBuffersNeeded = 1
+let g:ctrlp_working_path_mode = 'ra' " Set the working path to a .git folder
+
+"------------------------------------------------------------------------------
+" Tab completion setup
+"------------------------------------------------------------------------------
+set wildmode=list:longest " Wildcard matches show a list, matching the longest first
+set wildignore+=.git,.hg,.svn " Ignore version control repos
+set wildignore+=*.6 " Ignore Go compiled files
+set wildignore+=*.pyc " Ignore Python compiled files
+set wildignore+=*.rbc " Ignore Rubinius compiled files
+set wildignore+=*.swp " Ignore vim backups
 
 "------------------------------------------------------------------------------
 " General Remappings
