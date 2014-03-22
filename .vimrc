@@ -43,20 +43,23 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'dahu/Insertlessly'
 Bundle 'kien/ctrlp.vim'
 
-" Utility plugins
+" Reference Library Plugins
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
+
+" Language Plugins
+Bundle 'chase/vim-ansible-yaml'
+Bundle 'othree/html5.vim'
+Bundle 'hallison/vim-markdown'
 
 " Plugins that are nice in order of use
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
-Bundle 'hallison/vim-markdown'
 Bundle 'mattn/emmet-vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
-Bundle 'othree/html5.vim'
 
 filetype on
 Bundle 'scrooloose/nerdcommenter'
