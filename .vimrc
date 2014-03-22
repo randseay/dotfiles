@@ -56,6 +56,7 @@ Bundle 'hallison/vim-markdown'
 Bundle 'mattn/emmet-vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'othree/html5.vim'
 
 filetype on
 Bundle 'scrooloose/nerdcommenter'
