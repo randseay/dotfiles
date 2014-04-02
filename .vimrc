@@ -169,6 +169,8 @@ nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
 nnoremap <leader>} <esc>gq} " Reformat paragraph
 map <leader>y "*y
 map <leader>p "*p
+nnoremap <leader>q :MBEbb<CR>
+nnoremap <leader>w :MBEbf<CR>
 
 "------------------------------------------------------------------------------
 " Plugin mappings
