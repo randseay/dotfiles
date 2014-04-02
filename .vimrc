@@ -42,6 +42,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'dahu/Insertlessly'
 Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
 
 " Reference Library Plugins
 Bundle 'tomtom/tlib_vim'
@@ -88,7 +89,7 @@ set number                  " Show line numbers
 set t_Co=256                " 256 colors, go iTerm 2 baby!
 set scrolloff=999           " Always keep the cursor in the middle  of the page
 set showmatch               " Highlight the opposing bracket
-set showmode                " Show the mode of the current buffer (visual, insert)
+set noshowmode                " Show the mode of the current buffer (visual, insert)
 set spell spelllang=en      " Set spelling to be English
 set splitbelow              " Splits should open below
 set splitright              " Splits should open right
