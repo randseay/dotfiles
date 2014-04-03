@@ -43,6 +43,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'dahu/Insertlessly'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'fholgado/minibufexpl.vim'
 
 " Reference Library Plugins
 Bundle 'tomtom/tlib_vim'
@@ -55,12 +56,12 @@ Bundle 'hallison/vim-markdown'
 
 " Plugins that are nice in order of use
 Bundle 'scrooloose/nerdtree'
+Bundle 'SirVer/ultisnips'
 Bundle 'scrooloose/syntastic'
-Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 Bundle 'mattn/emmet-vim'
-Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
+
 
 filetype on
 Bundle 'scrooloose/nerdcommenter'
@@ -95,6 +96,8 @@ set splitbelow              " Splits should open below
 set splitright              " Splits should open right
 set title                   " Show the title in MacVim
 set visualbell              " Who doesn't like a visual bell?!?
+set nobackup                " This just causes problems
+set noswapfile              " Swapfiles are more of a pain for me then they are helpful
 
 
 "------------------------------------------------------------------------------
