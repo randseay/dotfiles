@@ -104,7 +104,7 @@ set noswapfile              " Swapfiles are more of a pain for me then they are 
 " Tab Settings
 "------------------------------------------------------------------------------
 set expandtab               " Expand tabs to spaces
-set tabstop=4               " Number of spaces a file counts for
+set tabstop=4               " Number of spaces a tab counts for
 set softtabstop=4           " Soft-tab width in spaces
 set shiftwidth=4            " Number of spaces for each >>
 
@@ -123,8 +123,15 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 "------------------------------------------------------------------------------
 filetype plugin on
 filetype plugin indent on
-autocmd FileType rst,markdown setlocal textwidth=80 " Wrap markdown rst files @ 80
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby " Vagrant is ruby :(
+
+autocmd BufRead * set foldlevel=999999 " Fold nothing
+autocmd FileType rst set textwidth=80  " wrap at 80
+autocmd FileType rst set tabstop=2     " Indent by two
+autocmd FileType rst set softtabstop=2 " Indent by two
+autocmd FileType rst set shiftwidth=2  " Indent by two
+
+
 
 "------------------------------------------------------------------------------
 " Editor Settings
@@ -135,20 +142,20 @@ autocmd VimResized * wincmd = " Make vim equalize when resized
 " Plugin  Settings
 "------------------------------------------------------------------------------
 let NERDTreeIgnore = ['\.pyc$']
-let g:riv_fold_auto_update = 0 " Turn off auto folding on save for rst files
-let g:miniBufExplBRSplit = 0 " put MBE on top
+let g:riv_fold_auto_update = 0       " Turn off auto folding on save for rst files
+let g:miniBufExplBRSplit = 0         " put MBE on top
 let g:miniBufExplBuffersNeeded = 1
 let g:ctrlp_working_path_mode = 'ra' " Set the working path to a .git folder
 
 "------------------------------------------------------------------------------
 " Tab completion setup
 "------------------------------------------------------------------------------
-set wildmode=list:longest " Wildcard matches show a list, matching the longest first
+set wildmode=list:longest     " Wildcard matches show a list, matching the longest first
 set wildignore+=.git,.hg,.svn " Ignore version control repos
-set wildignore+=*.6 " Ignore Go compiled files
-set wildignore+=*.pyc " Ignore Python compiled files
-set wildignore+=*.rbc " Ignore Rubinius compiled files
-set wildignore+=*.swp " Ignore vim backups
+set wildignore+=*.6           " Ignore Go compiled files
+set wildignore+=*.pyc         " Ignore Python compiled files
+set wildignore+=*.rbc         " Ignore Rubinius compiled files
+set wildignore+=*.swp         " Ignore vim backups
 
 "------------------------------------------------------------------------------
 " General Remappings
@@ -168,9 +175,9 @@ map k gk
 "------------------------------------------------------------------------------
 " Leader mappings
 "------------------------------------------------------------------------------
-nnoremap <leader>e :MBEbd<CR> " close current buffer without closing split
+nnoremap <leader>e :MBEbd<CR>   " close current buffer without closing split
 nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
-nnoremap <leader>} <esc>gq} " Reformat paragraph
+nnoremap <leader>} <esc>gq}     " Reformat paragraph
 map <leader>y "*y
 map <leader>p "*p
 nnoremap <leader>q :MBEbb<CR>
