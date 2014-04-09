@@ -13,7 +13,6 @@
 " Project: Dotfiles
 " License: GNU GPLv3 (https://www.gnu.org/copyleft/gpl.html)
 
-
 "------------------------------------------------------------------------------
 " VUNDLE SETTINGS
 "------------------------------------------------------------------------------
@@ -146,6 +145,7 @@ let g:riv_fold_auto_update = 0       " Turn off auto folding on save for rst fil
 let g:miniBufExplBRSplit = 0         " put MBE on top
 let g:miniBufExplBuffersNeeded = 1
 let g:ctrlp_working_path_mode = 'ra' " Set the working path to a .git folder
+let g:UltiSnipsExpandTrigger="<tab>"
 
 "------------------------------------------------------------------------------
 " Tab completion setup
