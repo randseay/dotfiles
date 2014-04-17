@@ -2,7 +2,7 @@
 "
 "            /$$$$$$$$
 "           |_____ $$
-" /$$$$$$$      /$$/   /$$$$$$   /$$$$$$$
+" /$$$$$$$       /$$/   /$$$$$$   /$$$$$$$
 " | $$__  $$    /$$/   |____  $$ /$$_____/
 " | $$  \ $$   /$$/     /$$$$$$$| $$
 " | $$  | $$  /$$/     /$$__  $$| $$
@@ -39,6 +39,7 @@ Bundle 'gmarik/vundle'
 Bundle 'mhinz/vim-signify'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'dahu/Insertlessly'
 Bundle 'kien/ctrlp.vim'
@@ -169,8 +170,8 @@ nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
 nnoremap <leader>} <esc>gq} " Reformat paragraph
 map <leader>y "*y
 map <leader>p "*p
-nnoremap <leader>q :MBEbb<CR>
-nnoremap <leader>w :MBEbf<CR>
+nnoremap <leader>q :MBEbp<CR> " Open previous buffer
+nnoremap <leader>w :MBEbn<CR> " Open next buffer
 
 "------------------------------------------------------------------------------
 " Plugin mappings
