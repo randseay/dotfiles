@@ -11,30 +11,23 @@ export PROJECT_HOME=$HOME/j
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-
-# as a python develop, pip assistance is nice
-antigen bundle pip
-
-# I use this in the them I use
-antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
-
-# For my work mac
 antigen bundle brew
-
-# When I use sublime I like to launch it from the command line
+antigen bundle git
+antigen bundle git-flow
+antigen bundle pip
+antigen bundle osx
 antigen bundle sublime
-
-# I use vagrant at work and at home
 antigen bundle vagrant
-
-# gives virtualenv support
+antigen bundle virtualenv
 antigen bundle virtualenvwrapper
+
+# Personal theme requires this
+antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Load the theme.
+# Load personal theme.
 antigen theme https://gist.github.com/7885406.git personal
 
 # Tell antigen that you're done.
@@ -49,7 +42,16 @@ export GOPATH=$HOME/j/oss/gocode
 
 export PATH=$PATH:$GOPATH/bin
 
-# Setup some helpful aliases
+# Setup aliases
+alias ohmyzsh="vim ~/dotfiles/.oh-my-zsh"
+alias vimconfig="vim ~/dotfiles/.vimrc"
+alias zshconfig="vim ~/dotfiles/.zshrc"
 alias gs="git status"
-alias lla="ls -la"
+alias gco="git checkout"
 
+# source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+# export PATH=/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
+# export WORKON_HOME=~/.virtualenvs
+# source /usr/local/bin/virtualenvwrapper.sh

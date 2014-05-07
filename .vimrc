@@ -4,6 +4,7 @@
 " | | | (_| | | | | (_| | \__ \  __/ (_| | |_| |
 " |_|  \__,_|_| |_|\__,_| |___/\___|\__,_|\__, |
 "                                         |___/
+"
 " By: Rand Seay (Inspired by Nick Zaccardi)
 " Project: Dotfiles
 " License: GNU GPLv3 (https://www.gnu.org/copyleft/gpl.html)
@@ -176,8 +177,8 @@ nnoremap <leader>b <esc>:b#<CR> " Open previous buffer
 nnoremap <leader>} <esc>gq}     " Reformat paragraph
 map <leader>y "*y
 map <leader>p "*p
-nnoremap <leader>q :MBEbp<CR> " Open previous buffer
-nnoremap <leader>w :MBEbn<CR> " Open next buffer
+nnoremap <leader>q :MBEbp<CR>   " Open previous buffer
+nnoremap <leader>w :MBEbn<CR>   " Open next buffer
 
 "------------------------------------------------------------------------------
 " Plugin mappings
