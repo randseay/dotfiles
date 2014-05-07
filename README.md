@@ -10,6 +10,18 @@ Start by pulling down the repository
 git clone --recursive git@github.com:randseay/dotfiles.git ~/dotfiles
 ```
 
+I use [Homebrew](http://brew.sh/) to manage packages, so if you are going that route, you will need to set it up (It requires Ruby, which comes prepackaged on Mac OSX).
+
+```bash
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+```
+
+Python is another requirement that comes with Mac OSX, but if you want to use Python 3.4 (which I do), homebrew can install it for you.
+
+```bash
+brew install python3
+```
+
 The `setup` script should be able to handle the rest of the installation, you just have a couple of prompts to respond to.
 
 ```bash
