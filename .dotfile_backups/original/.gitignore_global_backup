@@ -1,8 +1,9 @@
+*~
 .DS_Store
 *.swo
 *.swp
 *.class
-*.pyc
+.pyc
 .idea
 __pycache__
-.sass-cache
+

@@ -1,0 +1,9 @@
+.DS_Store
+.backup
+*.class
+.idea
+*.pyc
+.sass-cache
+*.swo
+*.swp
+__pycache__
