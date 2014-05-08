@@ -27,7 +27,7 @@ then
                     chsh -s /bin/zsh
                     source $HOME/.zshrc
                     break;;
-            [Nn]* ) exit;;
+            [Nn]* ) break;;
             * ) echo "Please answer yes or no.";;
         esac
     done
@@ -84,7 +84,7 @@ while true; do
                 read -p "What is the git user email? " email
                 git config --global user.email "$email"
                 break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done

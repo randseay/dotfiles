@@ -37,8 +37,10 @@ while true; do
     read -p "Would you like to remove the dotfiles repository? [y/n]" yn
     case $yn in
         [Yy]* ) rm -rf $HOME/dotfiles
-                echo "You successfully uninstalled the dotfiles."; break;;
-        [Nn]* ) exit;;
+                echo "You successfully uninstalled the dotfiles."
+                break;;
+        [Nn]* ) echo "You successfully uninstalled the dotfiles, but the repository still exists."
+                exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done

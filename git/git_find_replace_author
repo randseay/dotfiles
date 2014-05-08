@@ -1,0 +1,43 @@
+#!/bin/sh
+
+echo "Please be sure your current working directory is in the correct git repository with the correct branch checked out."
+
+while true; do
+    read -p "Would you like to proceed? [y/n]" yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+read -p "What is the email of the committer you want to replace? " old_cm
+read -p "What is the email of the author you want to replace?" old_am
+read -p "What is the name of the new committer? [First Last] " new_cn
+read -p "What is the email of the new committer? " new_cm
+read -p "What is the name of the new author? [First Last] " new_an
+read -p "What is the email of the new author? " new_am
+
+git filter-branch --env-filter '
+
+an="$GIT_AUTHOR_NAME"
+am="$GIT_AUTHOR_EMAIL"
+cn="$GIT_COMMITTER_NAME"
+cm="$GIT_COMMITTER_EMAIL"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$old_cm" ]
+then
+    cn="$new_cn"
+    cm="$new_cm"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$old_am" ]
+then
+    an="$new_an"
+    am="$new_am"
+fi
+
+export GIT_AUTHOR_NAME="$an"
+export GIT_AUTHOR_EMAIL="$am"
+export GIT_COMMITTER_NAME="$cn"
+export GIT_COMMITTER_EMAIL="$cm"
+'

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+while true; do
+    read -p "Would you like to proceed? [y/n]" yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+echo "The script proceeded, did you want it to?"
