@@ -32,6 +32,11 @@ then
     git config --global core.excludesfile $HOME/.gitignore_global
 fi
 
+if [ -h "/usr/local/bin/git_find_replace_author" ]
+then
+    rm /usr/local/bin/git_find_replace_author
+fi
+
 # Remove dotfiles repository
 while true; do
     read -p "Would you like to remove the dotfiles repository? [y/n]" yn
