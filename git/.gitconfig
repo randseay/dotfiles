@@ -1,6 +1,6 @@
 [user]
-	name = Rand Seay
-	email = rand.seay@gmail.com
+	name = John Doe
+	email = john.doe@ihatemyname.com
 [core]
 	editor = subl
 	excludesfile = /Users/rand.seay/.gitignore_global
