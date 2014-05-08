@@ -1,6 +1,4 @@
-if [ ! -f "/bin/zsh" ]
-then
-    echo "zsh is not installed"
-else
-    echo "zsh is installed"
-fi
+brew update
+brew doctor
+brew upgrade
+pip install -r requirements.txt
