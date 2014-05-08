@@ -12,8 +12,27 @@ else
     cp -r $DOTFILES/fonts/* $HOME/.fonts
 fi
 
+# Install brew formulae
+echo "Installing brew formulae..."
+brew install git packer python python3 vim
+
 # Zsh Setup
 echo "Setting up zsh..."
+if [ ! -f "/bin/zsh" ]
+then
+    while true; do
+        read -p "Zsh was not found, do you want to install it? [y/n]" yn
+        case $yn in
+            [Yy]* ) curl -L http://install.ohmyz.sh | sh
+                    chsh -s /bin/zsh
+                    source $HOME/.zshrc
+                    break;;
+            [Nn]* ) exit;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+fi
+pip install -r $DOTFILES/requirements.txt
 if [ -f "$HOME/.zshrc" ]
 then
     echo ".zshrc already exists, backing it up..."
@@ -54,11 +73,11 @@ then
 fi
 echo "Linking .gitignore_global..."
 ln -sfv $DOTFILES/git/.gitignore_global $HOME/.gitignore_global
-git config --global core.excludesfile ~/.gitignore_global
+git config --global core.excludesfile $HOME/.gitignore_global
 
 while true; do
-    echo "The default git user is Rand Seay (rand.seay@gmail.com)."
-    read -p "Do you wish specify the git user? [y/n]" yn
+    echo "The default git user is blank."
+    read -p "Do you wish specify the git user right now? [y/n]" yn
     case $yn in
         [Yy]* ) read -p "What is the git user name? [First Last] " name
                 git config --global user.name "$name"
@@ -76,5 +95,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g KeyRepeat .01
     defualts write -g InitialKeyReapt 1.5
-    defaults write com.apple.dock expose-animation-duration ; killall Dock
+    chflags nohidden ~/Library/
+    defaults write com.apple.Dock autohide-delay -float 0
+    defaults write com.apple.dock expose-animation-duration -float 0.1
+    killall Dock
 fi

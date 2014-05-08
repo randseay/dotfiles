@@ -2,6 +2,14 @@
 echo "Uninstalling fonts..."
 rm -rf $HOME/.fonts/SourceCodePro $HOME/.fonts/powerline-fonts
 
+# Uninstall pip packages
+echo "Uninstalling pip packages..."
+pip uninstall -r $HOME/dotfiles/requirements.txt
+
+# Uninstall brew formulae
+echo "Uninstalling brew formulae. NOTE: spawned formulae dependencies may remain..."
+brew uninstall git packer python python3 vim --force
+
 # Restore .zshrc
 echo "Restoring zsh setup..."
 rm $HOME/.zshrc
@@ -28,7 +36,8 @@ fi
 while true; do
     read -p "Would you like to remove the dotfiles repository? [y/n]" yn
     case $yn in
-        [Yy]* ) rm -rf $HOME/dotfiles; break;;
+        [Yy]* ) rm -rf $HOME/dotfiles
+                echo "You successfully uninstalled the dotfiles."; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
