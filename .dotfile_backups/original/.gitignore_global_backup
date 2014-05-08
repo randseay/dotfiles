@@ -1,9 +1,0 @@
-*~
-.DS_Store
-*.swo
-*.swp
-*.class
-.pyc
-.idea
-__pycache__
-

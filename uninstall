@@ -13,22 +13,22 @@ brew uninstall git packer python python3 vim --force
 # Restore .zshrc
 echo "Restoring zsh setup..."
 rm $HOME/.zshrc
-cp $HOME/dotfiles/.dotfile_backups/original/.zshrc_backup $HOME/.zshrc
+cp $HOME/dotfiles/dotfile_backups/original/.zshrc_backup $HOME/.zshrc
 
 # Restore .vimrc
 echo "Restoring vim setup..."
 rm $HOME/.vimrc
-cp $HOME/dotfiles/.dotfile_backups/original/.vimrc_backup $HOME/.vimrc
+cp $HOME/dotfiles/dotfile_backups/original/.vimrc_backup $HOME/.vimrc
 
 # Restore git settings
 echo "Restoring git setup..."
 rm $HOME/.global_gitconfig
-cp $HOME/dotfiles/.dotfile_backups/original/.gitconfig_backup $HOME/.gitconfig
+cp $HOME/dotfiles/dotfile_backups/original/.gitconfig_backup $HOME/.gitconfig
 
-if [ -f "$HOME/dotfiles/.dotfile_backups/original/.gitignore_global_backup" ]
+if [ -f "$HOME/dotfiles/dotfile_backups/original/.gitignore_global_backup" ]
 then
     rm $HOME/.gitignore_global
-    cp $HOME/dotfiles/.dotfile_backups/original/.gitignore_global_backup
+    cp $HOME/dotfiles/dotfile_backups/original/.gitignore_global_backup
     git config --global core.excludesfile $HOME/.gitignore_global
 fi
 
