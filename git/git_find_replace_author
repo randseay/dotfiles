@@ -5,7 +5,7 @@ echo "You need to be on the correct branch with no uncommitted changes."
 pwd
 
 while true; do
-    read -p "Would you like to proceed? [y/n] " yn
+    read -p "CAUTION: You are rewriting history. Would you like to proceed? [y/n] " yn
     case $yn in
         [Yy]* ) break;;
         [Nn]* ) exit;;
