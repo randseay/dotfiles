@@ -1,9 +1,10 @@
 #!/bin/sh
 
-echo "Please be sure your current working directory is in the correct git repository with the correct branch checked out."
+echo "Please be sure your current working directory contains the correct git repository with the correct branch checked out."
+pwd
 
 while true; do
-    read -p "Would you like to proceed? [y/n]" yn
+    read -p "Would you like to proceed? [y/n] " yn
     case $yn in
         [Yy]* ) break;;
         [Nn]* ) exit;;
@@ -12,7 +13,7 @@ while true; do
 done
 
 read -p "What is the email of the committer you want to replace? " old_cm
-read -p "What is the email of the author you want to replace?" old_am
+read -p "What is the email of the author you want to replace? " old_am
 read -p "What is the name of the new committer? [First Last] " new_cn
 read -p "What is the email of the new committer? " new_cm
 read -p "What is the name of the new author? [First Last] " new_an

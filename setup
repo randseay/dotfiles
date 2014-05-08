@@ -66,6 +66,9 @@ fi
 echo "Linking .gitconfig..."
 ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
 
+echo "Linking git_find_replace_author script, so it can be used with shell..."
+ln -sfv $DOTFILES/git/git_find_replace_author /usr/local/bin/git_find_replace_author
+
 if [ -f "$HOME/.gitignore_global" ]
 then
     echo "The .gitignore_global file already exists, backing it up..."
