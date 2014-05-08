@@ -15,7 +15,7 @@ fi
 if [ "$GIT_AUTHOR_EMAIL" = "rand.seay@gmail.com" ]
 then
     an="Rando Seay"
-    am="rseay23@gmai.com"
+    am="rseay23@gmail.com"
 fi
 
 export GIT_AUTHOR_NAME="$an"
