@@ -36,7 +36,7 @@ pip install -r $DOTFILES/requirements.txt
 if [ -f "$HOME/.zshrc" ]
 then
     echo "The .zshrc file already exists, backing it up..."
-    cp $HOME/.zshrc $DOTFILES/dotfile_backups/original/.zshrc_backup
+    cp $HOME/.zshrc $DOTFILES/dotfile_backups/.zshrc_backup
 fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc  
@@ -46,7 +46,7 @@ echo "Setting up vim..."
 if [ -f "$HOME/.vimrc" ]
 then
     echo "The .vimrc file already exists, backing it up..."
-    cp $HOME/.vimrc $DOTFILES/dotfile_backups/original/.vimrc_backup
+    cp $HOME/.vimrc $DOTFILES/dotfile_backups/.vimrc_backup
 fi
 echo "Linking .vimrc..."
 ln -sfv $DOTFILES/vim/.vimrc $HOME/.vimrc
@@ -61,7 +61,7 @@ echo "Setting up git configuration..."
 if [ -f "$HOME/.gitconfig" ]
 then
     echo "The .gitconfig file already exists, backing it up..."
-    cp $HOME/.gitconfig $DOTFILES/dotfile_backups/original/.gitconfig_backup
+    cp $HOME/.gitconfig $DOTFILES/dotfile_backups/.gitconfig_backup
 fi
 echo "Linking .gitconfig..."
 ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
@@ -69,7 +69,7 @@ ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
 if [ -f "$HOME/.gitignore_global" ]
 then
     echo "The .gitignore_global file already exists, backing it up..."
-    cp $HOME/.gitignore_global $DOTFILES/dotfile_backups/original/.gitignore_global_backup
+    cp $HOME/.gitignore_global $DOTFILES/dotfile_backups/.gitignore_global_backup
 fi
 echo "Linking .gitignore_global..."
 ln -sfv $DOTFILES/git/.gitignore_global $HOME/.gitignore_global
