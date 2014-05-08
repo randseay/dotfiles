@@ -1,4 +1,9 @@
-brew update
-brew doctor
-brew upgrade
-pip install -r requirements.txt
+if [ -L "$HOME/dotfiles/blahblah.txt" ]
+then
+    echo "blahblah.txt is recognized as a link."
+elif [ -f "~/dotfiles/blahblah.txt" ]
+then
+    echo "blablah.txt is recognized as a file."
+else
+    echo "cannot find blahblah.txt"
+fi

@@ -137,7 +137,7 @@ Now tell git to use it as its main `excludesfile`.
 git config --global core.excludesfile ~/.gitignore_global
 ```
 
-Since the default user name and email are my personal ones, you'll need to change them to suit your purposes.
+Since the default user name and email are placeholders, you'll need to change them to suit your purposes.
 
 ```bash
 git config --global user.name "Your Name"

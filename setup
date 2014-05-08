@@ -21,7 +21,7 @@ echo "Setting up zsh..."
 if [ ! -f "/bin/zsh" ]
 then
     while true; do
-        read -p "Zsh was not found, do you want to install it? [y/n]" yn
+        read -p "Could not find zsh, do you want to install it? [y/n]" yn
         case $yn in
             [Yy]* ) curl -L http://install.ohmyz.sh | sh
                     chsh -s /bin/zsh
@@ -35,7 +35,7 @@ fi
 pip install -r $DOTFILES/requirements.txt
 if [ -f "$HOME/.zshrc" ]
 then
-    echo ".zshrc already exists, backing it up..."
+    echo "The .zshrc file already exists, backing it up..."
     cp $HOME/.zshrc $DOTFILES/.dotfile_backups/original/.zshrc_backup
 fi
 echo "Linking .zshrc..."
@@ -45,7 +45,7 @@ ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
 echo "Setting up vim..."
 if [ -f "$HOME/.vimrc" ]
 then
-    echo ".vimrc already exists, backing it up..."
+    echo "The .vimrc file already exists, backing it up..."
     cp $HOME/.vimrc $DOTFILES/.dotfile_backups/original/.vimrc_backup
 fi
 echo "Linking .vimrc..."
@@ -60,7 +60,7 @@ vim +BundleInstall +qall
 echo "Setting up git configuration..."
 if [ -f "$HOME/.gitconfig" ]
 then
-    echo ".gitconfig alread exists, backing it up..."
+    echo "The .gitconfig file already exists, backing it up..."
     cp $HOME/.gitconfig $DOTFILES/.dotfile_backups/original/.gitconfig_backup
 fi
 echo "Linking .gitconfig..."
@@ -68,7 +68,7 @@ ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
 
 if [ -f "$HOME/.gitignore_global" ]
 then
-    echo ".gitignore_global already exists, backing it up..."
+    echo "The .gitignore_global file already exists, backing it up..."
     cp $HOME/.gitignore_global $DOTFILES/.dotfile_backups/original/.gitignore_global_backup
 fi
 echo "Linking .gitignore_global..."
@@ -76,7 +76,7 @@ ln -sfv $DOTFILES/git/.gitignore_global $HOME/.gitignore_global
 git config --global core.excludesfile $HOME/.gitignore_global
 
 while true; do
-    echo "The default git user is blank."
+    echo "The default git user is a placeholder."
     read -p "Do you wish specify the git user right now? [y/n]" yn
     case $yn in
         [Yy]* ) read -p "What is the git user name? [First Last] " name
@@ -95,7 +95,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g KeyRepeat .01
     defualts write -g InitialKeyReapt 1.5
-    chflags nohidden ~/Library/
+    chflags nohidden $HOME/Library/
     defaults write com.apple.Dock autohide-delay -float 0
     defaults write com.apple.dock expose-animation-duration -float 0.1
     killall Dock
