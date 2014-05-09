@@ -1,3 +1,6 @@
+#!/bin/sh
+
+echo "\nDotfile Setup\n-------------"
 echo "Creating environment variables..."
 export DOTFILES=$HOME/dotfiles
 
@@ -17,7 +20,7 @@ echo "Installing brew formulae..."
 brew install git packer python python3 vim
 
 # Zsh Setup
-echo "Setting up zsh..."
+echo "\nSetting up zsh..."
 if [ ! -f "/bin/zsh" ]
 then
     while true; do
@@ -32,6 +35,7 @@ then
         esac
     done
 fi
+echo "Installing python packages with pip..."
 pip install -r $DOTFILES/requirements.txt
 if [ -f "$HOME/.zshrc" ]
 then
@@ -42,7 +46,7 @@ echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc  
 
 # Vim Setup
-echo "Setting up vim..."
+echo "/nSetting up vim..."
 if [ -f "$HOME/.vimrc" ]
 then
     echo "The .vimrc file already exists, backing it up..."
@@ -57,7 +61,7 @@ echo "Installing vim bundles..."
 vim +BundleInstall +qall
 
 # Git Setup
-echo "Setting up git configuration..."
+echo "/nSetting up git configuration..."
 if [ -f "$HOME/.gitconfig" ]
 then
     echo "The .gitconfig file already exists, backing it up..."
@@ -78,13 +82,15 @@ echo "Linking .gitignore_global..."
 ln -sfv $DOTFILES/git/.gitignore_global $HOME/.gitignore_global
 git config --global core.excludesfile $HOME/.gitignore_global
 
-echo
+echo "\nInitial Git Setup\n-----------------"
 while true; do
     echo "The default git user is a placeholder."
     read -p "Do you wish specify the git user right now? [y/n]" yn
     case $yn in
-        [Yy]* ) read -p "What is the git user name? [First Last] " name
+        [Yy]* ) echo
+                read -p "What is the git user name? [First Last] " name
                 git config --global user.name "$name"
+                echo
                 read -p "What is the git user email? " email
                 git config --global user.email "$email"
                 break;;
@@ -95,7 +101,7 @@ done
 
 # Mac Preference Setup
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Darwin OS found, setting preferences..."
+    echo "\nDarwin OS found, setting preferences..."
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g KeyRepeat .01
     defualts write -g InitialKeyReapt 1.5
