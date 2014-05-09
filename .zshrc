@@ -35,8 +35,11 @@ antigen theme https://gist.github.com/7885406.git personal
 antigen apply
 
 # Set up pyenv
-# eval "$(pyenv init -)"
-# pyenv virtualenvwrapper_lazy
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+    pyenv virtualenvwrapper_lazy
+fi
 
 # Setup gopath
 # export GOPATH=$HOME/j/oss/gocode
