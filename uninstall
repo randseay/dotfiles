@@ -8,7 +8,9 @@ pip uninstall -r $HOME/dotfiles/requirements.txt
 
 # Uninstall brew formulae
 echo "Uninstalling brew formulae. NOTE: spawned formulae dependencies may remain..."
-brew uninstall git packer python python3 vim --force
+brew update
+brew doctor
+brew uninstall git packer pyenv pyenv-virtualenvwrapper python python3 vim --force
 
 # Restore .zshrc
 echo "Restoring zsh setup..."
