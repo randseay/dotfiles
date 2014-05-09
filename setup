@@ -28,7 +28,7 @@ then
                     source $HOME/.zshrc
                     break;;
             [Nn]* ) break;;
-            * ) echo "Please answer yes or no.";;
+            * ) echo "Please answer yes or no.\n";;
         esac
     done
 fi
@@ -78,6 +78,7 @@ echo "Linking .gitignore_global..."
 ln -sfv $DOTFILES/git/.gitignore_global $HOME/.gitignore_global
 git config --global core.excludesfile $HOME/.gitignore_global
 
+echo
 while true; do
     echo "The default git user is a placeholder."
     read -p "Do you wish specify the git user right now? [y/n]" yn
@@ -88,7 +89,7 @@ while true; do
                 git config --global user.email "$email"
                 break;;
         [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer yes or no.\n";;
     esac
 done
 

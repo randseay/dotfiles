@@ -1,24 +1,79 @@
 #!/bin/sh
 
+echo "\nFind and Replace Author in Git History\n--------------------------------------"
 echo "Please be sure your current working directory contains the correct git repository."
-echo "You need to be on the correct branch with no uncommitted changes."
-pwd
+echo "You need to be on the correct branch with no uncommitted changes.\n"
+echo "Your current working directory: ${PWD}\n"
 
 while true; do
     read -p "CAUTION: You are rewriting history. Would you like to proceed? [y/n] " yn
     case $yn in
         [Yy]* ) break;;
         [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer yes or no.\n";;
+    esac
+done
+echo "----------------------------------------------------------------------\n"
+read -p "What is the EMAIL of the author you want to replace? " old_am
+echo
+while true; do
+    read -p "Is this the same EMAIL as the committer you want to replace? [y/n] " yn
+    case $yn in
+        [Yy]* ) old_cm=$old_am
+                break;;
+        [Nn]* ) echo
+                read -p "What is the EMAIL of the committer you want to replace? " old_cm
+                if [ "$old_cm"="$old_am" ]
+                then
+                    echo "So it was the same after all."
+                fi
+                break;;
+        * ) echo "Please answer yes or no.\n";;
+    esac
+done
+echo
+read -p "What is the NAME of the new author? [First Last] " new_an
+echo
+read -p "What is the EMAIL of the new author? " new_am
+
+echo
+while true; do
+    read -p "Is this the same NAME and EMAIL as the new committer? [y/n] " yn
+    case $yn in
+        [Yy]* ) new_cn=$new_an
+                new_cm=$new_am
+                break;;
+        [Nn]* ) echo
+                read -p "What is the NAME of the new committer? [First Last] " new_cn
+                if [ "$new_cn"="$new_an" ]
+                then
+                    echo "So it was the same after all."
+                fi
+                echo
+                read -p "What is the EMAIL of the new committer? " new_cm
+                if [ "$new_cm"="$new_am" ]
+                then
+                    echo "So it was the same after all."
+                fi
+                break;;
+        * ) echo "Please answer yes or no.\n";;
     esac
 done
 
-read -p "What is the email of the committer you want to replace? " old_cm
-read -p "What is the email of the author you want to replace? " old_am
-read -p "What is the name of the new committer? [First Last] " new_cn
-read -p "What is the email of the new committer? " new_cm
-read -p "What is the name of the new author? [First Last] " new_an
-read -p "What is the email of the new author? " new_am
+echo "\nHere is what you have so far.\n-----------------------------"
+echo "EMAIL of author to be replaced: $old_am"
+echo "EMAIL of committer to be replaced: $old_cm"
+echo "New author [Name <Email>]: $new_an <$new_am>"
+echo "New committer [Name <Email>]: $new_cn <$new_cm>\n"
+while true; do
+    read -p "CAUTION: You are about to rewrite history, would you like to proceed? [y/n] " yn
+    case $yn in
+        [Yy]* ) echo "Geronimo!\n"
+                break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.\n";;
+    esac
+done
 
 git filter-branch -f --env-filter '
 
