@@ -3,7 +3,7 @@
 	email = john.doe@ihatemyname.com
 [core]
 	editor = subl
-	excludesfile = /Users/rand.seay/.gitignore_global
+	excludesfile = $HOME/dotfiles/git/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =

@@ -25,13 +25,6 @@ echo "Restoring git setup..."
 rm $HOME/.global_gitconfig
 cp $HOME/dotfiles/dotfile_backups/.gitconfig_backup $HOME/.gitconfig
 
-if [ -f "$HOME/dotfiles/dotfile_backups/.gitignore_global_backup" ]
-then
-    rm $HOME/.gitignore_global
-    cp $HOME/dotfiles/dotfile_backups/.gitignore_global_backup
-    git config --global core.excludesfile $HOME/.gitignore_global
-fi
-
 if [ -h "/usr/local/bin/git_find_replace_author" ]
 then
     rm /usr/local/bin/git_find_replace_author

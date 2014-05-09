@@ -16,8 +16,14 @@ else
 fi
 
 # Install brew formulae
-echo "Installing brew formulae..."
-brew install git packer python python3 vim
+echo "\nUpdating brew..."
+brew update
+echo "Upgrading brew formulae..."
+brew upgrade
+echo "Running brew doctor..."
+brew doctor
+echo "Installing brew formulae"
+brew install git packer pyenv pyenv-virtualenvwrapper python python3 vim
 
 # Zsh Setup
 echo "\nSetting up zsh..."
@@ -72,15 +78,6 @@ ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
 
 echo "Linking git_find_replace_author script, so it can be used with shell..."
 ln -sfv $DOTFILES/git/git_find_replace_author /usr/local/bin/git_find_replace_author
-
-if [ -f "$HOME/.gitignore_global" ]
-then
-    echo "The .gitignore_global file already exists, backing it up..."
-    cp $HOME/.gitignore_global $DOTFILES/dotfile_backups/.gitignore_global_backup
-fi
-echo "Linking .gitignore_global..."
-ln -sfv $DOTFILES/git/.gitignore_global $HOME/.gitignore_global
-git config --global core.excludesfile $HOME/.gitignore_global
 
 echo "\nInitial Git Setup\n-----------------"
 while true; do
