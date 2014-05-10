@@ -34,7 +34,7 @@ cp $HOME/dotfiles/dotfile_backups/.vimrc_backup $HOME/.vimrc
 
 # Restore git settings
 echo "Restoring git setup..."
-rm $HOME/.global_gitconfig
+rm $HOME/.gitconfig
 cp $HOME/dotfiles/dotfile_backups/.gitconfig_backup $HOME/.gitconfig
 
 if [ -h "/usr/local/bin/git_find_replace_author" ]
