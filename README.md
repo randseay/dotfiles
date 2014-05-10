@@ -119,24 +119,6 @@ Then symlink the `.gitconfig` file into place.
 ln -sfv ~/dotfiles/git/.gitconfig $HOME/.gitconfig
 ```
 
-I like to use a `gitignore_global` file to avoid file types that I always want git to ignore. If you have one, backing it up is not the worst idea.
-
-```bash
-cp ~/.gitignore_global ~/.gitignore_global_backup
-```
-
-Then symlink the `.gitignore_global` file into place.
-
-```bash
-ln -sfv ~/dotfiles/git/.gitignore_global ~/.gitignore_global
-```
-
-Now tell git to use it as its main `excludesfile`.
-
-```bash
-git config --global core.excludesfile ~/.gitignore_global
-```
-
 Since the default user name and email are placeholders, you'll need to change them to suit your purposes.
 
 ```bash

@@ -48,6 +48,7 @@ then
 fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc  
+source $HOME/.zshrc
 
 # Vim Setup
 echo "/nSetting up vim..."
