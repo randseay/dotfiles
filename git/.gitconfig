@@ -1,6 +1,6 @@
 [user]
-	name = John Doe
-	email = john.doe@ihatemyname.com
+	name = Rand Seay
+	email = rand.seay@gmail.com
 [core]
 	editor = subl
 	excludesfile = $HOME/dotfiles/git/.gitignore_global
@@ -32,3 +32,5 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[color]
+	ui = true

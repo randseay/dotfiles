@@ -20,8 +20,14 @@ echo "\nUpdating brew..."
 brew update
 echo "Running brew doctor..."
 brew doctor
-echo "Installing brew formulae"
-brew install git packer pyenv pyenv-virtualenvwrapper python python3 vim
+echo "Installing brew formulae..."
+brew install git
+brew install packer
+brew install pyenv
+brew install pyenv-virtualenvwrapper
+brew install python
+brew install python3
+brew install vim
 
 # Zsh Setup
 echo "\nSetting up zsh..."
@@ -48,7 +54,6 @@ then
 fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc  
-source $HOME/.zshrc
 
 # Vim Setup
 echo "/nSetting up vim..."
@@ -81,7 +86,7 @@ ln -sfv $DOTFILES/git/git_find_replace_author /usr/local/bin/git_find_replace_au
 echo "\nInitial Git Setup\n-----------------"
 while true; do
     echo "The default git user is a placeholder."
-    read -p "Do you wish specify the git user right now? [y/n]" yn
+    read -p "Do you wish specify the git user right now? [y/n] " yn
     case $yn in
         [Yy]* ) echo
                 read -p "What is the git user name? [First Last] " name
@@ -100,9 +105,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "\nDarwin OS found, setting preferences..."
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g KeyRepeat .01
-    defualts write -g InitialKeyReapt 1.5
+    defaults write -g InitialKeyReapt 1.5
     chflags nohidden $HOME/Library/
     defaults write com.apple.Dock autohide-delay -float 0
     defaults write com.apple.dock expose-animation-duration -float 0.1
     killall Dock
 fi
+
+source ~/.zshrc

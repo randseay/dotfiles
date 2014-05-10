@@ -1,3 +1,7 @@
+#!/bin/sh
+
+echo "\nDotfile Uninstallation\n----------------------"
+
 # Remove Fonts
 echo "Uninstalling fonts..."
 rm -rf $HOME/.fonts/SourceCodePro $HOME/.fonts/powerline-fonts
@@ -10,7 +14,13 @@ pip uninstall -r $HOME/dotfiles/requirements.txt
 echo "Uninstalling brew formulae. NOTE: spawned formulae dependencies may remain..."
 brew update
 brew doctor
-brew uninstall git packer pyenv pyenv-virtualenvwrapper python python3 vim --force
+brew uninstall git --force
+brew uninstall packer --force
+brew uninstall pyenv --force
+brew uninstall pyenv-virtualenvwrapper --force
+brew uninstall python --force
+brew uninstall python3 --force
+brew uninstall vim --force
 
 # Restore .zshrc
 echo "Restoring zsh setup..."
