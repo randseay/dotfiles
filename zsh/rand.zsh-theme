@@ -15,7 +15,7 @@ PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
  
 # color vars
-eval my_gray='$FG[237]'
+eval my_gray='$FG[226]'
 eval my_orange='$FG[214]'
  
 # right prompt

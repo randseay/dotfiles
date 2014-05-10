@@ -28,7 +28,8 @@ antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load personal theme.
-antigen theme https://gist.github.com/7885406.git personal
+# antigen theme randseay/dotfiles zsh/rand
+antigen theme https://gist.github.com/randseay/b106748a423b38250835 rand
 
 # Tell antigen that you're done.
 antigen apply

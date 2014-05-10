@@ -54,7 +54,10 @@ then
     cp $HOME/.zshrc $DOTFILES/dotfile_backups/.zshrc_backup
 fi
 echo "Linking .zshrc..."
-ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc  
+ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
+
+echo "Linking battery_charge script, so it can be used with shell..."
+ln -sfv $DOTFILES/zsh/battery_charge.py /usr/local/bin/battery_charge
 
 # Vim Setup
 echo "/nSetting up vim..."
