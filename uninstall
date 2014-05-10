@@ -55,3 +55,4 @@ while true; do
         * ) echo "Please answer yes or no.\n";;
     esac
 done
+source ~/.zshrc
