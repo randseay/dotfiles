@@ -25,10 +25,10 @@ out = (filled + empty).encode('utf-8')
 import sys
 
 # color_green = '%{[32m%}'
-color_green = '$FG[034]'
-color_yellow = '$FG[184]'
-color_red = '$FG[160]'
-color_reset = '$FG[240]'
+color_green = '%{$FG[034]%}'
+color_yellow = '%{$FG[184]%}'
+color_red = '%{$FG[160]%}'
+color_reset = '%{$FG[240]%}'
 color_out = (
     color_green if len(filled) > 6
     else color_yellow if len(filled) > 4
