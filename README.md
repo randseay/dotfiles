@@ -67,6 +67,18 @@ Then symlink the `.zshrc` file into place.
 ln -sfv ~/dotfiles/zsh/.zshrc ~/.zshrc
 ```
 
+Now link the battery charge script into place, so it can be used by the theme.
+
+```bash
+ln -sfv ~/dotfiles/zsh/batcharge.py /usr/local/bin/batcharge
+```
+
+Lastly, source the `~/.zshrc` file.
+
+```bash
+source ~/.zshrc
+```
+
 ### vim
 
 The vim setup is fairly self-contained, and although vim comes with Mac OS X, I opt for the one you can get through Homebrew.
