@@ -22,6 +22,7 @@ echo "Running brew doctor..."
 brew doctor
 echo "Installing brew formulae..."
 brew install git
+brew install node
 brew tap homebrew/binary
 brew install packer
 brew install pyenv
@@ -35,7 +36,7 @@ echo "\nSetting up zsh..."
 if [ ! -f "/bin/zsh" ]
 then
     while true; do
-        read -p "Could not find zsh, do you want to install it? [y/n]" yn
+        read -p "Could not find zsh, do you want to install it via oh-my-zsh? [y/n]" yn
         case $yn in
             [Yy]* ) curl -L http://install.ohmyz.sh | sh
                     chsh -s /bin/zsh
@@ -56,8 +57,7 @@ fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
 
-echo "Linking battery charge script, so it can be used with shell..."
-ln -sfv $DOTFILES/zsh/batcharge.py /usr/local/bin/batcharge
+source $HOME/.zshrc
 
 # Vim Setup
 echo "/nSetting up vim..."
@@ -83,9 +83,6 @@ then
 fi
 echo "Linking .gitconfig..."
 ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
-
-echo "Linking git_find_replace_author script, so it can be used with shell..."
-ln -sfv $DOTFILES/git/git_find_replace_author /usr/local/bin/git_find_replace_author
 
 echo "\nInitial Git Setup\n-----------------"
 while true; do

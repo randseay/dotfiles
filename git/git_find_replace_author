@@ -9,7 +9,8 @@ while true; do
     read -p "CAUTION: You are rewriting history. Would you like to proceed? [y/n] " yn
     case $yn in
         [Yy]* ) break;;
-        [Nn]* ) exit;;
+        [Nn]* ) echo "Farewell!\n"
+                exit;;
         * ) echo "Please answer yes or no.\n";;
     esac
 done

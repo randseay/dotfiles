@@ -11,16 +11,25 @@ echo "Uninstalling pip packages..."
 pip uninstall -r $HOME/dotfiles/requirements.txt
 
 # Uninstall brew formulae
-echo "Uninstalling brew formulae. NOTE: spawned formulae dependencies may remain..."
-brew update
-brew doctor
-brew uninstall git --force
-brew uninstall packer --force
-brew uninstall pyenv --force
-brew uninstall pyenv-virtualenvwrapper --force
-brew uninstall python --force
-brew uninstall python3 --force
-brew uninstall vim --force
+while true; do
+    read -p "Do you want to uninstall the brew packages? [y/n]" yn
+    case $yn in
+        [Yy]* ) echo "Uninstalling brew formulae. NOTE: spawned formulae dependencies may remain..."
+                brew update
+                brew doctor
+                brew uninstall git --force
+                brew uninstall node --force
+                brew uninstall packer --force
+                brew uninstall pyenv --force
+                brew uninstall pyenv-virtualenvwrapper --force
+                brew uninstall python --force
+                brew uninstall python3 --force
+                brew uninstall vim --force
+                break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.\n";;
+    esac
+done
 
 # Restore .zshrc
 echo "Restoring zsh setup..."
@@ -55,4 +64,5 @@ while true; do
         * ) echo "Please answer yes or no.\n";;
     esac
 done
+
 source ~/.zshrc
