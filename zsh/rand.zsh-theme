@@ -21,7 +21,7 @@ eval my_orange='$FG[214]'
 
 # right prompt
 function precmd() {
-    RPROMPT=${R_DIR_TIME_}$(batcharge)
+    RPROMPT=${R_DIR_TIME_}$(batterycharge)
 }
  
 # git settings

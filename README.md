@@ -61,16 +61,10 @@ You may consider making a backup of the `.zshrc` file.
 cp ~/.zshrc ~/.zshrc_backup
 ```
 
-Then symlink the `.zshrc` file into place.
+Now symlink the `.zshrc` file into place.
 
 ```bash
 ln -sfv ~/dotfiles/zsh/.zshrc ~/.zshrc
-```
-
-Now link the battery charge script into place, so it can be used by the theme.
-
-```bash
-ln -sfv ~/dotfiles/zsh/batcharge.py /usr/local/bin/batcharge
 ```
 
 Lastly, source the `~/.zshrc` file.
@@ -99,7 +93,7 @@ You may consider making a backup of the `.vimrc`. If you don't have one, don't w
 cp ~/.vimrc ~/.vimrc_backup
 ```
 
-Then symlink the `.zshrc` file into place.
+Then symlink the `.vimrc` file into place.
 
 ```bash
 ln -sfv ~/dotfiles/vim/.vimrc ~/.vimrc
@@ -162,7 +156,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.1; killall Dock
 chflags nohidden ~/Library/
 ```
 
-After you change what you want, you may need to restart your shell or dock
+After you change what you want, you may need to restart your shell or dock, or even logout and log back in (such is the case with speeding up the key repeat).
 
 ```bash
 # exit shell

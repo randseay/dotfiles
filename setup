@@ -85,8 +85,14 @@ echo "Linking .gitconfig..."
 ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
 
 echo "\nInitial Git Setup\n-----------------"
+function git_user_name() {
+    echo $(git config --global user.name)
+}
+function git_user_email() {
+    echo $(git config --global user.email)
+}
 while true; do
-    echo "The default git user is a placeholder."
+    echo "The current git user is $(git_user_name) <$(git_user_email)>."
     read -p "Do you wish specify the git user right now? [y/n] " yn
     case $yn in
         [Yy]* ) echo
