@@ -147,7 +147,7 @@ Here are a couple of OS X settings that help make life with your Mac much smooth
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # speed up key repeat
-defaults write -g KeyRepeat .01
+defaults write -g KeyRepeat -int 1
 
 # speed up initial key repeat
 defualts write -g InitialKeyReapt 1.5

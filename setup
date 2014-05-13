@@ -56,8 +56,8 @@ fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
 
-echo "Linking battery_charge script, so it can be used with shell..."
-ln -sfv $DOTFILES/zsh/battery_charge.py /usr/local/bin/battery_charge
+echo "Linking battery charge script, so it can be used with shell..."
+ln -sfv $DOTFILES/zsh/batcharge.py /usr/local/bin/batcharge
 
 # Vim Setup
 echo "/nSetting up vim..."
@@ -108,7 +108,7 @@ done
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "\nDarwin OS found, setting preferences..."
     defaults write -g ApplePressAndHoldEnabled -bool false
-    defaults write -g KeyRepeat .01
+    defaults write -g KeyRepeat -int 1
     defaults write -g InitialKeyReapt 1.5
     chflags nohidden $HOME/Library/
     defaults write com.apple.Dock autohide-delay -float 0
