@@ -56,7 +56,6 @@ then
 fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
-
 source $HOME/.zshrc
 
 # Vim Setup
@@ -83,14 +82,13 @@ then
 fi
 echo "Linking .gitconfig..."
 ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
-
-echo "\nInitial Git Setup\n-----------------"
 function git_user_name() {
     echo $(git config --global user.name)
 }
 function git_user_email() {
     echo $(git config --global user.email)
 }
+echo "\nInitial Git Setup\n-----------------"
 while true; do
     echo "The current git user is $(git_user_name) <$(git_user_email)>."
     read -p "Do you wish specify the git user right now? [y/n] " yn
