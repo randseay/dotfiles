@@ -11,7 +11,7 @@ ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] ) $FG[240]-----"
 
 # primary prompt
 PROMPT='$(virtualenv_prompt_info) $(git_prompt_info)%{$reset_color%}
-$FG[105]%(!.#.→)%{$reset_color%} '
+$FG[105]%(!.#.→)%{$reset_color%}  '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
  
