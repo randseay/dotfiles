@@ -1,8 +1,5 @@
 #!/bin/sh
 
-
-git filter-branch -f --env-filter '
-
 echo "\nFind and Replace Author in Git History\n--------------------------------------"
 echo "Please be sure your current working directory contains the correct git repository."
 echo "You need to be on the correct branch with no uncommitted changes.\n"
@@ -79,6 +76,8 @@ while true; do
     esac
 done
 
+git filter-branch -f --env-filter '
+
 an="$GIT_AUTHOR_NAME"
 am="$GIT_AUTHOR_EMAIL"
 cn="$GIT_COMMITTER_NAME"
@@ -99,4 +98,4 @@ export GIT_AUTHOR_NAME="$an"
 export GIT_AUTHOR_EMAIL="$am"
 export GIT_COMMITTER_NAME="$cn"
 export GIT_COMMITTER_EMAIL="$cm"
-'
+' -- --all
