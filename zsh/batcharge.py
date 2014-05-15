@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 # coding=UTF-8
 
-import math, subprocess
+import math, subprocess, sys
 
 divisor = 6
 
@@ -40,7 +40,6 @@ battery_out = (filled + empty).encode('utf-8')
 battery_or_charged = 'Full' if b_charged == 'Yes' else battery_out
 charging_out = ' ⚡︎' if b_charge == 'Yes' else ''
 time_remaining = ' [' + time_remaining + ']'
-import sys
 
 color_gold = '%{$FG[214]%}'
 color_green = '%{$FG[034]%}'
