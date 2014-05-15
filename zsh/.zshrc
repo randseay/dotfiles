@@ -1,5 +1,4 @@
 source $HOME/dotfiles/antigen/antigen.zsh
-antigen update
 
 # Apply my custom things
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin

@@ -23,6 +23,7 @@ brew doctor
 echo "Installing brew formulae..."
 brew install git
 brew install node
+brew install mysql
 brew tap homebrew/binary
 brew install packer
 brew install pyenv

@@ -23,7 +23,7 @@ eval my_orange='$FG[214]'
 # right prompt
 function precmd() {
     RPROMPT=${R_DIR_TIME_}$(batterycharge)
-    if [ -d .git ]; then ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] )"; else ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] ) $FG[240]-----"; fi
+    if [ $(git rev-parse --is-inside-work-tree 2>/dev/null) ]; then ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] )"; else ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] ) $FG[240]-----"; fi
 }
  
 # git settings

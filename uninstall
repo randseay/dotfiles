@@ -19,6 +19,7 @@ while true; do
                 brew doctor
                 brew uninstall git --force
                 brew uninstall node --force
+                brew uninstall mysql --force
                 brew uninstall packer --force
                 brew uninstall pyenv --force
                 brew uninstall pyenv-virtualenvwrapper --force
