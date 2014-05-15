@@ -1,6 +1,6 @@
 [user]
 	name = Rand Seay
-	email = rand.seay@ndus.edu
+	email = rand.seay@gmail.com
 [core]
 	editor = subl
 	excludesfile = ~/dotfiles/git/.gitignore_global
