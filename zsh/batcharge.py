@@ -43,7 +43,7 @@ battery_or_charge = (
     else battery_out
 )
 charging_out = ' ⚡︎' if b_charge == 'Yes' else ''
-time_remaining = ' [' + time_remaining + ']'
+time_remaining = ' [' + time_remaining + ']' if b_charged == 'No' else ''
 
 color_gold = '%{$FG[214]%}'
 color_green = '%{$FG[034]%}'
