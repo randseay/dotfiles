@@ -36,7 +36,7 @@ antigen apply
 
 # Set up pyenv
 eval "$(pyenv init -)"
-pyenv virtualenvwrapper_lazy
+pyenv virtualenvwrapper
 
 # Setup gopath
 export GOPATH=$HOME/j/oss/gocode
@@ -51,6 +51,7 @@ alias gco="git checkout"
 alias ohmyzsh="vim ~/dotfiles/.oh-my-zsh"
 alias vimconfig="vim ~/dotfiles/vim/.vimrc"
 alias zshconfig="vim ~/dotfiles/zsh/.zshrc"
+alias zshtime="~/dotfiles/zsh/zsh_time.py"
 
 # source $ZSH/oh-my-zsh.sh
 
