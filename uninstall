@@ -23,8 +23,6 @@ while true; do
                 brew uninstall packer --force
                 brew uninstall pyenv --force
                 brew uninstall pyenv-virtualenvwrapper --force
-                brew uninstall python --force
-                brew uninstall python3 --force
                 brew uninstall vim --force
                 break;;
         [Nn]* ) break;;
