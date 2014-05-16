@@ -38,7 +38,7 @@ empty = (total_slots - len(filled)) * u'▹'
 
 battery_out = ' ' + (filled + empty).encode('utf-8')
 battery_or_charge = (
-    'Full' if b_charged == 'Yes'
+    ' Full' if b_charged == 'Yes'
     else '' if b_charge == 'Yes'
     else battery_out
 )

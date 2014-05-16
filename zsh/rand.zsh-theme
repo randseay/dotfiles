@@ -7,7 +7,7 @@ local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 # primary prompt
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$FG[240]╍╍╍$FG[075] ( venv: "
 PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)%{$reset_color%}$my_teal%B${PWD/#$HOME/~}%b
-$FG[105]%(!.#.→)%{$reset_color%}  '
+$FG[105]%(!.#.→)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
  
