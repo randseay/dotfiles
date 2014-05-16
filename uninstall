@@ -18,6 +18,7 @@ while true; do
                 brew update
                 brew doctor
                 brew uninstall git --force
+                brew uninstall hub --force
                 brew uninstall node --force
                 brew uninstall mysql --force
                 brew uninstall packer --force

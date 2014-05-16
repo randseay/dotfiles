@@ -22,6 +22,7 @@ echo "Running brew doctor..."
 brew doctor
 echo "Installing brew formulae..."
 brew install git
+brew install hub
 brew install node
 brew install mysql
 brew tap homebrew/binary
