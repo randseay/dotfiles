@@ -36,8 +36,12 @@ total_slots, slots = divisor, []
 filled = int(math.ceil(charge_threshold * (total_slots / float(divisor)))) * u'▸'
 empty = (total_slots - len(filled)) * u'▹'
 
-battery_out = (filled + empty).encode('utf-8')
-battery_or_charged = 'Full' if b_charged == 'Yes' else battery_out
+battery_out = ' ' + (filled + empty).encode('utf-8')
+battery_or_charge = (
+    'Full' if b_charged == 'Yes'
+    else '' if b_charge == 'Yes'
+    else battery_out
+)
 charging_out = ' ⚡︎' if b_charge == 'Yes' else ''
 time_remaining = ' [' + time_remaining + ']'
 
@@ -52,5 +56,5 @@ color_out = (
     else color_red
 )
 
-out = color_out + battery_or_charged + color_gold + charging_out + color_reset + time_remaining
+out = color_out + battery_or_charge + color_gold + charging_out + color_reset + time_remaining
 sys.stdout.write(out)

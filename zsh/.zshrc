@@ -51,7 +51,7 @@ alias gco="git checkout"
 alias ohmyzsh="vim ~/dotfiles/.oh-my-zsh"
 alias vimconfig="vim ~/dotfiles/vim/.vimrc"
 alias zshconfig="vim ~/dotfiles/zsh/.zshrc"
-alias zshtime="~/dotfiles/zsh/zsh_time.py"
+alias zshtime="~/dotfiles/zsh/zsh_day_time.py"
 
 # source $ZSH/oh-my-zsh.sh
 

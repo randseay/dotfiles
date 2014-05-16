@@ -3,7 +3,7 @@
 
 import sys, time, datetime
 
-day = str(time.strftime("%a %H:%M "))
+day = str(time.strftime("%a %H:%M"))
 
 color_teal = '%{$FG[101]%}'
 color_reset = '%{$FG[240]%}'
