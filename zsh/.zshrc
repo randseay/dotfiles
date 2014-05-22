@@ -46,8 +46,6 @@ export PATH=$PATH:$GOPATH/bin
 # Setup aliases
 alias batterycharge="~/dotfiles/zsh/batcharge.py"
 alias git_find_replace_author="~/dotfiles/git/git_find_replace_author"
-alias gs="git status"
-alias gco="git checkout"
 alias ohmyzsh="vim ~/dotfiles/.oh-my-zsh"
 alias vimconfig="vim ~/dotfiles/vim/.vimrc"
 alias zshconfig="vim ~/dotfiles/zsh/.zshrc"
