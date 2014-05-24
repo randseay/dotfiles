@@ -47,8 +47,11 @@ then
         esac
     done
 fi
-echo "Installing python packages with pip..."
-pip install -r $DOTFILES/requirements.txt
+echo "Setting up Python..."
+pyenv install 2.7.6
+pyenv shell 2.7.6
+echo "Installing Python packages with pip..."
+pip install -r $DOTFILES/pip_requirements.txt
 if [ -f "$HOME/.zshrc" ]
 then
     echo "The .zshrc file already exists, backing it up..."
@@ -56,7 +59,6 @@ then
 fi
 echo "Linking .zshrc..."
 ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
-source $HOME/.zshrc
 
 # Vim Setup
 echo "/nSetting up vim..."
@@ -73,6 +75,18 @@ ln -sfv $DOTFILES/vim/spell/en.utf-8.spl $HOME/.vim/spell/
 echo "Installing vim bundles..."
 vim +BundleInstall +qall
 
+source $HOME/.zshrc
+
+# Node Setup
+echo "Setting up Node Packages..."
+npm install -g bower
+npm install -g grunt
+npm install -g grunt-cli
+npm install -g grunt-contrib-watch
+npm install -g grunt-sass
+npm install -g node-sass
+npm install -g markdown
+
 # Git Setup
 echo "/nSetting up git configuration..."
 if [ -f "$HOME/.gitconfig" ]
@@ -82,6 +96,8 @@ then
 fi
 echo "Linking .gitconfig..."
 ln -sfv $DOTFILES/git/.gitconfig $HOME/.gitconfig
+echo "Linking git hooks..."
+ln -sfv $DOTFILES/git/git_hooks/post-merge $DOTFILES/.git/hooks/post-merge
 
 echo "\nInitial Git Setup\n-----------------"
 while true; do

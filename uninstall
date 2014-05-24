@@ -10,6 +10,16 @@ rm -rf $HOME/.fonts/SourceCodePro $HOME/.fonts/powerline-fonts
 echo "Uninstalling pip packages..."
 pip uninstall -r $HOME/dotfiles/requirements.txt
 
+# Uninstall node packages
+echo "Uninstalling node packages..."
+npm unininstall -g bower
+npm unininstall -g grunt
+npm unininstall -g grunt-cli
+npm unininstall -g grunt-contrib-watch
+npm unininstall -g grunt-sass
+npm unininstall -g node-sass
+npm unininstall -g markdown
+
 # Uninstall brew formulae
 while true; do
     read -p "Do you want to uninstall the brew packages? [y/n]" yn

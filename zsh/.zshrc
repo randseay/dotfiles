@@ -11,11 +11,17 @@ export PROJECT_HOME=$HOME/j
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle bower
 antigen bundle brew
+antigen bundle copydir
+antigen bundle copyfile
 antigen bundle git
 antigen bundle git-flow
-antigen bundle pip
+antigen bundle npm
 antigen bundle osx
+antigen bundle pip
+antigen bundle pyenv
+antigen bundle python
 antigen bundle sublime
 antigen bundle vagrant
 antigen bundle virtualenv
@@ -44,6 +50,7 @@ export GOPATH=$HOME/j/oss/gocode
 export PATH=$PATH:$GOPATH/bin
 
 # Setup aliases
+alias gs="git status"
 alias batterycharge="~/dotfiles/zsh/batcharge.py"
 alias git_find_replace_author="~/dotfiles/git/git_find_replace_author"
 alias ohmyzsh="vim ~/dotfiles/.oh-my-zsh"
