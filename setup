@@ -73,17 +73,32 @@ ln -sfv $DOTFILES/vim/.vimrc $HOME/.vimrc
 mkdir -p $HOME/.vim/spell/
 ln -sfv $DOTFILES/vim/spell/en.utf-8.spl $HOME/.vim/spell/
 echo "Installing vim bundles..."
+source ~/.zshrc
 vim +BundleInstall +qall
-
-source $HOME/.zshrc
 
 # Node Setup
 echo "Setting up Node Packages..."
-npm install -g bower
-npm install -g grunt
+if [ -h "usr/local/bin/bower" ]
+then
+    echo "Bower found, skipping ahead..."
+else
+    npm install -g bower
+fi
+if [ -h "usr/local/bin/grunt" ]
+then
+    echo "Grunt found, skipping ahead..."
+else
+    npm install -g grunt
+fi
 npm install -g grunt-cli
 npm install -g grunt-contrib-watch
 npm install -g grunt-sass
+if [ -h "usr/local/bin/node-sass" ]
+then
+    echo "Node-sass found, skipping ahead..."
+else
+    npm install -g node-sass
+fi
 npm install -g node-sass
 npm install -g markdown
 
