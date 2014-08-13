@@ -4,33 +4,6 @@ echo "\nDotfile Setup\n-------------"
 echo "Creating environment variables..."
 export DOTFILES=$HOME/dotfiles
 
-# Install Fonts
-echo "Checking fonts..."
-if [ -d "$HOME/.fonts" ]
-then
-    echo ".fonts directory already exists, skipping ahead..."
-else
-    echo "Installing fonts..."
-    mkdir -p $HOME/.fonts
-    cp -r $DOTFILES/fonts/* $HOME/.fonts
-fi
-
-# Install brew formulae
-echo "\nUpdating brew..."
-brew update
-echo "Running brew doctor..."
-brew doctor
-echo "Installing brew formulae..."
-brew install git
-brew install hub
-brew install node
-brew install mysql
-brew tap homebrew/binary
-brew install packer
-brew install pyenv
-brew install pyenv-virtualenvwrapper
-brew install vim
-
 # Zsh Setup
 echo "\nSetting up zsh..."
 if [ ! -f "/bin/zsh" ]
@@ -47,11 +20,35 @@ then
         esac
     done
 fi
+
+# Install Fonts
+echo "Checking fonts..."
+if [ -d "$HOME/.fonts" ]
+then
+    echo ".fonts directory already exists, skipping ahead..."
+else
+    echo "Installing fonts..."
+    mkdir -p $HOME/.fonts
+    cp -r $DOTFILES/fonts/* $HOME/.fonts
+fi
+
+# Install Homebrew
+echo "\nInstalling Homebrew..."
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+# Install brew formulae
+./brew_packages
+
 echo "Setting up Python..."
 pyenv install 2.7.6
 pyenv shell 2.7.6
 echo "Installing Python packages with pip..."
 pip install -r $DOTFILES/pip_requirements.txt
+
+# Node Setup
+echo "Setting up Node Packages..."
+./npm_modules
+
 if [ -f "$HOME/.zshrc" ]
 then
     echo "The .zshrc file already exists, backing it up..."
@@ -75,32 +72,6 @@ ln -sfv $DOTFILES/vim/spell/en.utf-8.spl $HOME/.vim/spell/
 echo "Installing vim bundles..."
 source ~/.zshrc
 vim +BundleInstall +qall
-
-# Node Setup
-echo "Setting up Node Packages..."
-if [ -h "usr/local/bin/bower" ]
-then
-    echo "Bower found, skipping ahead..."
-else
-    npm install -g bower
-fi
-if [ -h "usr/local/bin/grunt" ]
-then
-    echo "Grunt found, skipping ahead..."
-else
-    npm install -g grunt
-fi
-npm install -g grunt-cli
-npm install -g grunt-contrib-watch
-npm install -g grunt-sass
-if [ -h "usr/local/bin/node-sass" ]
-then
-    echo "Node-sass found, skipping ahead..."
-else
-    npm install -g node-sass
-fi
-npm install -g node-sass
-npm install -g markdown
 
 # Git Setup
 echo "/nSetting up git configuration..."
@@ -132,7 +103,8 @@ while true; do
 done
 
 # Mac Preference Setup
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]
+then
     echo "\nDarwin OS found, setting preferences..."
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g KeyRepeat -int 1
