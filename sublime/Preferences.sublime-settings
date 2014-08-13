@@ -5,14 +5,13 @@
 	"command": "reveal_in_side_bar",
 	"dictionary": "Packages/Language - English/en_US.dic",
 	"font_face": "Source Code Pro Light",
-	"font_size": 13,
+	"font_size": 14,
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"SublimeCodeIntel",
-		"AdvancedNewFile",
 		"Markdown",
+		"AdvancedNewFile",
+		"SublimeCodeIntel",
 		"RestructuredText"
 	],
 	"keys":
@@ -21,6 +20,7 @@
 	],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
+	"match_brackets": true,
 	"rulers":
 	[
 		80,
@@ -28,7 +28,9 @@
 	],
 	"scroll_past_end": true,
 	"shift_tab_unindent": true,
-	"spell_check": true,
+	"spell_check": false,
 	"tab_size": 4,
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"vintage_start_in_command_mode": false
 }
