@@ -1,10 +1,3 @@
-"                      _
-"  _ __ __ _ _ __   __| |  ___  ___  __ _ _   _
-" | '__/ _` | '_ \ / _` | / __|/ _ \/ _` | | | |
-" | | | (_| | | | | (_| | \__ \  __/ (_| | |_| |
-" |_|  \__,_|_| |_|\__,_| |___/\___|\__,_|\__, |
-"                                         |___/
-"
 " By: Rand Seay (Inspired by Nick Zaccardi)
 " Project: Dotfiles
 " License: GNU GPLv3 (https://www.gnu.org/copyleft/gpl.html)
@@ -55,6 +48,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'SirVer/ultisnips'
 Bundle 'scrooloose/syntastic'
 Bundle 'honza/vim-snippets'
+Bundle 'tpope/vim-surround'
 Bundle 'mattn/emmet-vim'
 Bundle 'godlygeek/tabular'
 
@@ -99,6 +93,7 @@ set noswapfile              " Swapfiles are more of a pain for me then they are 
 "------------------------------------------------------------------------------
 " Tab Settings
 "------------------------------------------------------------------------------
+set autoindent              " Turns auto indent on
 set expandtab               " Expand tabs to spaces
 set tabstop=4               " Number of spaces a tab counts for
 set softtabstop=4           " Soft-tab width in spaces
