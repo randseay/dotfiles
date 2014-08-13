@@ -1,0 +1,33 @@
+#!/bin/sh
+
+packages=(
+    'caskroom/cask/brew-cask'
+    'git'
+    'hub'
+    'node'
+    'mysql'
+    'packer'
+    'pyenv'
+    'pyenv-virtualenvwrapper'
+    'tmux'
+    'vim'
+)
+
+echo "\nUpdating brew..."
+brew update
+
+echo "Running brew doctor..."
+brew doctor
+
+echo "\nInstalling brew formulae..."
+for package in "${packages[@]}"
+do
+    echo "\n\n"
+    echo "Installing $package next."
+    brew install $package
+    if [ $package == "mysql" ]
+    then
+        echo "Tapping the brew binaries..."
+        brew tap homebrew/binary
+    fi
+done
