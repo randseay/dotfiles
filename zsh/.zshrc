@@ -3,9 +3,10 @@ source $HOME/dotfiles/antigen/antigen.zsh
 # Apply my custom things
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 
-# Setup some environment variables 
+# Setup some environment variables
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/j
+export SITES_ROOT=$HOME/Dev/ndus/und
 
 # Load oh-my-zsh library.
 antigen use oh-my-zsh
@@ -20,7 +21,6 @@ antigen bundle git-flow
 antigen bundle npm
 antigen bundle osx
 antigen bundle pip
-antigen bundle pyenv
 antigen bundle python
 antigen bundle sublime
 antigen bundle vagrant
