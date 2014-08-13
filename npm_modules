@@ -3,9 +3,21 @@
 modules=(
     'bower'
     'grunt'
+    'grunt-autoprefixer'
+    'grunt-bower-install'
     'grunt-cli'
+    'grunt-contrib-clean'
+    'grunt-contrub-concat'
+    'grunt-contrib-sass'
+    'grunt-contrib-uglify'
     'grunt-contrib-watch'
+    'grunt-grunticon'
+    'grunt-imageoptim'
     'grunt-sass'
+    'grunt-shell'
+    'grunt-svgstore'
+    'imageoptim-cli'
+    'load-grunt-tasks'
     'node-sass'
     'markdown'
 )
@@ -23,4 +35,3 @@ do
         echo "$module is already installed, skipping ahead..."
     fi
 done
-
