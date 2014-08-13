@@ -6,7 +6,7 @@ from sys import argv
 
 script, wd_max_width = argv
 
-wd_full = os.getcwd().replace("/Users/randseay","~")
+wd_full = os.getcwd().replace("/Users/rand.seay","~")
 wd_list = wd_full.split("/")
 
 if len(wd_full) > int(wd_max_width):
