@@ -1,0 +1,25 @@
+#!/bin/sh
+
+function git_user_name() {
+    echo $(git config --global user.name)
+}
+function git_user_email() {
+    echo $(git config --global user.email)
+}
+
+echo "\nInitial Git Setup\n-----------------"
+while true; do
+    echo "The current git user is $(git_user_name) <$(git_user_email)>."
+    read -p "Do you wish specify the git user right now? [y/n] " yn
+    case $yn in
+        [Yy]* ) echo
+                read -p "What is the git user name? [First Last] " name
+                git config --global user.name "$name"
+                echo
+                read -p "What is the git user email? " email
+                git config --global user.email "$email"
+                break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.\n";;
+    esac
+done
