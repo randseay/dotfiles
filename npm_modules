@@ -1,0 +1,26 @@
+#!/bin/sh
+
+modules=(
+    'bower'
+    'grunt'
+    'grunt-cli'
+    'grunt-contrib-watch'
+    'grunt-sass'
+    'node-sass'
+    'markdown'
+)
+
+echo "\nInstalling Node modules via npm..."
+for module in "${modules[@]}"
+do
+    if [ ! -h /usr/local/bin/$module  ]
+    then
+        echo "\n\n"
+        echo "Installing $module..."
+        npm install -g $module
+    else
+        echo "\n\n"
+        echo "$module is already installed, skipping ahead..."
+    fi
+done
+
