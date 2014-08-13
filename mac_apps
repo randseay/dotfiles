@@ -1,0 +1,36 @@
+#!/bin/sh
+
+applications=(
+    'adium'
+    'alfred'
+    'anvil'
+    'bettertouchtool'
+    'cyberduck'
+    'dash'
+    'dropbox'
+    'evernote'
+    'firefox'
+    'flux'
+    'github'
+    'google-chrome'
+    'google-drive'
+    'iterm2'
+    'mou'
+    'mysqlworkbench'
+    'opera'
+    'sequel-pro'
+    'sourcetree'
+    'spotify'
+    'sublime-text'
+    'vagrant'
+    'virtualbox'
+)
+
+brew tap caskroom/cask
+
+for app in "${applications[@]}"
+do
+    echo "\n\n"
+    echo "Installing $app..."
+    brew cask install $app
+done
