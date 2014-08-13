@@ -1,12 +1,12 @@
 [user]
 	name = Rand Seay
-	email = rand.seay@gmail.com
+	email = rand.seay@ndus.edu
 [core]
-	editor = subl
+	editor = vim
 	excludesfile = ~/dotfiles/git/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -29,7 +29,7 @@
 	oops = reset --soft HEAD~1
 	pop = stash pop --index
 	save = stash save
-	see = !gitk
+	see = diff --staged
 	st = status
 	undo = reset --hard
 	unstage = reset
