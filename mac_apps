@@ -1,7 +1,6 @@
 #!/bin/sh
 
 applications=(
-    'adium'
     'alfred'
     'anvil'
     'bettertouchtool'
@@ -18,6 +17,7 @@ applications=(
     'mou'
     'mysqlworkbench'
     'opera'
+    'quassel-client'
     'sequel-pro'
     'sourcetree'
     'spotify'
