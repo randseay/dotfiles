@@ -27,6 +27,10 @@
 	ls = branch -av
 	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	oops = reset --soft HEAD~1
+
+	# Squashes the previous x number of commits into one. Takes two arguments: "number of commits" and "message"
+	squashed = "!f() { git reset --soft HEAD~${1} && git commit -m \"${2}\"; }; f"
+
 	pop = stash pop --index
 	save = stash save
 	see = diff --staged
