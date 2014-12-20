@@ -5,6 +5,7 @@ packages=(
     'git'
     'hub'
     'node'
+    'mercurial'
     'mysql'
     'packer'
     'pyenv'

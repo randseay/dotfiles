@@ -1,0 +1,4 @@
+[ui]
+username = Rand Seay <rand@skosh.io>
+ssh = ssh -C
+

@@ -8,7 +8,8 @@
     echo "                                         |___/    "
     echo "\nYou pulled down the dotfiles repository!\n----------------------------------------"
 
-while true; do
+while true
+do
     read -p "Would you like to run through the setup right now? [y/n] " yn
     case $yn in
         [Yy]* ) MYLOC=$(dirname -- $0)

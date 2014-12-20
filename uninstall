@@ -30,6 +30,7 @@ while true; do
                 brew uninstall git --force
                 brew uninstall hub --force
                 brew uninstall node --force
+                brew uninstall mercurial --force
                 brew uninstall mysql --force
                 brew uninstall packer --force
                 brew uninstall pyenv --force

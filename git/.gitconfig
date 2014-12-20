@@ -1,6 +1,6 @@
 [user]
 	name = Rand Seay
-	email = rand.seay@ndus.edu
+	email = rand.seay@gmail.com
 [core]
 	editor = vim
 	excludesfile = ~/dotfiles/git/.gitignore_global
@@ -34,8 +34,9 @@
 	undo = reset --hard
 	unstage = reset
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
 [color]
 	ui = true
 [hub]
