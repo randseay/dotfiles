@@ -6,8 +6,7 @@ export DOTFILES=$HOME/dotfiles
 
 # Zsh Setup
 echo "\nSetting up zsh..."
-if [ ! -f "/bin/zsh" ]
-then
+if [ ! -f "/bin/zsh" ]; then
     while true; do
         read -p "Could not find zsh, do you want to install it via oh-my-zsh? [y/n]" yn
         case $yn in
@@ -23,8 +22,7 @@ fi
 
 # Install Fonts
 echo "Checking fonts..."
-if [ -d "$HOME/.fonts" ]
-then
+if [ -d "$HOME/.fonts" ]; then
     echo ".fonts directory already exists, skipping ahead..."
 else
     echo "Installing fonts..."
@@ -37,7 +35,8 @@ echo "\nInstalling Homebrew..."
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 # Install brew formulae
-./brew_packages
+source brew_packages
+brew_install $packages
 
 echo "Setting up Python..."
 pyenv install 2.7.6
@@ -49,8 +48,7 @@ pip install -r $DOTFILES/pip_requirements.txt
 echo "Setting up Node Packages..."
 ./npm_modules
 
-if [ -f "$HOME/.zshrc" ]
-then
+if [ -f "$HOME/.zshrc" ]; then
     echo "The .zshrc file already exists, backing it up..."
     cp $HOME/.zshrc $DOTFILES/dotfile_backups/.zshrc_backup
 fi
@@ -59,8 +57,7 @@ ln -sfv $DOTFILES/zsh/.zshrc $HOME/.zshrc
 
 # Vim Setup
 echo "/nSetting up vim..."
-if [ -f "$HOME/.vimrc" ]
-then
+if [ -f "$HOME/.vimrc" ]; then
     echo "The .vimrc file already exists, backing it up..."
     cp $HOME/.vimrc $DOTFILES/dotfile_backups/.vimrc_backup
 fi
@@ -75,8 +72,7 @@ vim +BundleInstall +qall
 
 # Git Setup
 echo "/nSetting up git configuration..."
-if [ -f "$HOME/.gitconfig" ]
-then
+if [ -f "$HOME/.gitconfig" ]; then
     echo "The .gitconfig file already exists, backing it up..."
     cp $HOME/.gitconfig $DOTFILES/dotfile_backups/.gitconfig_backup
 fi
@@ -102,9 +98,17 @@ while true; do
     esac
 done
 
+# Mercurial Setup
+echo "\nSetting up mercurial configuration..."
+if [ -f "$HOME/.hgrc" ]; then
+    echo "The .hgrc file already exist, backing it up..."
+    cp $HOME/.hgrc $DOTFILES/dotfile_backups/.hgrc_backup
+fi
+echo "Linking .hgrc..."
+ln -sfv $DOTFILES/hg/.hgrc $HOME/.hgrc
+
 # Mac Preference Setup
-if [[ "$OSTYPE" == "darwin"* ]]
-then
+if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "\nDarwin OS found, setting preferences..."
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g KeyRepeat -int 1

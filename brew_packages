@@ -14,21 +14,42 @@ packages=(
     'vim'
 )
 
-echo "\nUpdating brew..."
-brew update
+function brew_install() {
+    echo "${$1}"
+}
 
-echo "Running brew doctor..."
-brew doctor
+function brew_install2() {
+    echo "\nUpdating brew..."
+    brew update
 
-echo "\nInstalling brew formulae..."
-for package in "${packages[@]}"
-do
-    echo "\n\n"
-    echo "Installing $package next."
-    brew install $package
-    if [ $package == "mysql" ]
-    then
-        echo "Tapping the brew binaries..."
-        brew tap homebrew/binary
-    fi
+    echo "Running brew doctor..."
+    brew doctor
+
+    echo "\nInstalling brew formulae..."
+    for package in "${packages[@]}"; do
+        echo "\n\n"
+        echo "Installing $package next."
+        brew install $package
+        if [ $package == "mysql" ]
+        then
+            echo "Tapping the brew binaries..."
+            brew tap homebrew/binary
+        fi
+    done
+}
+
+function brew_uninstall() {
+    while true; do
+    read -p "Do you want to uninstall the brew packages? [y/n]" yn
+    case $yn in
+        [Yy]* ) brew doctor
+                brew cleanup
+                for package in ${packages[@]}; do
+                    brew uninstall $package --force
+                done
+                break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.\n";;
+    esac
 done
+}

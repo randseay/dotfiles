@@ -21,45 +21,40 @@ npm unininstall -g node-sass
 npm unininstall -g markdown
 
 # Uninstall brew formulae
-while true; do
-    read -p "Do you want to uninstall the brew packages? [y/n]" yn
-    case $yn in
-        [Yy]* ) echo "Uninstalling brew formulae. NOTE: spawned formulae dependencies may remain..."
-                brew update
-                brew doctor
-                brew uninstall git --force
-                brew uninstall hub --force
-                brew uninstall node --force
-                brew uninstall mercurial --force
-                brew uninstall mysql --force
-                brew uninstall packer --force
-                brew uninstall pyenv --force
-                brew uninstall pyenv-virtualenvwrapper --force
-                brew uninstall vim --force
-                break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.\n";;
-    esac
-done
+source brew_packages
+brew_uninstall $packages
 
 # Restore .zshrc
-echo "Restoring zsh setup..."
-rm $HOME/.zshrc
-cp $HOME/dotfiles/dotfile_backups/.zshrc_backup $HOME/.zshrc
+if [ -f $DOTFILES/dotfiles/dotfile_backups/.zshrc_backup ]; then
+    echo "Restoring zsh setup..."
+    rm $HOME/.zshrc
+    cp $HOME/dotfiles/dotfile_backups/.zshrc_backup $HOME/.zshrc
+fi
 
 # Restore .vimrc
-echo "Restoring vim setup..."
-rm $HOME/.vimrc
-cp $HOME/dotfiles/dotfile_backups/.vimrc_backup $HOME/.vimrc
+if [ -f $DOTFILES/dotfiles/dotfile_backups/.vimrc_backup ]; then
+    echo "Restoring vim setup..."
+    rm $HOME/.vimrc
+    cp $HOME/dotfiles/dotfile_backups/.vimrc_backup $HOME/.vimrc
+fi
 
 # Restore git settings
-echo "Restoring git setup..."
-rm $HOME/.gitconfig
-cp $HOME/dotfiles/dotfile_backups/.gitconfig_backup $HOME/.gitconfig
+if [ -f $DOTFILES/dotfiles/dotfile_backups/.gitconfig_backup ]; then
+    echo "Restoring git setup..."
+    rm $HOME/.gitconfig
+    cp $HOME/dotfiles/dotfile_backups/.gitconfig_backup $HOME/.gitconfig
+fi
 
 if [ -h "/usr/local/bin/git_find_replace_author" ]
 then
     rm /usr/local/bin/git_find_replace_author
+fi
+
+# Restore mercurial settings
+if [ -f $DOTFILES/dotfiles/dotfile_backups/.hgrc_backup ]; then
+    echo "Restoring mercurial setup..."
+    rm $HOME/.hgrc
+    cp $HOME/dotfiles/dotfile_backups/.hgrc_backup $HOME/.hgrc
 fi
 
 # Remove dotfiles repository

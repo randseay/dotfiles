@@ -2,3 +2,5 @@
 username = Rand Seay <rand@skosh.io>
 ssh = ssh -C
 
+[extensions]
+prompt = ~/dotfiles/hg/prompt.py

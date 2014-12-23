@@ -34,8 +34,10 @@ antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load personal theme.
-# antigen theme randseay/dotfiles zsh/rand
-antigen theme https://gist.github.com/randseay/b106748a423b38250835 rand
+antigen theme randseay/dotfiles zsh/rand2
+
+# Make root prompt the same
+export ROOT_PS1=$PS1
 
 # Tell antigen that you're done.
 antigen apply

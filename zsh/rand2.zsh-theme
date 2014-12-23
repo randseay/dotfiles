@@ -11,6 +11,7 @@ eval my_green='$FG[034]'
 eval my_orange='$FG[214]'
 eval my_purple='$FG[093]'
 eval my_red='$FG[088]'
+eval my_yellow='$FG[011]'
 
 # check for super user
 if [ $UID -eq 0 ]; then
@@ -19,7 +20,20 @@ else
     uname_color=$my_forest;
 fi
 
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+# check for git repo
+function is_git_repo {
+    git rev-parse --is-inside-work-tree 2>/dev/null
+}
+
+# check for hg repo
+function is_hg_repo {
+    hg --cwd $PWD root 2>/dev/null
+}
+
+# hg repository information
+function hg_ps1() {
+    hg prompt $1 2>/dev/null
+}
 
 function get_pwd_width() {
 
@@ -47,27 +61,35 @@ function get_pwd_width() {
   echo $pwd_width
 }
 
-# primary prompt
-ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$my_blue ( venv: "
-PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$PWD_PROMPT
-$uname_color\u $FG[105]%(!.#.→)%{$reset_color%} '
-# PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
-# RPS1='${return_code}'
+# git settings
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$my_blue%}[ git:  "
+ZSH_THEME_GIT_PROMPT_CLEAN="$my_green ✓%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange %B±%b%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$my_blue ] $my_gray╍╍╍ %{$reset_color%}"
 
+# hg settings
+HG_PROMPT_PREFIX="%{$my_purple%}[ hg:  "
+HG_PROMPT_SUFFIX="$myblue ] $my_gray╍╍╍ "
 
 # pre-command functions
 function precmd() {
     RPROMPT="$my_forest$(zshtime)%{$reset_color%}$(batterycharge)"
-    if [ $(git rev-parse --is-inside-work-tree 2>/dev/null) ]; then
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] ) ";
+    if [ $(is_git_repo) ] || [ $(is_hg_repo) ]; then
+        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) $my_gray╍╍╍ "
+    elif [ ! $(is_git_repo) ] && [ ! $(is_hg_repo) ]; then
+        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) $my_gray╍╍╍ "
     else
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$FG[075] ) $FG[240]╍╍╍ ";
+        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) "
+    fi
+    if [ $(is_hg_repo) ]; then
+        hg_prompt_info="$HG_PROMPT_PREFIX$(hg_ps1 branch)$HG_PROMPT_SUFFIX"
+    else
+        hg_prompt_info=""
     fi
     PWD_PROMPT="$my_forest%B$(abbr_path $(get_pwd_width))%b"
 }
 
-# git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[240]╍╍╍$my_blue [ git:  "
-ZSH_THEME_GIT_PROMPT_CLEAN="$my_green ✓%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange %B±%b%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$my_blue ] $FG[240]╍╍╍ %{$reset_color%}"
+# primary prompt
+ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$my_blue( venv: "
+PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n%{$reset_color%} in $PWD_PROMPT
+$my_orange%(!.#.→)%{$reset_color%} '
