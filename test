@@ -1,4 +1,0 @@
-#!/bin/sh
-
-source brew_packages
-brew_install $packages

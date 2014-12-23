@@ -15,10 +15,8 @@ packages=(
 )
 
 function brew_install() {
-    echo "${$1}"
-}
+    local_packages=("${@}")
 
-function brew_install2() {
     echo "\nUpdating brew..."
     brew update
 
@@ -26,7 +24,7 @@ function brew_install2() {
     brew doctor
 
     echo "\nInstalling brew formulae..."
-    for package in "${packages[@]}"; do
+    for package in "${local_packages[@]}"; do
         echo "\n\n"
         echo "Installing $package next."
         brew install $package
@@ -39,12 +37,14 @@ function brew_install2() {
 }
 
 function brew_uninstall() {
+    local_packages=("${@}")
+
     while true; do
     read -p "Do you want to uninstall the brew packages? [y/n]" yn
     case $yn in
         [Yy]* ) brew doctor
                 brew cleanup
-                for package in ${packages[@]}; do
+                for package in "${local_packages[@]}"; do
                     brew uninstall $package --force
                 done
                 break;;

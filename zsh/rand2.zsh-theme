@@ -32,8 +32,20 @@ function is_hg_repo {
 
 # hg repository information
 function hg_ps1() {
-    hg prompt $1 2>/dev/null
+    hg prompt "{${1}}" 2>/dev/null
 }
+
+case $(hg_ps1 status) in
+    "!")
+        HG_STATUS="%{$my_orange%}±"
+        ;;
+    "?")
+        HG_STATUS="%{$my_orange%}?"
+        ;;
+    "")
+        HG_STATUS="%{$my_green%}✓"
+        ;;
+esac
 
 function get_pwd_width() {
 
@@ -69,7 +81,7 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$my_blue ] $my_gray╍╍╍ %{$reset_color%}"
 
 # hg settings
 HG_PROMPT_PREFIX="%{$my_purple%}[ hg:  "
-HG_PROMPT_SUFFIX="$myblue ] $my_gray╍╍╍ "
+HG_PROMPT_SUFFIX="%{$my_purple%} ] $my_gray╍╍╍ "
 
 # pre-command functions
 function precmd() {
@@ -82,7 +94,7 @@ function precmd() {
         ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) "
     fi
     if [ $(is_hg_repo) ]; then
-        hg_prompt_info="$HG_PROMPT_PREFIX$(hg_ps1 branch)$HG_PROMPT_SUFFIX"
+        hg_prompt_info="$HG_PROMPT_PREFIX$(hg_ps1 branch) $HG_STATUS$HG_PROMPT_SUFFIX"
     else
         hg_prompt_info=""
     fi
