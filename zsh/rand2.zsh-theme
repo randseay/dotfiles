@@ -35,18 +35,6 @@ function hg_ps1() {
     hg prompt "{${1}}" 2>/dev/null
 }
 
-case $(hg_ps1 status) in
-    "!")
-        HG_STATUS="%{$my_orange%}±"
-        ;;
-    "?")
-        HG_STATUS="%{$my_orange%}?"
-        ;;
-    "")
-        HG_STATUS="%{$my_green%}✓"
-        ;;
-esac
-
 function get_pwd_width() {
 
   git_info=$(git_prompt_info)
@@ -86,6 +74,17 @@ HG_PROMPT_SUFFIX="%{$my_purple%} ] $my_gray╍╍╍ "
 # pre-command functions
 function precmd() {
     RPROMPT="$my_forest$(zshtime)%{$reset_color%}$(batterycharge)"
+    case $(hg_ps1 status) in
+        '!')
+            HG_STATUS="%{$my_orange%}±"
+            ;;
+        '?')
+            HG_STATUS="%{$my_orange%}?"
+            ;;
+        '')
+            HG_STATUS="%{$my_green%}✓"
+            ;;
+    esac
     if [ $(is_git_repo) ] || [ $(is_hg_repo) ]; then
         ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) $my_gray╍╍╍ "
     elif [ ! $(is_git_repo) ] && [ ! $(is_hg_repo) ]; then
