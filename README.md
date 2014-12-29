@@ -2,6 +2,22 @@
 
 I was looking for an easier way to manage my dotfiles, using nZac's dotfiles as a baseline.
 
+## Screenshots
+
+Different users with the machine chargin or on battery. The time in square brackets is time till charged (if charging) or time remaing (if on battery).
+
+![](https://github.com/randseay/dotfiles/tree/master/img/prompt-root-charging.png)
+
+![](https://github.com/randseay/dotfiles/tree/master/img/prompt-user-battery.png)
+
+Using various source control tools, git and hg. Green check mark is clean, gold plus-minus is dirty, and gold question mark is untracked files (in hg). Shown with and without a virtualenvironment.
+
+![](https://github.com/randseay/dotfiles/tree/master/img/prompt-git-clean-charging.png)
+
+![](https://github.com/randseay/dotfiles/tree/master/img/prompt-venv-git-dirty-battery.png)
+
+![](https://github.com/randseay/dotfiles/tree/master/img/prompt-venv-hg-untracked-battery.png)
+
 ## Installation
 
 Start by pulling down the repository.
