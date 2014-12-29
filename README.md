@@ -83,6 +83,12 @@ Now symlink the `.zshrc` file into place.
 ln -sfv ~/dotfiles/zsh/.zshrc ~/.zshrc
 ```
 
+Symlink the repository into place within antigen (in order to use a local version of the theme) Then if you update the theme file (`zsh/rand2.zsh-theme`), you can just `source ~/.zshrc` to see the changes.
+
+```bash
+ln -sfv ~/dotfiles ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-randseay-SLASH-dotfiles.git
+```
+
 Lastly, source the `~/.zshrc` file.
 
 ```bash
