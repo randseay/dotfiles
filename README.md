@@ -2,6 +2,22 @@
 
 I was looking for an easier way to manage my dotfiles, using nZac's dotfiles as a baseline.
 
+## Screenshots
+
+Different users with the machine charging or on battery. The time in square brackets is time till charged (if charging) or time remaining (if on battery).
+
+![](https://github.com/randseay/dotfiles/blob/master/img/prompt-root-charging.png)
+
+![](https://github.com/randseay/dotfiles/blob/master/img/prompt-user-battery.png)
+
+Using various source control tools, git and hg. Green check mark is clean, gold plus-minus is dirty, and gold question mark is untracked files (in hg). Shown with and without a virtualenvironment.
+
+![](https://github.com/randseay/dotfiles/blob/master/img/prompt-git-clean-charging.png)
+
+![](https://github.com/randseay/dotfiles/blob/master/img/prompt-venv-git-dirty-battery.png)
+
+![](https://github.com/randseay/dotfiles/blob/master/img/prompt-venv-hg-untracked-battery.png)
+
 ## Installation
 
 Start by pulling down the repository.
@@ -65,6 +81,12 @@ Now symlink the `.zshrc` file into place.
 
 ```bash
 ln -sfv ~/dotfiles/zsh/.zshrc ~/.zshrc
+```
+
+Symlink the repository into place within antigen (in order to use a local version of the theme) Then if you update the theme file (`zsh/rand2.zsh-theme`), you can just `source ~/.zshrc` to see the changes.
+
+```bash
+ln -sfv ~/dotfiles ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-randseay-SLASH-dotfiles.git
 ```
 
 Lastly, source the `~/.zshrc` file.
