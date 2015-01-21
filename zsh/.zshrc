@@ -2,6 +2,7 @@ source $HOME/dotfiles/antigen/antigen.zsh
 
 # Apply my custom things
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Setup some environment variables
 export WORKON_HOME=$HOME/.virtualenvs
@@ -45,6 +46,10 @@ antigen apply
 # Set up pyenv
 eval "$(pyenv init -)"
 pyenv virtualenvwrapper
+
+# Set up rbenv
+eval "$(rbenv init -)"
+export RBENV_VERSION=2.2.0
 
 # Setup gopath
 export GOPATH=$HOME/j/oss/gocode
