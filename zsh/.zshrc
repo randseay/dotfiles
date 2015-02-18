@@ -46,6 +46,9 @@ antigen apply
 eval "$(pyenv init -)"
 pyenv virtualenvwrapper
 
+# Set up rbenv
+eval "$(rbenv init -)"
+
 # Setup gopath
 export GOPATH=$HOME/j/oss/gocode
 
