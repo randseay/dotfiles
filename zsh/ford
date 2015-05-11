@@ -1,0 +1,25 @@
+#!/bin/sh
+
+echo "Shipping things like it's 1903.\n-------------------------------"
+
+function do_ford_stuff() {
+    workon ford
+    vagrant "$@"
+    deactivate
+}
+
+function go_to_ford() {
+    local CURRENT_DIR=${PWD}
+
+    if [ "$CURRENT_DIR" != "$FORD_DIR" ]
+    then
+        cd $FORD_DIR
+        do_ford_stuff $@
+        cd $CURRENT_DIR
+    else
+        do_ford_stuff $@
+    fi
+}
+
+go_to_ford $@
+
