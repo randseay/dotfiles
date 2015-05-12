@@ -1,6 +1,6 @@
-" By: Rand Seay (Inspired by Nick Zaccardi)
-" Project: Dotfiles
-" License: GNU GPLv3 (https://www.gnu.org/copyleft/gpl.html)
+" Dotfiles
+" Rand Seay (Inspired by Nick Zaccardi)
+" GNU GPLv3 (https://www.gnu.org/copyleft/gpl.html)
 
 "------------------------------------------------------------------------------
 " VUNDLE SETTINGS
@@ -95,6 +95,7 @@ set noswapfile              " Swapfiles are more of a pain for me then they are 
 "------------------------------------------------------------------------------
 set autoindent              " Turns auto indent on
 set expandtab               " Expand tabs to spaces
+autocmd FileType make setlocal noexpandtab " Use tabs in Makefiles
 set tabstop=4               " Number of spaces a tab counts for
 set softtabstop=4           " Soft-tab width in spaces
 set shiftwidth=4            " Number of spaces for each >>

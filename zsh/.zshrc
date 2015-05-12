@@ -2,11 +2,15 @@ source $HOME/dotfiles/antigen/antigen.zsh
 
 # Apply my custom things
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Setup some environment variables
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/j
+export PROJECT_HOME=$HOME/Dev
 export SITES_ROOT=$HOME/Dev/ndus/und
+export FORD_DIR=$HOME/Dev/ndus/ford
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Load oh-my-zsh library.
 antigen use oh-my-zsh
@@ -48,6 +52,7 @@ pyenv virtualenvwrapper
 
 # Set up rbenv
 eval "$(rbenv init -)"
+export RBENV_VERSION=2.2.0
 
 # Setup gopath
 export GOPATH=$HOME/j/oss/gocode
@@ -58,6 +63,7 @@ export PATH=$PATH:$GOPATH/bin
 alias gs="git status"
 alias abbr_path="~/dotfiles/zsh/abbr_path.py"
 alias batterycharge="~/dotfiles/zsh/batcharge.py"
+function ford() { ~/dotfiles/zsh/ford "$@" }
 alias git_find_replace_author="~/dotfiles/git/git_find_replace_author"
 alias ohmyzsh="vim ~/dotfiles/.oh-my-zsh"
 alias vimconfig="vim ~/dotfiles/vim/.vimrc"
