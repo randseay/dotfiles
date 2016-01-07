@@ -10,6 +10,7 @@ packages=(
     'packer'
     'pyenv'
     'pyenv-virtualenvwrapper'
+    'rbenv'
     'tmux'
     'vim'
 )
