@@ -2,24 +2,18 @@
 
 modules=(
     'bower'
+    'browserify'
     'grunt'
-    'grunt-autoprefixer'
-    'grunt-bower-install'
     'grunt-cli'
-    'grunt-contrib-clean'
-    'grunt-contrub-concat'
-    'grunt-contrib-sass'
-    'grunt-contrib-uglify'
-    'grunt-contrib-watch'
-    'grunt-grunticon'
-    'grunt-imageoptim'
     'grunt-sass'
-    'grunt-shell'
-    'grunt-svgstore'
+    'gulp'
+    'http-server'
     'imageoptim-cli'
     'load-grunt-tasks'
     'node-sass'
     'markdown'
+    'modernizr'
+    'speed-test'
 )
 
 echo "\nInstalling Node modules via npm..."
