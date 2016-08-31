@@ -3,6 +3,7 @@ source $HOME/dotfiles/antigen/antigen.zsh
 # Apply my custom things
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/anaconda/bin:$PATH"
 
 # Setup some environment variables
 export WORKON_HOME=$HOME/.virtualenvs
