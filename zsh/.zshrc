@@ -4,6 +4,7 @@ source $HOME/dotfiles/antigen/antigen.zsh
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/anaconda/bin:$PATH"
+export DOTFILES=$HOME/dotfiles
 
 # Setup some environment variables
 export WORKON_HOME=$HOME/.virtualenvs
@@ -36,7 +37,8 @@ antigen bundle virtualenvwrapper
 antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 
 # Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+# antigen bundle zsh-users/zsh-syntax-highlighting
+source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Load personal theme.
 antigen theme randseay/dotfiles zsh/rand2

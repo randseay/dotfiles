@@ -11,6 +11,7 @@ packages=(
     'pyenv'
     'pyenv-virtualenvwrapper'
     'rbenv'
+    'ruby-build'
     'tmux'
     'vim'
 )

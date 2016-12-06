@@ -2,6 +2,7 @@
 
 modules=(
     'bower'
+<<<<<<< HEAD
     'browserify'
     'grunt'
     'grunt-cli'
@@ -14,6 +15,9 @@ modules=(
     'markdown'
     'modernizr'
     'speed-test'
+    'grunt-cli'
+    'gulp'
+    'node-sass'
 )
 
 echo "\nInstalling Node modules via npm..."
