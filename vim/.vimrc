@@ -122,6 +122,7 @@ autocmd FileType rst set textwidth=80  " wrap at 80
 autocmd FileType rst set tabstop=2     " Indent by two
 autocmd FileType rst set softtabstop=2 " Indent by two
 autocmd FileType rst set shiftwidth=2  " Indent by two
+autocmd FileType crontab setlocal nobackup nowritebackup
 
 
 

@@ -13,6 +13,7 @@ export SITES_ROOT=$HOME/Dev/ndus/und
 export FORD_DIR=$HOME/Dev/ndus/ford
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export EDITOR=vim
 
 # Load oh-my-zsh library.
 antigen use oh-my-zsh

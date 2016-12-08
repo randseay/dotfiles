@@ -1,6 +1,7 @@
 .DS_Store
 .backup
 *.class
+*.egg-info
 .idea
 *.pyc
 .sass-cache
