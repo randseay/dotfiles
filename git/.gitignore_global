@@ -2,6 +2,7 @@
 .backup
 *.class
 *.egg-info
+.eggs
 .idea
 *.pyc
 .sass-cache
