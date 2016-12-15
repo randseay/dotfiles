@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# temporarily disabled
+exit;;
+
     echo "                      _                           "
     echo "  _ __ __ _ _ __   __| |  ___  ___  __ _ _   _    "
     echo " | '__/ _' | '_ \ / _' | / __|/ _ \/ _' | | | |   "

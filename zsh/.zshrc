@@ -33,13 +33,14 @@ antigen bundle sublime
 antigen bundle vagrant
 antigen bundle virtualenv
 antigen bundle virtualenvwrapper
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Personal theme requires this
 antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 
 # Syntax highlighting bundle.
 # antigen bundle zsh-users/zsh-syntax-highlighting
-source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Load personal theme.
 antigen theme randseay/dotfiles zsh/rand2

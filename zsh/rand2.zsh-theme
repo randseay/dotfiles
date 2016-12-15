@@ -4,20 +4,26 @@
 #    virtualenv-prompt (https://github.com/tonyseek/oh-my-zsh-virtualenv-prompt)
 
 # colors
-eval my_blue='$FG[075]'
-eval my_forest='$FG[101]'
-eval my_gray='$FG[240]'
-eval my_green='$FG[034]'
-eval my_orange='$FG[214]'
-eval my_purple='$FG[093]'
-eval my_red='$FG[088]'
-eval my_yellow='$FG[011]'
+eval color_blue='$FG[075]'
+eval color_forest='$FG[101]'
+eval color_gray='$FG[240]'
+eval color_green='$FG[034]'
+eval color_orange='$FG[214]'
+eval color_purple='$FG[093]'
+eval color_red='$FG[088]'
+eval color_yellow='$FG[011]'
+
+# symbols
+eval symbol_branch=""
+eval symbol_check="✓"
+eval symbol_untracked="?"
+eval symbol_changes="±"
 
 # check for super user
 if [ $UID -eq 0 ]; then
-    uname_color=$my_red;
+    uname_color=$color_red;
 else
-    uname_color=$my_forest;
+    uname_color=$color_forest;
 fi
 
 # check for git repo
@@ -62,45 +68,45 @@ function get_pwd_width() {
 }
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$my_blue%}[ git:  "
-ZSH_THEME_GIT_PROMPT_CLEAN="$my_green ✓%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange %B±%b%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$my_blue ] $my_gray╍╍╍ %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$color_blue%}[ git: %{$symbol_branch%} "
+ZSH_THEME_GIT_PROMPT_CLEAN="$color_green %{$symbol_check%}%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="$color_orange %B%{$symbol_changes%}%b%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$color_blue ] $color_gray╍╍╍ %{$reset_color%}"
 
 # hg settings
-HG_PROMPT_PREFIX="%{$my_purple%}[ hg:  "
-HG_PROMPT_SUFFIX="%{$my_purple%} ] $my_gray╍╍╍ "
+HG_PROMPT_PREFIX="%{$color_purple%}[ hg: %{$symbol_branch%} "
+HG_PROMPT_SUFFIX="%{$color_purple%} ] $color_gray╍╍╍ "
 
 # pre-command functions
 function precmd() {
-    RPROMPT="$my_forest$(zshtime)%{$reset_color%}$(batterycharge)"
+    RPROMPT="$color_forest$(zshtime)%{$reset_color%}$(batterycharge)"
     case $(hg_ps1 status) in
         '!')
-            HG_STATUS="%{$my_orange%}±"
+            HG_STATUS="%{$color_orange%}%{$symbol_changes%}"
             ;;
         '?')
-            HG_STATUS="%{$my_orange%}?"
+            HG_STATUS="%{$color_orange%}%{$symbol_untracked%}"
             ;;
         '')
-            HG_STATUS="%{$my_green%}✓"
+            HG_STATUS="%{$color_green%}%{$symbol_check%}"
             ;;
     esac
     if [ $(is_git_repo) ] || [ $(is_hg_repo) ]; then
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) $my_gray╍╍╍ "
+        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$color_blue ) $color_gray╍╍╍ "
     elif [ ! $(is_git_repo) ] && [ ! $(is_hg_repo) ]; then
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) $my_gray╍╍╍ "
+        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$color_blue ) $color_gray╍╍╍ "
     else
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$my_blue ) "
+        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$color_blue ) "
     fi
     if [ $(is_hg_repo) ]; then
         hg_prompt_info="$HG_PROMPT_PREFIX$(hg_ps1 branch) $HG_STATUS$HG_PROMPT_SUFFIX"
     else
         hg_prompt_info=""
     fi
-    PWD_PROMPT="$my_forest%B$(abbr_path $(get_pwd_width))%b"
+    PWD_PROMPT="$color_forest%B$(abbr_path $(get_pwd_width))%b"
 }
 
 # primary prompt
-ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$my_blue( venv: "
+ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$color_blue( venv: "
 PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n%{$reset_color%} in $PWD_PROMPT
-$my_orange%(!.#.→)%{$reset_color%} '
+$color_orange%(!.#.→)%{$reset_color%} '

@@ -5,7 +5,6 @@ packages=(
     'git'
     'hub'
     'node'
-    'mercurial'
     'mysql'
     'packer'
     'pyenv'
@@ -14,6 +13,7 @@ packages=(
     'ruby-build'
     'tmux'
     'vim'
+    'yarn'
 )
 
 function brew_install() {
