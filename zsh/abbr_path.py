@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-import os, sys
+import getpass, os, sys
 from sys import argv
 
 script, wd_max_width = argv
 
-wd_full = os.getcwd().replace("/Users/rand.seay","~").replace("/Users/randseay","~")
+wd_full = os.getcwd().replace("/Users/" + getpass.getuser(),"~")
 wd_list = wd_full.split("/")
 
 if len(wd_full) > int(wd_max_width):
