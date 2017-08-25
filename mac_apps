@@ -2,10 +2,8 @@
 
 applications=(
     'alfred'
-    'anvil'
     'atom'
     'bettertouchtool'
-    'cyberduck'
     'dash'
     'dropbox'
     'firefox'
@@ -16,14 +14,10 @@ applications=(
     'iterm2'
     'mou'
     'mysqlworkbench'
-    'opera'
     'sequel-pro'
     'sourcetree'
     'slack'
     'spotify'
-    'sublime-text'
-    'vagrant'
-    'virtualbox'
 )
 
 brew tap caskroom/cask

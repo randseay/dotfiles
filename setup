@@ -39,8 +39,8 @@ source brew_packages
 brew_install $packages
 
 echo "Setting up Python..."
-pyenv install 2.7.6
-pyenv shell 2.7.6
+pyenv install 3.6.1
+pyenv shell 3.6.1
 echo "Installing Python packages with pip..."
 pip install -r $DOTFILES/pip_requirements.txt
 

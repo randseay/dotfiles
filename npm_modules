@@ -2,7 +2,6 @@
 
 modules=(
     'bower'
-<<<<<<< HEAD
     'browserify'
     'grunt'
     'grunt-cli'
@@ -17,7 +16,10 @@ modules=(
     'speed-test'
     'grunt-cli'
     'gulp'
+    'gulp-cli'
     'node-sass'
+    'typescript'
+    'webpack'
 )
 
 echo "\nInstalling Node modules via npm..."

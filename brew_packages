@@ -1,12 +1,12 @@
 #!/bin/sh
 
 packages=(
-    'caskroom/cask/brew-cask'
     'git'
     'hub'
     'node'
     'mysql'
     'packer'
+    'postgresql'
     'pyenv'
     'pyenv-virtualenvwrapper'
     'rbenv'
