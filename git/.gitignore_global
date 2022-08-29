@@ -11,3 +11,4 @@
 __pycache__
 *.map
 .python-version
+.vscode/*
