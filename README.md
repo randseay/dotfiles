@@ -188,5 +188,13 @@ exit
 killall Dock
 ```
 
+### VS Code key repeat
+
+To disable Mac keyboard press and hold functionality in VS Code, run this command. This will make it possible to repeat a key when holding it down
+
+```
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+```
+
 ## License
 Do what ever you want with these files.

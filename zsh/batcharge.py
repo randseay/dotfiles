@@ -3,6 +3,20 @@
 
 import math, subprocess, sys
 
+def extract_float(line):
+    value = line.rpartition(b'=')[-1].strip()
+    # Remove trailing non-digit characters (e.g., '}')
+    value = value.rstrip(b'}')
+    return float(value)
+
+def extract_int(line):
+    value = line.rpartition(b'=')[-1].strip()
+    value = value.rstrip(b'}')
+    return int(value)
+
+def extract_str(line):
+    return line.rpartition(b'=')[-1].strip()
+
 divisor = 6
 
 # Find the AppleSmartBattery
@@ -21,11 +35,11 @@ if len(output):
 
     # Strip out the value in each key-value pair
 
-    b_max = float(o_max.rpartition(b'=')[-1].strip())
-    b_cur = float(o_cur.rpartition(b'=')[-1].strip())
-    b_charge = str(o_charge.rpartition(b'=')[-1].strip())
-    b_charged = str(o_charged.rpartition(b'=')[-1].strip())
-    b_time_remaining = int(o_time_remaining.rpartition(b'=')[-1].strip())
+    b_max = extract_float(o_max)
+    b_cur = extract_float(o_cur)
+    b_charge = extract_str(o_charge)
+    b_charged = extract_str(o_charged)
+    b_time_remaining = extract_int(o_time_remaining)
 
     charge = b_cur / b_max
     charge_threshold = int(math.ceil(divisor * charge))
