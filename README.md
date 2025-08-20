@@ -322,6 +322,38 @@ If you get errors about Oh My Zsh not loading or direnv not found:
 
 **Pro tip**: The setup script will offer to change your default shell to zsh automatically!
 
+### Common Setup Issues
+
+#### **Commands Not Found After Setup**
+If you see errors like "Command 'exa' not found" after running the setup:
+
+**Problem**: You're still in bash, but the setup script linked your zsh configuration with aliases.
+
+**Solution**: Switch to zsh to use your configuration:
+```bash
+zsh
+```
+
+**Why this happens**: The setup script configures zsh, but you need to actually be running zsh for those configurations to take effect.
+
+#### **Cannot Change Default Shell**
+If you get permission errors when trying to change your default shell:
+
+**Problem**: The `chsh` command requires elevated privileges on some systems.
+
+**Solutions**:
+1. **Switch to zsh manually** (recommended for now):
+   ```bash
+   zsh
+   ```
+
+2. **Change shell with sudo** (if you have sudo access):
+   ```bash
+   sudo chsh -s $(which zsh) $USER
+   ```
+
+3. **Restart your terminal** - it may pick up the new shell automatically
+
 
 
 ## Contributing

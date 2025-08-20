@@ -259,9 +259,16 @@ if [ "$CURRENT_SHELL" != "zsh" ]; then
         [Yy]* )
             log_info "Changing default shell to zsh..."
             if command -v chsh &> /dev/null; then
-                chsh -s $(which zsh)
-                log_success "Default shell changed to zsh!"
-                log_info "To complete the setup, please restart your terminal or run: zsh"
+                # Try to change shell, handle permission issues
+                if chsh -s $(which zsh) 2>/dev/null; then
+                    log_success "Default shell changed to zsh!"
+                    log_info "To complete the setup, please restart your terminal or run: zsh"
+                else
+                    log_warning "Could not change default shell (may need sudo privileges)."
+                    log_info "You can still use zsh by switching manually:"
+                    echo "  1. Switch to zsh now: zsh"
+                    echo "  2. Or restart your terminal later"
+                fi
             else
                 log_error "chsh command not found. You may need to install zsh first."
                 log_info "You can manually switch to zsh with: zsh"
