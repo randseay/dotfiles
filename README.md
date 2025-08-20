@@ -86,9 +86,10 @@ Installs everything needed for a complete development environment:
 ### Slim Setup (`./setup --slim`)
 Configuration-only mode for environments where development tools are already available:
 - **Installs**: Oh My Zsh (required for zsh configuration)
+- **Installs**: direnv (required for zsh configuration)
 - **Installs**: Custom zsh theme and plugins
 - **Configures**: Zsh and git settings
-- **Skips**: Development tool installation, fonts, vim, macOS preferences
+- **Skips**: Heavy development tools, fonts, vim, macOS preferences
 - **Perfect for**: devbox, Docker containers, CI/CD environments
 
 ### Help and Options
@@ -293,6 +294,33 @@ Reinstall if needed:
 # or
 ./setup         # For full mode
 ```
+
+### Shell Configuration Issues
+If you get errors about Oh My Zsh not loading or direnv not found:
+
+1. **Check your current shell**:
+   ```bash
+   echo $SHELL
+   ```
+
+2. **Switch to zsh temporarily**:
+   ```bash
+   zsh
+   ```
+
+3. **Change default shell** (recommended):
+   ```bash
+   chsh -s $(which zsh)
+   ```
+
+4. **Restart your terminal** or run:
+   ```bash
+   source ~/.zshrc
+   ```
+
+**Note**: The zsh configuration will only work when running zsh, not bash.
+
+**Pro tip**: The setup script will offer to change your default shell to zsh automatically!
 
 
 
