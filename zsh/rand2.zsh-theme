@@ -12,6 +12,8 @@ eval color_orange='$FG[214]'
 eval color_purple='$FG[093]'
 eval color_red='$FG[088]'
 eval color_yellow='$FG[011]'
+eval color_burlywood='$FG[180]'
+eval color_white='$FG[015]'
 
 # symbols
 eval symbol_branch=""
@@ -108,5 +110,5 @@ function precmd() {
 
 # primary prompt
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$color_blue( venv: "
-PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n@%m%{$reset_color%} in $PWD_PROMPT
+PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n%{$color_white%}@%{$color_burlywood%}%m%{$reset_color%} in $PWD_PROMPT
 $color_orange%(!.#.→)%{$reset_color%} '
