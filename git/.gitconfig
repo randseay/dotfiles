@@ -1,6 +1,4 @@
 # Git configuration for Rand Seay
-# Clean, modern setup with SSH signing support
-
 [user]
 	name = Rand Seay
 	email = rand.seay@gmail.com
@@ -38,12 +36,3 @@
 # Quality of life improvements
 [color]
 	ui = true
-
-[diff]
-	# Remove zebra - it can be visually distracting
-	# colorMoved = zebra
-
-# Remove unused tools and aliases
-# - No more sourcetree difftool/mergetool
-# - No more unused aliases
-# - No more media filter
