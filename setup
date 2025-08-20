@@ -250,14 +250,14 @@ else
     log_success "Custom theme already installed"
 fi
 
-# Link your custom zshrc
+# Copy your custom zshrc
 if [ ! -f "$HOME/.zshrc" ]; then
-    ln -sfv "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
-    log_success "Zsh configuration linked"
+    cp "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
+    log_success "Zsh configuration copied"
 else
-    log_warning ".zshrc already exists. Backing up and linking new one..."
+    log_warning ".zshrc already exists. Backing up and copying new one..."
     cp "$HOME/.zshrc" "$DOTFILES/dotfile_backups/.zshrc_backup_$(date +%Y%m%d_%H%M%S)"
-    ln -sfv "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
+    cp "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
     log_success "Zsh configuration updated"
 fi
 
@@ -268,11 +268,11 @@ if [ "$SLIM_MODE" = false ]; then
         log_warning ".vimrc already exists. Backing up..."
         cp "$HOME/.vimrc" "$DOTFILES/dotfile_backups/.vimrc_backup_$(date +%Y%m%d_%H%M%S)"
     fi
-    ln -sfv "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+    cp "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
 
-    # Create vim spell directory and link spell file
+    # Create vim spell directory and copy spell file
     mkdir -p "$HOME/.vim/spell/"
-    ln -sfv "$DOTFILES/vim/spell/en.utf-8.spl" "$HOME/.vim/spell/"
+    cp "$DOTFILES/vim/spell/en.utf-8.spl" "$HOME/.vim/spell/"
 fi
 
 # Set up git configuration
@@ -281,7 +281,7 @@ if [ -f "$HOME/.gitconfig" ]; then
     log_warning ".gitconfig already exists. Backing up..."
     cp "$HOME/.gitconfig" "$DOTFILES/dotfile_backups/.gitconfig_backup_$(date +%Y%m%d_%H%M%S)"
 fi
-ln -sfv "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+cp "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 
 # Git user setup
 log_info "Setting up git user configuration..."
