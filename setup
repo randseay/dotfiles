@@ -133,6 +133,28 @@ else
     else
         log_success "direnv already installed"
     fi
+    
+    # Install eza (modern ls replacement)
+    if ! command -v eza &> /dev/null; then
+        log_info "Installing eza (modern ls replacement)..."
+        if command -v apt &> /dev/null; then
+            # Ubuntu/Debian
+            sudo apt update && sudo apt install -y eza
+        elif command -v snap &> /dev/null; then
+            # Snap-based systems
+            sudo snap install eza
+        elif command -v brew &> /dev/null; then
+            # macOS with Homebrew
+            brew install eza
+        else
+            log_warning "Could not install eza automatically. Please install it manually:"
+            echo "  Ubuntu/Debian: sudo apt install eza"
+            echo "  Snap: sudo snap install eza"
+            echo "  macOS: brew install eza"
+        fi
+    else
+        log_success "eza already installed"
+    fi
 fi
 
 # Set up zsh with Oh My Zsh (both modes need this)
@@ -259,12 +281,13 @@ if [ "$CURRENT_SHELL" != "zsh" ]; then
         [Yy]* )
             log_info "Changing default shell to zsh..."
             if command -v chsh &> /dev/null; then
-                # Try to change shell, handle permission issues
-                if chsh -s $(which zsh) 2>/dev/null; then
+                # Try to change shell with sudo for devbox environments
+                log_info "Attempting to change default shell to zsh..."
+                if sudo chsh -s $(which zsh) $USER 2>/dev/null; then
                     log_success "Default shell changed to zsh!"
                     log_info "To complete the setup, please restart your terminal or run: zsh"
                 else
-                    log_warning "Could not change default shell (may need sudo privileges)."
+                    log_warning "Could not change default shell even with sudo."
                     log_info "You can still use zsh by switching manually:"
                     echo "  1. Switch to zsh now: zsh"
                     echo "  2. Or restart your terminal later"

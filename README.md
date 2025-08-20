@@ -20,7 +20,7 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 - **Tmux**: Latest version
 - **Python**: 3.12 (for prompt scripts)
 - **JavaScript Runtimes**: Node.js 20 with corepack, Bun latest
-- **Modern CLI Tools**: ripgrep, fd, bat, exa
+- **Modern CLI Tools**: ripgrep, fd, bat, eza
 - **direnv**: Environment management
 
 ### Custom Zsh Theme
@@ -41,6 +41,13 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 - `git`: Git integration
 - `zsh-autosuggestions`: Command suggestions
 - `zsh-syntax-highlighting`: Syntax highlighting
+
+### Modern CLI Tool Aliases
+The setup includes enhanced aliases for common commands:
+- **`ls` → `eza`**: Modern `ls` replacement with colors, icons, and tree views
+- **`cat` → `bat`**: Enhanced `cat` with syntax highlighting and paging
+- **`find` → `fd`**: Fast, user-friendly alternative to `find`
+- **`grep` → `ripgrep`**: Fast, recursive grep with smart defaults
 
 ## Quick Start
 

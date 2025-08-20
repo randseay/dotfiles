@@ -15,7 +15,7 @@ bun = "latest"
 ripgrep = "latest"
 fd = "latest"
 bat = "latest"
-exa = "latest"
+eza = "latest"
 
 # direnv for environment management
 direnv = "latest"
