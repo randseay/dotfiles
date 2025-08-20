@@ -108,17 +108,9 @@ if [ "$SLIM_MODE" = false ]; then
     else
         log_warning "Fonts directory not found, skipping font installation"
     fi
-else
-    # Slim mode: Check if Oh My Zsh is available
-    if [ ! -d "$HOME/.oh-my-zsh" ]; then
-        log_error "Oh My Zsh not found. Please install Oh My Zsh first or use the full setup script."
-        log_info "You can install Oh My Zsh with:"
-        echo "  sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
-        exit 1
-    fi
 fi
 
-# Set up zsh with Oh My Zsh
+# Set up zsh with Oh My Zsh (both modes need this)
 log_info "Setting up zsh configuration..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     log_info "Installing Oh My Zsh..."

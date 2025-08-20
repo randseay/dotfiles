@@ -84,11 +84,11 @@ Installs everything needed for a complete development environment:
 - Zsh and git configuration
 
 ### Slim Setup (`./setup --slim`)
-Configuration-only mode for environments where tools are already available:
-- **Requires**: Oh My Zsh to be pre-installed
+Configuration-only mode for environments where development tools are already available:
+- **Installs**: Oh My Zsh (required for zsh configuration)
 - **Installs**: Custom zsh theme and plugins
 - **Configures**: Zsh and git settings
-- **Skips**: Tool installation, fonts, vim, macOS preferences
+- **Skips**: Development tool installation, fonts, vim, macOS preferences
 - **Perfect for**: devbox, Docker containers, CI/CD environments
 
 ### Help and Options
@@ -252,7 +252,7 @@ cat ~/.ssh/id_ed25519_signing.pub
 ## Requirements
 
 - **Full setup**: macOS (tested on Apple Silicon and Intel)
-- **Slim setup**: Any Unix-like system with Oh My Zsh pre-installed
+- **Slim setup**: Any Unix-like system (Oh My Zsh will be installed automatically)
 - Internet connection for initial setup
 - Homebrew (installed automatically in full mode)
 
@@ -294,15 +294,7 @@ Reinstall if needed:
 ./setup         # For full mode
 ```
 
-### Slim Mode Fails
-If you get an error about Oh My Zsh not being found:
-```bash
-# Install Oh My Zsh first
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Then run slim setup
-./setup --slim
-```
 
 ## Contributing
 
