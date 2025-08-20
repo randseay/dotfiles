@@ -108,5 +108,5 @@ function precmd() {
 
 # primary prompt
 ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$color_blue( venv: "
-PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n%{$reset_color%} in $PWD_PROMPT
+PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n@%m%{$reset_color%} in $PWD_PROMPT
 $color_orange%(!.#.→)%{$reset_color%} '
