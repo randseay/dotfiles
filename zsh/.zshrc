@@ -111,3 +111,5 @@ alias grep="rg"
 alias mx="mise x --"
 alias mls="mise ls"
 alias msync="mise sync"
+
+export PATH=/opt/homebrew/bin:$PATH
