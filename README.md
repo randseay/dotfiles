@@ -10,6 +10,7 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 - **macOS Optimized**: Custom macOS preferences and Apple Silicon support
 - **Easy Management**: Simple setup and uninstall scripts
 - **Clean Plugin Selection**: Only essential Oh My Zsh plugins for fast loading
+- **Flexible Installation**: Choose between full setup or configuration-only mode
 
 ## What's Included
 
@@ -49,15 +50,49 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
    cd ~/dotfiles
    ```
 
-2. **Run the setup script**:
+2. **Choose your setup mode**:
+   
+   **Full setup (recommended for fresh machines):**
    ```bash
    ./setup
+   ```
+   
+   **Slim setup (for devbox/deterministic environments):**
+   ```bash
+   ./setup --slim
    ```
 
 3. **Restart your terminal** or run:
    ```bash
    source ~/.zshrc
    ```
+
+## Setup Modes
+
+### Full Setup (`./setup`)
+Installs everything needed for a complete development environment:
+- Homebrew package manager
+- mise-en-place for tool management
+- All development tools (git, vim, tmux, python, node, bun, etc.)
+- Fonts for custom prompt
+- Vim configuration
+- macOS preferences
+- Zsh and git configuration
+
+### Slim Setup (`./setup --slim`)
+Configuration-only mode for environments where tools are already available:
+- **Requires**: Oh My Zsh to be pre-installed
+- **Installs**: Custom zsh theme and plugins
+- **Configures**: Zsh and git settings
+- **Skips**: Tool installation, fonts, vim, macOS preferences
+- **Perfect for**: devbox, Docker containers, CI/CD environments
+
+### Help and Options
+```bash
+./setup --help          # Show all available options
+./setup --slim          # Configuration-only mode
+./setup                 # Full setup mode (default)
+```
 
 ## Tool Management
 
@@ -140,6 +175,76 @@ Edit `zsh/rand2.zsh-theme` to customize your prompt appearance.
 2. Run `mise sync`
 3. Add any necessary configuration to `zsh/.zshrc`
 
+## Git Configuration
+
+### SSH Signing Setup
+
+The dotfiles include Git commit and tag signing with SSH keys. You'll need to set this up on each fresh installation:
+
+#### 1. Generate SSH Signing Key
+
+```bash
+# Generate a new SSH key for signing (different from your main SSH key)
+ssh-keygen -t ed25519 -C "your-email@example.com" -f ~/.ssh/id_ed25519_signing
+
+# Add the key to your SSH agent
+ssh-add ~/.ssh/id_ed25519_signing
+```
+
+#### 2. Create Allowed Signers File
+
+```bash
+# Create the git config directory
+mkdir -p ~/.config/git
+
+# Add your signing key to the allowed signers file
+echo "your-email@example.com ssh-ed25519 $(cat ~/.ssh/id_ed25519_signing.pub)" > ~/.config/git/allowed_signers
+```
+
+#### 3. Update Git Config
+
+Edit `~/.gitconfig` and update the signing key path:
+
+```ini
+[user]
+    name = Your Name
+    email = your-email@example.com
+    signingkey = ~/.ssh/id_ed25519_signing
+```
+
+#### 4. Test Signing
+
+```bash
+# Test commit signing
+echo "test" > test.txt
+git add test.txt
+git commit -m "Test signed commit"
+git log --show-signature
+
+# Test tag signing
+git tag -s v1.0.0 -m "Test signed tag"
+git show v1.0.0
+```
+
+#### 5. Add to GitHub (Optional)
+
+If you're using GitHub, add your signing public key:
+
+```bash
+# Copy your public key
+cat ~/.ssh/id_ed25519_signing.pub
+
+# Add this to GitHub: Settings > SSH and GPG keys > New SSH key
+# Mark it as a "Signing key"
+```
+
+### Git Configuration Features
+
+- **SSH Signing**: All commits and tags are automatically signed
+- **Modern Settings**: `pull.rebase = true` for clean history, `fetch.prune = true` for clean remotes
+- **Color Output**: Enhanced readability with colored git output
+- **Clean Setup**: Removed unused tools and aliases for a lean configuration
+
 ## What Was Removed
 
 - **Ruby environment**: rbenv, ruby-build
@@ -154,9 +259,10 @@ Edit `zsh/rand2.zsh-theme` to customize your prompt appearance.
 
 ## Requirements
 
-- macOS (tested on Apple Silicon and Intel)
+- **Full setup**: macOS (tested on Apple Silicon and Intel)
+- **Slim setup**: Any Unix-like system with Oh My Zsh pre-installed
 - Internet connection for initial setup
-- Homebrew (installed automatically if needed)
+- Homebrew (installed automatically in full mode)
 
 ## Troubleshooting
 
@@ -191,7 +297,19 @@ ls ~/.oh-my-zsh/custom/plugins/
 
 Reinstall if needed:
 ```bash
-./setup
+./setup --slim  # For slim mode
+# or
+./setup         # For full mode
+```
+
+### Slim Mode Fails
+If you get an error about Oh My Zsh not being found:
+```bash
+# Install Oh My Zsh first
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Then run slim setup
+./setup --slim
 ```
 
 ## Contributing

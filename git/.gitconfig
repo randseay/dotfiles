@@ -1,51 +1,49 @@
+# Git configuration for Rand Seay
+# Clean, modern setup with SSH signing support
+
 [user]
 	name = Rand Seay
 	email = rand.seay@gmail.com
+	# TODO: Replace with your actual signing key path
+	# Run: ssh-keygen -t ed25519 -C "your-email@example.com" -f ~/.ssh/id_ed25519_signing
+	signingkey = ~/.ssh/id_ed25519_signing
+
 [core]
 	editor = vim
 	excludesfile = ~/dotfiles/git/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+
+# Modern git settings
 [push]
 	default = simple
-[alias]
-    abort = reset --hard HEAD
-	aliases = config --global --get-regexp ^alias.
-	br = branch
 
-	# Change Commits Usage: git change-commits GIT_COMMITTER_NAME "Old Name" "New Name"
-	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ $`echo $VAR` = \\\"$OLD\\\" ]]; then export $VAR=\\\"$NEW\\\"; fi\" $@; }; f"
-
-	ci = commit
-	co = checkout
-	fancy = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
-	last = log -1 HEAD
-	ls = branch -av
-	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-	oops = reset --soft HEAD~1
-
-	# Squashes the previous x number of commits into one. Takes two arguments: "number of commits" and "message"
-	squashed = "!f() { git reset --soft HEAD~${1} && git commit -m \"${2}\"; }; f"
-
-	pop = stash pop --index
-	save = stash save
-	see = diff --staged
-	st = status
-	undo = reset --hard
-	unstage = reset
-[filter "media"]
-	clean = git media clean %f
-	smudge = git media smudge %f
-	required = true
-[color]
-	ui = true
 [pull]
 	rebase = true
+
 [fetch]
 	prune = true
+
+# SSH signing configuration
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgsign = true
+
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+
+# Quality of life improvements
+[color]
+	ui = true
+
 [diff]
-	colorMoved = zebra
+	# Remove zebra - it can be visually distracting
+	# colorMoved = zebra
+
+# Remove unused tools and aliases
+# - No more sourcetree difftool/mergetool
+# - No more unused aliases
+# - No more media filter
