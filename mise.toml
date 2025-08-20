@@ -1,0 +1,34 @@
+[tools]
+# Core development tools
+git = "latest"
+vim = "latest"
+tmux = "latest"
+
+# Python for your prompt scripts
+python = "3.12"
+
+# JavaScript runtimes
+node = { version = "20", postinstall = "corepack enable" }
+bun = "latest"
+
+# Modern CLI tools
+ripgrep = "latest"
+fd = "latest"
+bat = "latest"
+exa = "latest"
+
+# direnv for environment management
+direnv = "latest"
+
+# Optional: Add more tools as needed
+# terraform = "latest"
+# docker = "latest"
+# kubectl = "latest"
+
+[env]
+# Environment variables
+EDITOR = "vim"
+DOTFILES = "~/dotfiles"
+
+# Python environment
+PYTHONUNBUFFERED = "1"

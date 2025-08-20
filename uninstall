@@ -1,74 +1,132 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "\nDotfile Uninstallation\n----------------------"
+echo "🗑️  Dotfile Uninstall"
+echo "====================="
 
-# Remove Fonts
-echo "Uninstalling fonts..."
-rm -rf $HOME/.fonts/SourceCodePro $HOME/.fonts/powerline-fonts
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
-# Uninstall pip packages
-echo "Uninstalling pip packages..."
-pip uninstall -r $HOME/dotfiles/requirements.txt
+# Helper functions
+log_info() { echo -e "${BLUE}ℹ️  $1${NC}"; }
+log_success() { echo -e "${GREEN}✅ $1${NC}"; }
+log_warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
+log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Uninstall node packages
-echo "Uninstalling node packages..."
-npm unininstall -g bower
-npm unininstall -g grunt
-npm unininstall -g grunt-cli
-npm unininstall -g grunt-contrib-watch
-npm unininstall -g grunt-sass
-npm unininstall -g node-sass
-npm unininstall -g markdown
+# Set up environment variables
+export DOTFILES="$HOME/dotfiles"
 
-# Uninstall brew formulae
-source brew_packages
-brew_uninstall $packages
+# Remove symlinks
+log_info "Removing dotfile symlinks..."
 
-# Restore .zshrc
-if [ -f $DOTFILES/dotfiles/dotfile_backups/.zshrc_backup ]; then
-    echo "Restoring zsh setup..."
-    rm $HOME/.zshrc
-    cp $HOME/dotfiles/dotfile_backups/.zshrc_backup $HOME/.zshrc
+# Remove .zshrc symlink
+if [ -L "$HOME/.zshrc" ]; then
+    rm "$HOME/.zshrc"
+    log_success "Removed .zshrc symlink"
 fi
 
-# Restore .vimrc
-if [ -f $DOTFILES/dotfiles/dotfile_backups/.vimrc_backup ]; then
-    echo "Restoring vim setup..."
-    rm $HOME/.vimrc
-    cp $HOME/dotfiles/dotfile_backups/.vimrc_backup $HOME/.vimrc
+# Remove .vimrc symlink
+if [ -L "$HOME/.vimrc" ]; then
+    rm "$HOME/.vimrc"
+    log_success "Removed .vimrc symlink"
 fi
 
-# Restore git settings
-if [ -f $DOTFILES/dotfiles/dotfile_backups/.gitconfig_backup ]; then
-    echo "Restoring git setup..."
-    rm $HOME/.gitconfig
-    cp $HOME/dotfiles/dotfile_backups/.gitconfig_backup $HOME/.gitconfig
+# Remove .gitconfig symlink
+if [ -L "$HOME/.gitconfig" ]; then
+    rm "$HOME/.gitconfig"
+    log_success "Removed .gitconfig symlink"
 fi
 
-if [ -h "/usr/local/bin/git_find_replace_author" ]
-then
-    rm /usr/local/bin/git_find_replace_author
+# Remove .hgrc symlink
+if [ -L "$HOME/.hgrc" ]; then
+    rm "$HOME/.hgrc"
+    log_success "Removed .hgrc symlink"
 fi
 
-# Restore mercurial settings
-if [ -f $DOTFILES/dotfiles/dotfile_backups/.hgrc_backup ]; then
-    echo "Restoring mercurial setup..."
-    rm $HOME/.hgrc
-    cp $HOME/dotfiles/dotfile_backups/.hgrc_backup $HOME/.hgrc
+# Restore backups if they exist
+log_info "Checking for backups to restore..."
+
+if [ -f "$DOTFILES/dotfile_backups/.zshrc_backup" ]; then
+    cp "$DOTFILES/dotfile_backups/.zshrc_backup" "$HOME/.zshrc"
+    log_success "Restored .zshrc from backup"
 fi
 
-# Remove dotfiles repository
+if [ -f "$DOTFILES/dotfile_backups/.vimrc_backup" ]; then
+    cp "$DOTFILES/dotfile_backups/.vimrc_backup" "$HOME/.vimrc"
+    log_success "Restored .vimrc from backup"
+fi
+
+if [ -f "$DOTFILES/dotfile_backups/.gitconfig_backup" ]; then
+    cp "$DOTFILES/dotfile_backups/.gitconfig_backup" "$HOME/.gitconfig"
+    log_success "Restored .gitconfig from backup"
+fi
+
+if [ -f "$DOTFILES/dotfile_backups/.hgrc_backup" ]; then
+    cp "$DOTFILES/dotfile_backups/.hgrc_backup" "$HOME/.hgrc"
+    log_success "Restored .hgrc from backup"
+fi
+
+# Remove vim spell directory
+if [ -d "$HOME/.vim/spell" ]; then
+    rm -rf "$HOME/.vim/spell"
+    log_success "Removed vim spell directory"
+fi
+
+# Remove vim directory if empty
+if [ -d "$HOME/.vim" ] && [ -z "$(ls -A $HOME/.vim)" ]; then
+    rmdir "$HOME/.vim"
+    log_success "Removed empty vim directory"
+fi
+
+# Remove fonts
+log_info "Removing installed fonts..."
+if [ -d "$HOME/Library/Fonts" ]; then
+    # Remove powerline fonts
+    find "$HOME/Library/Fonts" -name "*Powerline*" -delete 2>/dev/null || true
+    log_success "Removed powerline fonts"
+fi
+
+# Clean up mise tools (optional)
+read -p "Do you want to remove all tools installed via mise? [y/n] " yn
+case $yn in
+    [Yy]* )
+        log_info "Removing mise tools..."
+        mise uninstall --all
+        log_success "Removed all mise tools"
+        ;;
+    [Nn]* )
+        log_info "Keeping mise tools installed"
+        ;;
+    * )
+        log_warning "Invalid response, keeping mise tools"
+        ;;
+esac
+
+# Remove mise itself (optional)
+read -p "Do you want to remove mise-en-place? [y/n] " yn
+case $yn in
+    [Yy]* )
+        log_info "Removing mise-en-place..."
+        brew uninstall mise
+        log_success "Removed mise-en-place"
+        ;;
+    [Nn]* )
+        log_info "Keeping mise-en-place installed"
+        ;;
+    * )
+        log_warning "Invalid response, keeping mise-en-place"
+        ;;
+esac
+
+log_success "Uninstall completed!"
 echo
-while true; do
-    read -p "Would you like to remove the dotfiles repository? [y/n]" yn
-    case $yn in
-        [Yy]* ) echo "You successfully uninstalled the dotfiles."
-                break;;
-        [Nn]* ) echo "You successfully uninstalled the dotfiles, but the repository still exists."
-                exit;;
-        * ) echo "Please answer yes or no.\n";;
-    esac
-done
-cd $HOME
-source ~/.zshrc
-rm -rf $HOME/dotfiles
+echo "Note: Your dotfiles directory ($DOTFILES) has not been removed."
+echo "You can delete it manually if you no longer need it."
+echo
+echo "To completely start fresh, you may also want to:"
+echo "1. Remove Oh My Zsh: rm -rf ~/.oh-my-zsh"
+echo "2. Remove antigen: rm -rf ~/.antigen"
+echo "3. Remove vim bundles: rm -rf ~/.vim/bundle"

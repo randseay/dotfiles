@@ -1,200 +1,199 @@
-# My Dotfiles
+# Rand's Dotfiles
 
-I was looking for an easier way to manage my dotfiles, using nZac's dotfiles as a baseline.
+A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev/dev-tools/) for tool management.
 
-## Screenshots
+## Features
 
-Different users with the machine charging or on battery. The time in square brackets is time till charged (if charging) or time remaining (if on battery).
+- **Custom Zsh Theme**: Personalized prompt with battery status, git info, and path abbreviation
+- **Modern Tool Management**: Uses [mise-en-place](https://mise.jdx.dev/dev-tools/) instead of outdated version managers
+- **Lean Setup**: Removed outdated tools (Ruby, old Python, Mercurial, Sublime, etc.)
+- **macOS Optimized**: Custom macOS preferences and Apple Silicon support
+- **Easy Management**: Simple setup and uninstall scripts
+- **Clean Plugin Selection**: Only essential Oh My Zsh plugins for fast loading
 
-![](https://github.com/randseay/dotfiles/blob/master/img/prompt-root-charging.png)
+## What's Included
 
-![](https://github.com/randseay/dotfiles/blob/master/img/prompt-user-battery.png)
+### Core Tools (via mise)
+- **Git**: Latest version
+- **Vim**: Latest version  
+- **Tmux**: Latest version
+- **Python**: 3.12 (for prompt scripts)
+- **JavaScript Runtimes**: Node.js 20 with corepack, Bun latest
+- **Modern CLI Tools**: ripgrep, fd, bat, exa
+- **direnv**: Environment management
 
-Using various source control tools, git and hg. Green check mark is clean, gold plus-minus is dirty, and gold question mark is untracked files (in hg). Shown with and without a virtualenvironment.
+### Custom Zsh Theme
+- Battery status with charging indicator
+- Git repository information
+- Path abbreviation for long directories
+- Time display
+- Virtual environment support
 
-![](https://github.com/randseay/dotfiles/blob/master/img/prompt-git-clean-charging.png)
+### Python Scripts for Prompt
+- `batcharge.py`: Battery status display
+- `abbr_path.py`: Path abbreviation
+- `zsh_day_time.py`: Time display
 
-![](https://github.com/randseay/dotfiles/blob/master/img/prompt-venv-git-dirty-battery.png)
+### Essential Oh My Zsh Plugins
+- `autojump`: Smart directory jumping
+- `direnv`: Environment management
+- `git`: Git integration
+- `zsh-autosuggestions`: Command suggestions
+- `zsh-syntax-highlighting`: Syntax highlighting
 
-![](https://github.com/randseay/dotfiles/blob/master/img/prompt-venv-hg-untracked-battery.png)
+## Quick Start
 
-## Installation
+1. **Clone the repository**:
+   ```bash
+   git clone <your-repo> ~/dotfiles
+   cd ~/dotfiles
+   ```
 
-Start by pulling down the repository.
+2. **Run the setup script**:
+   ```bash
+   ./setup
+   ```
 
+3. **Restart your terminal** or run:
+   ```bash
+   source ~/.zshrc
+   ```
+
+## Tool Management
+
+### Using mise
+
+**List installed tools**:
 ```bash
-git clone --recursive git@github.com:randseay/dotfiles.git ~/dotfiles
+mise ls
 ```
 
-I use [Homebrew](http://brew.sh/) to manage packages, so if you are going that route, you will need to set it up (It requires Ruby, which comes prepackaged on Mac OSX). The `setup` script will not be happy without Homebrew. Here's how to get it.
-
+**Use a specific tool version in current directory**:
 ```bash
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+mise use node@20
+mise use python@3.12
+mise use bun@latest
 ```
 
-The `setup` script should be able to handle the rest of the installation, you just have a couple of prompts to respond to.
-
+**Run a tool with current directory's version**:
 ```bash
-./setup
+mise x -- node --version
+mise x -- python --version
+mise x -- bun --version
 ```
 
-## Uninstallation
+**Install all tools from configuration**:
+```bash
+mise sync
+```
 
-If you would like to remove the dotfiles, the `uninstall` script can do that for you. It removes the files and restores your original configurations (if there were any), in addition to giving you the option of deleting the repository.
+### Adding New Tools
+
+Edit `mise.toml` to add new tools:
+
+```toml
+[tools]
+# Add new tools here
+terraform = "latest"
+docker = "latest"
+```
+
+Then run:
+```bash
+mise sync
+```
+
+## Project-Specific Configuration
+
+Create a `mise.toml` in your project directory:
+
+```toml
+[tools]
+node = "18"
+python = "3.11"
+bun = "1.0"
+```
+
+mise will automatically use these versions when you're in that directory.
+
+## Uninstalling
+
+To remove the dotfiles setup:
 
 ```bash
 ./uninstall
 ```
 
-## Cherry-Picking
+## Customization
 
-It is not necessary to use all of the settings in the repository, if you would like to cherry-pick one or multiple, creating specific symlinks should do this for you.
+### Adding New Aliases
 
-### zsh
+Edit `zsh/.zshrc` and add your aliases in the aliases section.
 
-To use the zsh configuration you will need a few other things, like antigen and virtualenv_wrapper, specifically if you want to use the theme. These steps are baked into the setup script, but you can do them manually. Just make sure you have zsh and pip installed.
+### Modifying the Theme
 
+Edit `zsh/rand2.zsh-theme` to customize your prompt appearance.
+
+### Adding New Tools
+
+1. Add to `mise.toml`
+2. Run `mise sync`
+3. Add any necessary configuration to `zsh/.zshrc`
+
+## What Was Removed
+
+- **Ruby environment**: rbenv, ruby-build
+- **Python environment**: pyenv, virtualenvwrapper  
+- **Mercurial**: hg configuration
+- **Sublime**: Sublime Text configuration
+- **Ford**: Custom tool
+- **Outdated Node.js tools**: bower, grunt, gulp
+- **Old Homebrew installation method**: Updated to modern approach
+- **Antigen**: Replaced with standard Oh My Zsh plugin system
+- **Excessive plugins**: Streamlined to only essential ones
+
+## Requirements
+
+- macOS (tested on Apple Silicon and Intel)
+- Internet connection for initial setup
+- Homebrew (installed automatically if needed)
+
+## Troubleshooting
+
+### Python Scripts Not Working
+Ensure Python 3.12+ is installed via mise:
 ```bash
-which zsh
-which pip
+mise use python@3.12
 ```
 
-Clone the repository, if you haven't already.
-
+### Fonts Not Displaying
+Install fonts manually:
 ```bash
-git clone --recursive git@github.com:randseay/dotfiles.git ~/dotfiles
+cp -r fonts/powerline-fonts/* ~/Library/Fonts/
 ```
 
-Then install the requirements, virtualenv and virtualenvwrapper.
-
+### Tool Not Found
+Check if the tool is installed:
 ```bash
-pip install -r ~/dotfiles/requirements.txt
+mise ls
 ```
 
-You may consider making a backup of the `.zshrc` file.
-
+Install missing tools:
 ```bash
-cp ~/.zshrc ~/.zshrc_backup
+mise sync
 ```
 
-Now symlink the `.zshrc` file into place.
-
+### Zsh Plugins Not Working
+Ensure plugins are installed in the custom directory:
 ```bash
-ln -sfv ~/dotfiles/zsh/.zshrc ~/.zshrc
+ls ~/.oh-my-zsh/custom/plugins/
 ```
 
-Symlink the repository into place within antigen (in order to use a local version of the theme) Then if you update the theme file (`zsh/rand2.zsh-theme`), you can just `source ~/.zshrc` to see the changes.
-
+Reinstall if needed:
 ```bash
-ln -sfv ~/dotfiles ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-randseay-SLASH-dotfiles.git
+./setup
 ```
 
-Lastly, source the `~/.zshrc` file.
+## Contributing
 
-```bash
-source ~/.zshrc
-```
-
-### vim
-
-The vim setup is fairly self-contained, and although vim comes with Mac OS X, I opt for the one you can get through Homebrew.
-
-```bash
-brew install vim
-```
-
-Clone the repository, if you haven't already.
-
-```bash
-git clone --recursive git@github.com:randseay/dotfiles.git ~/dotfiles
-```
-
-You may consider making a backup of the `.vimrc`. If you don't have one, don't worry about it.
-
-```bash
-cp ~/.vimrc ~/.vimrc_backup
-```
-
-Then symlink the `.vimrc` file into place.
-
-```bash
-ln -sfv ~/dotfiles/vim/.vimrc ~/.vimrc
-```
-
-### git
-
-The git configuration is relativey standalone (the `setup` script helps speed up some of the steps), and once again Homebrew can help you get started.
-
-```bash
-brew install git
-```
-
-Clone the repository, if you haven't already.
-
-```bash
-git clone --recursive git@github.com:randseay/dotfiles.git ~/dotfiles
-```
-
-You may consider making a backup of the `.gitconfig` file.
-
-```bash
-cp ~/.gitcofig ~/.gitconfig_backup
-```
-
-Then symlink the `.gitconfig` file into place.
-
-```bash
-ln -sfv ~/dotfiles/git/.gitconfig $HOME/.gitconfig
-```
-
-Since the default user name and email are placeholders, you'll need to change them to suit your purposes.
-
-```bash
-git config --global user.name "Your Name"
-git config --gloval user.email youremail@email.com
-```
-
-### OS X Settings
-
-Here are a couple of OS X settings that help make life with your Mac much smoother.
-
-```bash
-# make held keys repeat
-defaults write -g ApplePressAndHoldEnabled -bool false
-
-# speed up key repeat
-defaults write -g KeyRepeat -int 1
-
-# speed up initial key repeat
-defualts write -g InitialKeyReapt 1.5
-
-# remove the auto-hide dock delay
-defaults write com.apple.Dock autohide-delay -float 0; killall Dock
-
-# speed up mission control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1; killall Dock
-
-# always show user library directory
-chflags nohidden ~/Library/
-```
-
-After you change what you want, you may need to restart your shell or dock, or even logout and log back in (such is the case with speeding up the key repeat).
-
-```bash
-# exit shell
-exit
-
-# restart the dock
-killall Dock
-```
-
-### VS Code key repeat
-
-To disable Mac keyboard press and hold functionality in VS Code, run this command. This will make it possible to repeat a key when holding it down
-
-```
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-```
-
-## License
-Do what ever you want with these files.
+Feel free to submit issues and enhancement requests!
