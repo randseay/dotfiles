@@ -2,15 +2,48 @@
 
 set -e  # Exit on any error
 
-echo ""
+# Parse command line arguments
+SLIM_MODE=false
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --slim)
+            SLIM_MODE=true
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --slim    Only configure zsh and git (assumes tools are already installed)"
+            echo "  -h, --help  Show this help message"
+            echo ""
+            echo "Examples:"
+            echo "  $0              # Full setup with tool installation"
+            echo "  $0 --slim       # Configuration only (for devbox/deterministic environments)"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use -h or --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
 echo " ____                 _ _       ____        _    __ _ _           "
 echo "|  _ \ __ _ _ __   __| ( )___  |  _ \  ___ | |_ / _(_) | ___  ___ "
 echo "| |_) / _\` | '_ \ / _\` |// __| | | | |/ _ \| __| |_| | |/ _ \/ __|"
 echo "|  _ < (_| | | | | (_| | \__ \ | |_| | (_) | |_|  _| | |  __/\__ \\"
 echo "|_| \_\__,_|_| |_|\__,_| |___/ |____/ \___/ \__|_| |_|_|\___||___/"
 echo ""
-echo "🚀 Setting up your development environment..."
-echo "=============================================="
+
+if [ "$SLIM_MODE" = true ]; then
+    echo "🚀 Setting up zsh and git configuration (slim mode)..."
+    echo "====================================================="
+else
+    echo "🚀 Setting up your development environment (full mode)..."
+    echo "========================================================"
+fi
 
 # Colors for output
 RED='\033[0;31m'
@@ -25,8 +58,8 @@ log_success() { echo -e "${GREEN}✅ $1${NC}"; }
 log_warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 log_error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Check if we're on macOS
-if [[ "$OSTYPE" != "darwin"* ]]; then
+# Check if we're on macOS (only for full mode)
+if [ "$SLIM_MODE" = false ] && [[ "$OSTYPE" != "darwin"* ]]; then
     log_error "This setup script is designed for macOS. Please adapt it for your system."
     exit 1
 fi
@@ -35,43 +68,54 @@ fi
 export DOTFILES="$HOME/dotfiles"
 log_info "Setting DOTFILES to: $DOTFILES"
 
-# Install Homebrew if not present
-if ! command -v brew &> /dev/null; then
-    log_info "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
-    # Add Homebrew to PATH for Apple Silicon Macs
-    if [[ $(uname -m) == "arm64" ]]; then
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+# Full mode: Install Homebrew and tools
+if [ "$SLIM_MODE" = false ]; then
+    # Install Homebrew if not present
+    if ! command -v brew &> /dev/null; then
+        log_info "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        
+        # Add Homebrew to PATH for Apple Silicon Macs
+        if [[ $(uname -m) == "arm64" ]]; then
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        fi
+        log_success "Homebrew installed successfully"
+    else
+        log_success "Homebrew already installed"
     fi
-    log_success "Homebrew installed successfully"
-else
-    log_success "Homebrew already installed"
-fi
 
-# Install mise-en-place
-if ! command -v mise &> /dev/null; then
-    log_info "Installing mise-en-place..."
-    brew install mise
-    log_success "mise-en-place installed successfully"
-else
-    log_success "mise-en-place already installed"
-fi
+    # Install mise-en-place
+    if ! command -v mise &> /dev/null; then
+        log_info "Installing mise-en-place..."
+        brew install mise
+        log_success "mise-en-place installed successfully"
+    else
+        log_success "mise-en-place already installed"
+    fi
 
-# Install tools via mise
-log_info "Installing development tools via mise..."
-mise install
-log_success "All tools installed successfully"
+    # Install tools via mise
+    log_info "Installing development tools via mise..."
+    mise install
+    log_success "All tools installed successfully"
 
-# Install fonts for your custom prompt
-log_info "Installing fonts..."
-if [ -d "$HOME/Library/Fonts" ]; then
-    # macOS Fonts directory
-    cp -r "$DOTFILES/fonts/powerline-fonts/"* "$HOME/Library/Fonts/" 2>/dev/null || true
-    log_success "Fonts installed to ~/Library/Fonts"
+    # Install fonts for your custom prompt
+    log_info "Installing fonts..."
+    if [ -d "$HOME/Library/Fonts" ]; then
+        # macOS Fonts directory
+        cp -r "$DOTFILES/fonts/powerline-fonts/"* "$HOME/Library/Fonts/" 2>/dev/null || true
+        log_success "Fonts installed to ~/Library/Fonts"
+    else
+        log_warning "Fonts directory not found, skipping font installation"
+    fi
 else
-    log_warning "Fonts directory not found, skipping font installation"
+    # Slim mode: Check if Oh My Zsh is available
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        log_error "Oh My Zsh not found. Please install Oh My Zsh first or use the full setup script."
+        log_info "You can install Oh My Zsh with:"
+        echo "  sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+        exit 1
+    fi
 fi
 
 # Set up zsh with Oh My Zsh
@@ -127,17 +171,19 @@ else
     log_success "Zsh configuration updated"
 fi
 
-# Set up vim configuration
-log_info "Setting up vim configuration..."
-if [ -f "$HOME/.vimrc" ]; then
-    log_warning ".vimrc already exists. Backing up..."
-    cp "$HOME/.vimrc" "$DOTFILES/dotfile_backups/.vimrc_backup_$(date +%Y%m%d_%H%M%S)"
-fi
-ln -sfv "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+# Full mode: Set up vim configuration
+if [ "$SLIM_MODE" = false ]; then
+    log_info "Setting up vim configuration..."
+    if [ -f "$HOME/.vimrc" ]; then
+        log_warning ".vimrc already exists. Backing up..."
+        cp "$HOME/.vimrc" "$DOTFILES/dotfile_backups/.vimrc_backup_$(date +%Y%m%d_%H%M%S)"
+    fi
+    ln -sfv "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
 
-# Create vim spell directory and link spell file
-mkdir -p "$HOME/.vim/spell/"
-ln -sfv "$DOTFILES/vim/spell/en.utf-8.spl" "$HOME/.vim/spell/"
+    # Create vim spell directory and link spell file
+    mkdir -p "$HOME/.vim/spell/"
+    ln -sfv "$DOTFILES/vim/spell/en.utf-8.spl" "$HOME/.vim/spell/"
+fi
 
 # Set up git configuration
 log_info "Setting up git configuration..."
@@ -146,8 +192,6 @@ if [ -f "$HOME/.gitconfig" ]; then
     cp "$HOME/.gitconfig" "$DOTFILES/dotfile_backups/.gitconfig_backup_$(date +%Y%m%d_%H%M%S)"
 fi
 ln -sfv "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
-
-
 
 # Git user setup
 log_info "Setting up git user configuration..."
@@ -162,16 +206,18 @@ else
     log_info "Git user already configured: $(git config --global user.name) <$(git config --global user.email)>"
 fi
 
-# macOS preferences
-log_info "Setting up macOS preferences..."
-defaults write -g ApplePressAndHoldEnabled -bool false
-defaults write -g KeyRepeat -int 1
-defaults write -g InitialKeyRepeat -float 1.5
-chflags nohidden "$HOME/Library/"
-defaults write com.apple.Dock autohide-delay -float 0
-defaults write com.apple.dock expose-animation-duration -float 0.1
-killall Dock 2>/dev/null || true
-log_success "macOS preferences configured"
+# Full mode: macOS preferences
+if [ "$SLIM_MODE" = false ]; then
+    log_info "Setting up macOS preferences..."
+    defaults write -g ApplePressAndHoldEnabled -bool false
+    defaults write -g KeyRepeat -int 1
+    defaults write -g InitialKeyRepeat -float 1.5
+    chflags nohidden "$HOME/Library/"
+    defaults write com.apple.Dock autohide-delay -float 0
+    defaults write com.apple.dock expose-animation-duration -float 0.1
+    killall Dock 2>/dev/null || true
+    log_success "macOS preferences configured"
+fi
 
 # Note: direnv is configured via the Oh My Zsh plugin in .zshrc
 
@@ -187,26 +233,44 @@ chmod +x "$DOTFILES/zsh/zsh_day_time.py"
 mkdir -p "$DOTFILES/dotfile_backups"
 
 echo ""
-echo "🎉 Setup completed successfully!"
-echo "================================"
-echo
-echo "Next steps:"
-echo "1. Restart your terminal or run: source ~/.zshrc"
-echo "2. Your custom zsh theme should now be active"
-echo "3. Use 'mise' to manage development tools"
-echo "4. Add project-specific tools with: mise use <tool>@<version>"
-echo
-echo "Available commands:"
-echo "  mise ls          - List installed tools"
-echo "  mise use node@20 - Use Node.js 20 in current directory"
-echo "  mise use bun@latest - Use latest Bun in current directory"
-echo "  mise x -- node   - Run node with current directory's version"
-echo "  mise sync        - Install all tools from mise.toml"
-echo
-echo "Custom zsh features:"
-echo "  - Custom 'rand2' theme with battery status and git info"
-echo "  - zsh-autosuggestions for command suggestions"
-echo "  - zsh-syntax-highlighting for syntax highlighting"
-echo "  - Modern CLI tool aliases (exa, bat, fd, ripgrep)"
-echo
-echo "Welcome to your new development environment! 🚀"
+if [ "$SLIM_MODE" = true ]; then
+    echo "🎉 Slim setup completed successfully!"
+    echo "===================================="
+    echo
+    echo "Next steps:"
+    echo "1. Restart your terminal or run: source ~/.zshrc"
+    echo "2. Your custom zsh theme should now be active"
+    echo
+    echo "What was configured:"
+    echo "  ✅ Custom zsh theme (rand2)"
+    echo "  ✅ Essential zsh plugins"
+    echo "  ✅ Git configuration"
+    echo "  ✅ Python prompt scripts"
+    echo
+    echo "Note: This slim setup assumes tools are already available in your environment."
+    echo "Use './setup' for the full setup if you need to install tools."
+else
+    echo "🎉 Full setup completed successfully!"
+    echo "===================================="
+    echo
+    echo "Next steps:"
+    echo "1. Restart your terminal or run: source ~/.zshrc"
+    echo "2. Your custom zsh theme should now be active"
+    echo "3. Use 'mise' to manage development tools"
+    echo "4. Add project-specific tools with: mise use <tool>@<version>"
+    echo
+    echo "Available commands:"
+    echo "  mise ls          - List installed tools"
+    echo "  mise use node@20 - Use Node.js 20 in current directory"
+    echo "  mise use bun@latest - Use latest Bun in current directory"
+    echo "  mise x -- node   - Run node with current directory's version"
+    echo "  mise sync        - Install all tools from mise.toml"
+    echo
+    echo "Custom zsh features:"
+    echo "  - Custom 'rand2' theme with battery status and git info"
+    echo "  - zsh-autosuggestions for command suggestions"
+    echo "  - zsh-syntax-highlighting for syntax highlighting"
+    echo "  - Modern CLI tool aliases (exa, bat, fd, ripgrep)"
+    echo
+    echo "Welcome to your new development environment! 🚀"
+fi
