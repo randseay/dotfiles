@@ -91,12 +91,13 @@ Installs everything needed for a complete development environment:
 - Zsh and git configuration
 
 ### Slim Setup (`./setup --slim`)
-Configuration-only mode for environments where development tools are already available:
+Configuration-only mode for environments where heavy development tools are already available:
 - **Installs**: Oh My Zsh (required for zsh configuration)
 - **Installs**: direnv (required for zsh configuration)
+- **Installs**: Modern CLI tools (eza, bat, fd, ripgrep) for enhanced aliases
 - **Installs**: Custom zsh theme and plugins
 - **Configures**: Zsh and git settings
-- **Skips**: Heavy development tools, fonts, vim, macOS preferences
+- **Skips**: Heavy development tools (git, vim, tmux, python, node, etc.), fonts, vim config, macOS preferences
 - **Perfect for**: devbox, Docker containers, CI/CD environments
 
 ### Help and Options
@@ -260,9 +261,12 @@ cat ~/.ssh/id_ed25519_signing.pub
 ## Requirements
 
 - **Full setup**: macOS (tested on Apple Silicon and Intel)
-- **Slim setup**: Any Unix-like system (Oh My Zsh will be installed automatically)
+  - Installs all tools via Homebrew and mise-en-place
+- **Slim setup**: Any Unix-like system
+  - Installs essential tools (Oh My Zsh, direnv, modern CLI tools) via package manager
+  - Assumes heavy development tools (git, vim, tmux, python, node) are pre-installed
 - Internet connection for initial setup
-- Homebrew (installed automatically in full mode)
+- Package manager access (apt, snap, brew) for slim mode
 
 ## Troubleshooting
 
