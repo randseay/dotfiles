@@ -46,11 +46,15 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo> ~/dotfiles
+   git clone git@github.com:randseay/dotfiles.git ~/dotfiles
+   ```
+
+2. **Navigate into the dotfiles**
+   ```bash
    cd ~/dotfiles
    ```
 
-2. **Choose your setup mode**:
+3. **Choose your setup mode**:
    
    **Full setup (recommended for fresh machines):**
    ```bash
@@ -62,7 +66,7 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
    ./setup --slim
    ```
 
-3. **Restart your terminal** or run:
+4. **Restart your terminal** or run:
    ```bash
    source ~/.zshrc
    ```
@@ -244,18 +248,6 @@ cat ~/.ssh/id_ed25519_signing.pub
 - **Modern Settings**: `pull.rebase = true` for clean history, `fetch.prune = true` for clean remotes
 - **Color Output**: Enhanced readability with colored git output
 - **Clean Setup**: Removed unused tools and aliases for a lean configuration
-
-## What Was Removed
-
-- **Ruby environment**: rbenv, ruby-build
-- **Python environment**: pyenv, virtualenvwrapper  
-- **Mercurial**: hg configuration
-- **Sublime**: Sublime Text configuration
-- **Ford**: Custom tool
-- **Outdated Node.js tools**: bower, grunt, gulp
-- **Old Homebrew installation method**: Updated to modern approach
-- **Antigen**: Replaced with standard Oh My Zsh plugin system
-- **Excessive plugins**: Streamlined to only essential ones
 
 ## Requirements
 
