@@ -307,6 +307,8 @@ if [ "$SLIM_MODE" = false ]; then
     defaults write com.apple.dock expose-animation-duration -float 0.1
     killall Dock 2>/dev/null || true
     log_success "macOS preferences configured"
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+    defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false
 fi
 
 # Note: direnv is configured via the Oh My Zsh plugin in .zshrc
