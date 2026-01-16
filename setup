@@ -313,6 +313,30 @@ fi
 
 # Note: direnv is configured via the Oh My Zsh plugin in .zshrc
 
+# Set up agent skills
+log_info "Setting up agent skills..."
+AGENT_SKILLS_DIR="$HOME/.agent/skills"
+mkdir -p "$AGENT_SKILLS_DIR"
+
+if [ -d "$DOTFILES/agent/skills" ]; then
+    for skill in "$DOTFILES/agent/skills"/*; do
+        if [ -d "$skill" ]; then
+            skill_name=$(basename "$skill")
+            target="$AGENT_SKILLS_DIR/$skill_name"
+            if [ -L "$target" ]; then
+                log_success "Skill '$skill_name' already linked"
+            elif [ -d "$target" ]; then
+                 log_warning "Skill '$skill_name' exists as a directory in destination, skipping link"
+            else
+                ln -s "$skill" "$target"
+                log_success "Linked skill: $skill_name"
+            fi
+        fi
+    done
+else
+    log_warning "No agent skills found in dotfiles"
+fi
+
 # Final setup
 log_info "Finalizing setup..."
 
@@ -382,6 +406,7 @@ if [ "$SLIM_MODE" = true ]; then
     echo "  ✅ Essential zsh plugins"
     echo "  ✅ Git configuration"
     echo "  ✅ Python prompt scripts"
+    echo "  ✅ Agent skills linked to ~/.agent/skills"
     echo
     echo "Note: This slim setup assumes tools are already available in your environment."
     echo "Use './setup' for the full setup if you need to install tools."
@@ -407,6 +432,9 @@ else
     echo "  - zsh-autosuggestions for command suggestions"
     echo "  - zsh-syntax-highlighting for syntax highlighting"
     echo "  - Modern CLI tool aliases (exa, bat, fd, ripgrep)"
+    echo "  - Agent Configuration:"
+    echo "    - Skills installed in ~/.agent/skills"
+    echo "    - Add new skills in ~/dotfiles/agent/skills"
     echo
     echo "Welcome to your new development environment! 🚀"
 fi
