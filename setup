@@ -45,18 +45,8 @@ else
     echo "========================================================"
 fi
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-# Helper functions
-log_info() { echo -e "${BLUE}ℹ️  $1${NC}"; }
-log_success() { echo -e "${GREEN}✅ $1${NC}"; }
-log_warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
-log_error() { echo -e "${RED}❌ $1${NC}"; }
+# Source shared utilities
+source "$HOME/dotfiles/lib/utils.sh"
 
 # Check if we're on macOS (only for full mode)
 if [ "$SLIM_MODE" = false ] && [[ "$OSTYPE" != "darwin"* ]]; then
@@ -64,8 +54,7 @@ if [ "$SLIM_MODE" = false ] && [[ "$OSTYPE" != "darwin"* ]]; then
     exit 1
 fi
 
-# Set up environment variables
-export DOTFILES="$HOME/dotfiles"
+# DOTFILES is exported by lib/utils.sh, but we can log it here to be sure
 log_info "Setting DOTFILES to: $DOTFILES"
 
 # Full mode: Install Homebrew and tools
@@ -320,27 +309,11 @@ fi
 # Note: direnv is configured via the Oh My Zsh plugin in .zshrc
 
 # Set up agent skills
-log_info "Setting up agent skills..."
-AGENT_SKILLS_DIR="$HOME/.agent/skills"
-mkdir -p "$AGENT_SKILLS_DIR"
-
-if [ -d "$DOTFILES/agent/skills" ]; then
-    for skill in "$DOTFILES/agent/skills"/*; do
-        if [ -d "$skill" ]; then
-            skill_name=$(basename "$skill")
-            target="$AGENT_SKILLS_DIR/$skill_name"
-            if [ -L "$target" ]; then
-                log_success "Skill '$skill_name' already linked"
-            elif [ -d "$target" ]; then
-                 log_warning "Skill '$skill_name' exists as a directory in destination, skipping link"
-            else
-                ln -s "$skill" "$target"
-                log_success "Linked skill: $skill_name"
-            fi
-        fi
-    done
+# Set up agent skills
+if [ -f "$DOTFILES/agent/setup" ]; then
+    bash "$DOTFILES/agent/setup"
 else
-    log_warning "No agent skills found in dotfiles"
+    log_warning "Agent setup script not found at $DOTFILES/agent/setup"
 fi
 
 # Final setup

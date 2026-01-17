@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# agent/setup: Configures agent skills and settings
+
+set -e
+
+# Source shared utilities
+source "$HOME/dotfiles/lib/utils.sh"
+AGENT_SKILLS_SOURCE="$DOTFILES/agent/skills"
+
+# Legacy Agent Skills Location
+LEGACY_SKILLS_DIR="$HOME/.agent/skills"
+
+# Antigravity Skills Location
+ANTIGRAVITY_SKILLS_DIR="$HOME/.gemini/antigravity/skills"
+
+log_info "Setting up agent skills..."
+
+# Ensure target directories exist
+mkdir -p "$LEGACY_SKILLS_DIR"
+mkdir -p "$ANTIGRAVITY_SKILLS_DIR"
+
+if [ -d "$AGENT_SKILLS_SOURCE" ]; then
+    for skill in "$AGENT_SKILLS_SOURCE"/*; do
+        if [ -d "$skill" ]; then
+            skill_name=$(basename "$skill")
+            
+            # Link to Legacy Location (~/.agent/skills)
+            target_legacy="$LEGACY_SKILLS_DIR/$skill_name"
+            if [ -L "$target_legacy" ]; then
+                : # Already linked, silent success
+            elif [ -d "$target_legacy" ]; then
+                 log_warning "Skill '$skill_name' exists as directory in ~/.agent/skills, skipping link"
+            else
+                ln -s "$skill" "$target_legacy"
+                log_success "Linked to ~/.agent/skills: $skill_name"
+            fi
+
+            # Link to Antigravity Location (~/.gemini/antigravity/skills)
+            target_antigravity="$ANTIGRAVITY_SKILLS_DIR/$skill_name"
+            if [ -L "$target_antigravity" ]; then
+                : # Already linked, silent success
+            elif [ -d "$target_antigravity" ]; then
+                 log_warning "Skill '$skill_name' exists as directory in ~/.gemini/antigravity/skills, skipping link"
+            else
+                ln -s "$skill" "$target_antigravity"
+                log_success "Linked to ~/.gemini/antigravity/skills: $skill_name"
+            fi
+        fi
+    done
+    log_success "Agent skills setup complete."
+else
+    log_warning "No agent skills found in $AGENT_SKILLS_SOURCE"
+fi
