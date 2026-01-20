@@ -49,6 +49,12 @@ The setup includes enhanced aliases for common commands:
 - **`find` → `fd`**: Fast, user-friendly alternative to `find`
 - **`grep` → `ripgrep`**: Fast, recursive grep with smart defaults
 
+### Agent Skills
+- AI agent capabilities directory (`agent/skills/`)
+- Automatically linked to `~/.agent/skills` and `~/.gemini/antigravity/skills`
+- Custom skills can be added to `agent/skills/` directory
+- See [Agent Skills Specification](https://agentskills.io/) for more info
+
 ## Quick Start
 
 1. **Clone the repository**:
@@ -190,6 +196,15 @@ Edit `zsh/rand2.zsh-theme` to customize your prompt appearance.
 
 ## Git Configuration
 
+### Global Gitignore
+
+The setup includes a global gitignore file at `git/.gitignore_global` that automatically excludes common files from all your repositories:
+- macOS system files (`.DS_Store`)
+- Editor temporary files
+- Common build artifacts
+
+This is automatically configured during setup.
+
 ### SSH Signing Setup
 
 The dotfiles include Git commit and tag signing with SSH keys. You'll need to set this up on each fresh installation:
@@ -256,7 +271,18 @@ cat ~/.ssh/id_ed25519_signing.pub
 - **SSH Signing**: All commits and tags are automatically signed
 - **Modern Settings**: `pull.rebase = true` for clean history, `fetch.prune = true` for clean remotes
 - **Color Output**: Enhanced readability with colored git output
+- **Global Gitignore**: Automatically excludes common files from all repositories
 - **Clean Setup**: Removed unused tools and aliases for a lean configuration
+
+## Git Submodules
+
+This repository includes the **powerline-fonts** submodule for the custom zsh theme.
+
+Submodules are automatically initialized during git clone with `--recursive` flag, but if you need to update them:
+
+```bash
+git submodule update --init --recursive
+```
 
 ## Requirements
 
@@ -336,7 +362,7 @@ If you get errors about Oh My Zsh not loading or direnv not found:
 ### Common Setup Issues
 
 #### **Commands Not Found After Setup**
-If you see errors like "Command 'exa' not found" after running the setup:
+If you see errors like "Command 'eza' not found" after running the setup:
 
 **Problem**: You're still in bash, but the setup script linked your zsh configuration with aliases.
 

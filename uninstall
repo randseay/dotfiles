@@ -128,5 +128,4 @@ echo "You can delete it manually if you no longer need it."
 echo
 echo "To completely start fresh, you may also want to:"
 echo "1. Remove Oh My Zsh: rm -rf ~/.oh-my-zsh"
-echo "2. Remove antigen: rm -rf ~/.antigen"
-echo "3. Remove vim bundles: rm -rf ~/.vim/bundle"
+echo "2. Remove vim bundles: rm -rf ~/.vim/bundle"

@@ -1,6 +1,3 @@
-[submodule "antigen"]
-	path = antigen
-	url = https://github.com/zsh-users/antigen.git
 [submodule "powerline"]
     path = fonts/powerline-fonts 
     url = https://github.com/Lokaltog/powerline-fonts.git
