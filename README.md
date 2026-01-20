@@ -27,7 +27,6 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 - Git repository information
 - Path abbreviation for long directories
 - Time display
-- Virtual environment support
 
 ### Python Scripts for Prompt
 - `batcharge.py`: Battery status display

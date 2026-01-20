@@ -1,7 +1,6 @@
 # This is my personal zsh-theme file
 # requirements
 #    oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
-#    virtualenv-prompt (https://github.com/tonyseek/oh-my-zsh-virtualenv-prompt)
 
 # colors
 eval color_blue='$FG[075]'
@@ -52,19 +51,8 @@ function get_pwd_width() {
     git_len=0
   fi
 
-  venv_info=$(virtualenv_prompt_info)
-  if [ ${#venv_info} != 0 ]; then
-    if [ ${#git_info} != 0 ]; then
-      ((venv_len=${#venv_info} - 42))
-    else
-      ((venv_len=${#venv_info} - 58))
-    fi
-  else
-    venv_len=0
-  fi
-
   local pwd_width
-  (( pwd_width = ${COLUMNS} - ${venv_len} - ${git_len} -1 ))
+  (( pwd_width = ${COLUMNS} - ${git_len} -1 ))
 
   echo $pwd_width
 }
@@ -93,13 +81,6 @@ function precmd() {
             HG_STATUS="%{$color_green%}%{$symbol_check%}"
             ;;
     esac
-    if [ $(is_git_repo) ] || [ $(is_hg_repo) ]; then
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$color_blue ) $color_gray╍╍╍ "
-    elif [ ! $(is_git_repo) ] && [ ! $(is_hg_repo) ]; then
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$color_blue ) $color_gray╍╍╍ "
-    else
-        ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="$color_blue ) "
-    fi
     if [ $(is_hg_repo) ]; then
         hg_prompt_info="$HG_PROMPT_PREFIX$(hg_ps1 branch) $HG_STATUS$HG_PROMPT_SUFFIX"
     else
@@ -109,6 +90,5 @@ function precmd() {
 }
 
 # primary prompt
-ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="$color_blue( venv: "
-PROMPT='$(virtualenv_prompt_info)$(git_prompt_info)$hg_prompt_info$uname_color%n%{$color_white%}@%{$color_burlywood%}%m%{$reset_color%} in $PWD_PROMPT
+PROMPT='$(git_prompt_info)$hg_prompt_info$uname_color%n%{$color_white%}@%{$color_burlywood%}%m%{$reset_color%} in $PWD_PROMPT
 $color_orange%(!.#.→)%{$reset_color%} '
