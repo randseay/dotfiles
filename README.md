@@ -6,11 +6,10 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 
 - **Custom Zsh Theme**: Personalized prompt with battery status, git info, and path abbreviation
 - **Modern Tool Management**: Uses [mise-en-place](https://mise.jdx.dev/dev-tools/) instead of outdated version managers
-- **Lean Setup**: Removed outdated tools (Ruby, old Python, Mercurial, Sublime, etc.)
 - **macOS Optimized**: Custom macOS preferences and Apple Silicon support
 - **Easy Management**: Simple setup and uninstall scripts
 - **Clean Plugin Selection**: Only essential Oh My Zsh plugins for fast loading
-- **Flexible Installation**: Choose between full setup or configuration-only mode
+- **Flexible Installation**: Choose between full setup or lean setup
 
 ## What's Included
 
