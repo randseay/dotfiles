@@ -47,11 +47,17 @@ The setup includes enhanced aliases for common commands:
 - **`find` → `fd`**: Fast, user-friendly alternative to `find`
 - **`grep` → `ripgrep`**: Fast, recursive grep with smart defaults
 
-### Agent Skills
+### Agent Skills & Claude Code
+
 - AI agent capabilities directory (`agent/skills/`)
-- Automatically linked to `~/.agent/skills` and `~/.gemini/antigravity/skills`
+- Automatically linked to:
+  - `~/.agent/skills` (legacy location)
+  - `~/.gemini/antigravity/skills` (Antigravity/Gemini)
+  - `~/.claude/skills` (Claude Code)
 - Custom skills can be added to `agent/skills/` directory
+- Global Claude Code configuration in `claude/CLAUDE.md` linked to `~/.claude/CLAUDE.md`
 - See [Agent Skills Specification](https://agentskills.io/) for more info
+- See [Claude Code Best Practices](https://code.claude.com/docs/en/best-practices) for Claude configuration
 
 ## Quick Start
 

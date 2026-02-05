@@ -14,11 +14,15 @@ LEGACY_SKILLS_DIR="$HOME/.agent/skills"
 # Antigravity Skills Location
 ANTIGRAVITY_SKILLS_DIR="$HOME/.gemini/antigravity/skills"
 
+# Claude Code Skills Location
+CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
+
 log_info "Setting up agent skills..."
 
 # Ensure target directories exist
 mkdir -p "$LEGACY_SKILLS_DIR"
 mkdir -p "$ANTIGRAVITY_SKILLS_DIR"
+mkdir -p "$CLAUDE_SKILLS_DIR"
 
 if [ -d "$AGENT_SKILLS_SOURCE" ]; then
     for skill in "$AGENT_SKILLS_SOURCE"/*; do
@@ -45,6 +49,17 @@ if [ -d "$AGENT_SKILLS_SOURCE" ]; then
             else
                 ln -s "$skill" "$target_antigravity"
                 log_success "Linked to ~/.gemini/antigravity/skills: $skill_name"
+            fi
+
+            # Link to Claude Code Location (~/.claude/skills)
+            target_claude="$CLAUDE_SKILLS_DIR/$skill_name"
+            if [ -L "$target_claude" ]; then
+                : # Already linked, silent success
+            elif [ -d "$target_claude" ]; then
+                 log_warning "Skill '$skill_name' exists as directory in ~/.claude/skills, skipping link"
+            else
+                ln -s "$skill" "$target_claude"
+                log_success "Linked to ~/.claude/skills: $skill_name"
             fi
         fi
     done

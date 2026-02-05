@@ -330,6 +330,24 @@ else
     log_warning "Agent setup script not found at $DOTFILES/agent/setup"
 fi
 
+# Set up Claude Code configuration
+log_info "Setting up Claude Code configuration..."
+mkdir -p "$HOME/.claude"
+
+# Link CLAUDE.md
+if [ -f "$HOME/.claude/CLAUDE.md" ] && [ ! -L "$HOME/.claude/CLAUDE.md" ]; then
+    log_warning "CLAUDE.md already exists. Backing up..."
+    cp "$HOME/.claude/CLAUDE.md" "$DOTFILES/dotfile_backups/CLAUDE.md_backup_$(date +%Y%m%d_%H%M%S)"
+    rm "$HOME/.claude/CLAUDE.md"
+fi
+
+if [ ! -L "$HOME/.claude/CLAUDE.md" ]; then
+    ln -s "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+    log_success "Claude Code configuration linked"
+else
+    log_success "Claude Code configuration already linked"
+fi
+
 # Final setup
 log_info "Finalizing setup..."
 
