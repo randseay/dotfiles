@@ -14,8 +14,8 @@ if len(wd_full) > int(wd_max_width):
         wd_list[i] = wd_list[i][:1]
         wd_path = '/'.join(str(x) for x in wd_list)
         if len(wd_path) < int(wd_max_width):
-            out = wd_path
             break
+    out = '/'.join(str(x) for x in wd_list)
 else:
     out = wd_full
 

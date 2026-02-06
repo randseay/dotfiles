@@ -63,6 +63,24 @@ ZSH_THEME_GIT_PROMPT_CLEAN="$color_green %{$symbol_check%}%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="$color_orange %B%{$symbol_changes%}%b%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$color_blue ] $color_gray╍╍╍ %{$reset_color%}"
 
+# Override git_prompt_info to abbreviate long branch names
+function git_prompt_info() {
+  if ! __git_prompt_git rev-parse --git-dir &> /dev/null \
+     || [[ "$(command git config --get oh-my-zsh.hide-info 2>/dev/null)" == 1 ]]; then
+    return
+  fi
+  local ref
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) \
+    || ref=$(command git rev-parse --short HEAD 2> /dev/null) \
+    || return 0
+  ref="${ref#refs/heads/}"
+  # Abbreviate branch names longer than 40 chars: first 35 + … + last 5
+  if [[ ${#ref} -gt 40 ]]; then
+    ref="${ref:0:35}…${ref: -5}"
+  fi
+  echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}
+
 # hg settings
 HG_PROMPT_PREFIX="%{$color_purple%}[ hg: %{$symbol_branch%} "
 HG_PROMPT_SUFFIX="%{$color_purple%} ] $color_gray╍╍╍ "

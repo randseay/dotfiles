@@ -31,30 +31,39 @@ def get_macos_battery():
             return None
             
         # Pull out pertinent key-value pairs
+        # Use exact key matching ('"Key" =') to avoid matching keys
+        # embedded inside the BatteryData blob
         lines = output.splitlines()
-        
-        o_max = [l for l in lines if b'MaxCapacity' in l]
-        o_cur = [l for l in lines if b'CurrentCapacity' in l]
-        o_charge = [l for l in lines if b'IsCharging' in l]
-        o_charged = [l for l in lines if b'FullyCharged' in l]
-        o_time_remaining = [l for l in lines if b'TimeRemaining' in l]
-        
+
+        o_max = [l for l in lines if b'"MaxCapacity" =' in l]
+        o_cur = [l for l in lines if b'"CurrentCapacity" =' in l]
+        o_charge = [l for l in lines if b'"IsCharging" =' in l]
+        o_charged = [l for l in lines if b'"FullyCharged" =' in l]
+        o_time_remaining = [l for l in lines if b'"TimeRemaining" =' in l]
+        o_external = [l for l in lines if b'"ExternalConnected" =' in l]
+
         if not all([o_max, o_cur, o_charge, o_charged, o_time_remaining]):
             return None
-            
+
         # Strip out the value in each key-value pair
         b_max = extract_float(o_max[0])
         b_cur = extract_float(o_cur[0])
         b_charge = extract_str(o_charge[0])
         b_charged = extract_str(o_charged[0])
         b_time_remaining = extract_int(o_time_remaining[0])
-        
+        b_external = extract_str(o_external[0]) if o_external else b'No'
+
+        # 65535 (0xFFFF) is a sentinel meaning "not available"
+        if b_time_remaining == 65535:
+            b_time_remaining = 0
+
         return {
             'max': b_max,
             'current': b_cur,
             'charging': b_charge == b'Yes',
             'fully_charged': b_charged == b'Yes',
-            'time_remaining': b_time_remaining
+            'time_remaining': b_time_remaining,
+            'external_connected': b_external == b'Yes',
         }
     except (subprocess.SubprocessError, FileNotFoundError, IndexError, ValueError):
         return None
@@ -169,15 +178,19 @@ def format_battery_output(battery_info):
     battery_out = " " + filled + empty
     
     # Determine what to show
+    external = battery_info.get('external_connected', False)
     if battery_info['fully_charged']:
         battery_or_charge = " Full"
     elif battery_info['charging']:
         battery_or_charge = ""
     else:
         battery_or_charge = battery_out
-    
-    # Charging indicator
-    charging_out = " ⚡︎" if battery_info['charging'] else ""
+
+    # Charging/plugged-in indicator
+    if battery_info['charging'] or external:
+        charging_out = " ⚡︎"
+    else:
+        charging_out = ""
     
     # Color coding
     if charge > 2/3:
