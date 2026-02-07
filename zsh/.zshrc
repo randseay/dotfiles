@@ -107,6 +107,9 @@ alias cat="bat"
 alias find="fd"
 alias grep="rg"
 
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 # mise
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
@@ -114,9 +117,6 @@ fi
 alias mx="mise x --"
 alias mls="mise ls"
 alias msync="mise sync"
-
-export PATH=/opt/homebrew/bin:$PATH
-export PATH="$HOME/.local/bin:$PATH"
 
 # Load local machine-specific configuration
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
