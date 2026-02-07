@@ -107,7 +107,10 @@ alias cat="bat"
 alias find="fd"
 alias grep="rg"
 
-# mise aliases
+# mise
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
 alias mx="mise x --"
 alias mls="mise ls"
 alias msync="mise sync"
