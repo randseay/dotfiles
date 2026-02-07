@@ -252,32 +252,48 @@ fi
 # Install custom theme
 log_info "Installing custom zsh theme..."
 mkdir -p "$HOME/.oh-my-zsh/custom/themes"
-if [ ! -f "$HOME/.oh-my-zsh/custom/themes/rand2.zsh-theme" ]; then
-    cp "$DOTFILES/zsh/rand2.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/"
-    log_success "Custom theme installed"
+if [ -f "$HOME/.oh-my-zsh/custom/themes/rand2.zsh-theme" ] && [ ! -L "$HOME/.oh-my-zsh/custom/themes/rand2.zsh-theme" ]; then
+    log_warning "Custom theme exists as a file. Backing up..."
+    cp "$HOME/.oh-my-zsh/custom/themes/rand2.zsh-theme" "$DOTFILES/dotfile_backups/rand2.zsh-theme_backup_$(date +%Y%m%d_%H%M%S)"
+fi
+
+if [ ! -L "$HOME/.oh-my-zsh/custom/themes/rand2.zsh-theme" ]; then
+    ln -sf "$DOTFILES/zsh/rand2.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/"
+    log_success "Custom theme linked"
 else
-    log_success "Custom theme already installed"
+    log_success "Custom theme already linked"
 fi
 
 # Copy your custom zshrc
-if [ ! -f "$HOME/.zshrc" ]; then
-    cp "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
-    log_success "Zsh configuration copied"
-else
-    log_warning ".zshrc already exists. Backing up and copying new one..."
+# Link your custom zshrc
+if [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]; then
+    log_warning ".zshrc already exists. Backing up..."
     cp "$HOME/.zshrc" "$DOTFILES/dotfile_backups/.zshrc_backup_$(date +%Y%m%d_%H%M%S)"
-    cp "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
-    log_success "Zsh configuration updated"
+fi
+ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
+log_success "Zsh configuration linked"
+
+# Create local zshrc if it doesn't exist
+if [ ! -f "$HOME/.zshrc.local" ]; then
+    touch "$HOME/.zshrc.local"
+    log_info "Created empty ~/.zshrc.local for machine-specific settings"
 fi
 
 # Full mode: Set up vim configuration
 if [ "$SLIM_MODE" = false ]; then
     log_info "Setting up vim configuration..."
-    if [ -f "$HOME/.vimrc" ]; then
+    if [ -f "$HOME/.vimrc" ] && [ ! -L "$HOME/.vimrc" ]; then
         log_warning ".vimrc already exists. Backing up..."
         cp "$HOME/.vimrc" "$DOTFILES/dotfile_backups/.vimrc_backup_$(date +%Y%m%d_%H%M%S)"
     fi
-    cp "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+    ln -sf "$DOTFILES/vim/.vimrc" "$HOME/.vimrc"
+    log_success "Vim configuration linked"
+
+    # Create local vimrc if it doesn't exist
+    if [ ! -f "$HOME/.vimrc.local" ]; then
+        touch "$HOME/.vimrc.local"
+        log_info "Created empty ~/.vimrc.local for machine-specific settings"
+    fi
 
     # Create vim spell directory and copy spell file
     mkdir -p "$HOME/.vim/spell/"
@@ -286,11 +302,18 @@ fi
 
 # Set up git configuration
 log_info "Setting up git configuration..."
-if [ -f "$HOME/.gitconfig" ]; then
+if [ -f "$HOME/.gitconfig" ] && [ ! -L "$HOME/.gitconfig" ]; then
     log_warning ".gitconfig already exists. Backing up..."
     cp "$HOME/.gitconfig" "$DOTFILES/dotfile_backups/.gitconfig_backup_$(date +%Y%m%d_%H%M%S)"
 fi
-cp "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+log_success "Git configuration linked"
+
+# Create local git config if it doesn't exist
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+    touch "$HOME/.gitconfig.local"
+    log_info "Created empty ~/.gitconfig.local for machine-specific settings"
+fi
 
 # Git user setup
 log_info "Setting up git user configuration..."

@@ -114,3 +114,6 @@ alias msync="mise sync"
 
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
+
+# Load local machine-specific configuration
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

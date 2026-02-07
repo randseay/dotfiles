@@ -36,3 +36,7 @@
 # Quality of life improvements
 [color]
 	ui = true
+
+# Load local machine-specific configuration
+[include]
+	path = ~/.gitconfig.local

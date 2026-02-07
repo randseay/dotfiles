@@ -184,3 +184,8 @@ nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>l :CtrlPLine<cr>
 nnoremap <leader>k :NERDTreeToggle<CR> " Toggle NERDTree
 
+" Load local machine-specific configuration
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
+
