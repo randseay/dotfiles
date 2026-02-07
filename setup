@@ -371,6 +371,20 @@ else
     log_success "Claude Code configuration already linked"
 fi
 
+# Link settings.json
+if [ -f "$HOME/.claude/settings.json" ] && [ ! -L "$HOME/.claude/settings.json" ]; then
+    log_warning "settings.json already exists. Backing up..."
+    cp "$HOME/.claude/settings.json" "$DOTFILES/dotfile_backups/claude_settings.json_backup_$(date +%Y%m%d_%H%M%S)"
+    rm "$HOME/.claude/settings.json"
+fi
+
+if [ ! -L "$HOME/.claude/settings.json" ]; then
+    ln -s "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+    log_success "Claude Code settings linked"
+else
+    log_success "Claude Code settings already linked"
+fi
+
 # Final setup
 log_info "Finalizing setup..."
 
