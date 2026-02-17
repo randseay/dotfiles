@@ -1,9 +1,4 @@
 [tools]
-# Core development tools
-git = "latest"
-vim = "latest"
-tmux = "latest"
-
 # Python for your prompt scripts
 python = "3.12"
 
