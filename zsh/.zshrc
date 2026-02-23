@@ -118,5 +118,35 @@ alias mx="mise x --"
 alias mls="mise ls"
 alias msync="mise sync"
 
+# Launch Obsidian vault, ensuring SSH keys are loaded first for Obsidian Sync
+function brain() {
+  # ssh-add -l exits 0 (keys loaded), 1 (agent running, no keys), or 2 (no agent/stale socket).
+  # Capture the status so we can handle each case without running it twice.
+  ssh-add -l &>/dev/null
+  local agent_status=$?
+
+  # Exit 2 means no agent is running, or the socket exists but the agent process died.
+  # Start a fresh agent rather than checking SSH_AUTH_SOCK, which can point to a stale socket.
+  if [[ $agent_status -eq 2 ]]; then
+    eval "$(ssh-agent -s)" > /dev/null
+  fi
+
+  # Exit 1 means the agent is running but has no keys loaded (or we just started a fresh one above).
+  # On macOS, load from the system Keychain so no passphrase prompt is needed.
+  # On Linux/WSL, prompt for the passphrase once and add to the running agent.
+  if [[ $agent_status -ne 0 ]]; then
+    if [[ "$OSTYPE" == darwin* ]]; then
+      ssh-add --apple-load-keychain
+    else
+      ssh-add ~/.ssh/id_ed25519 ~/.ssh/id_ed25519_signing
+    fi
+  fi
+  if [[ "$OSTYPE" == darwin* ]]; then
+    open -a "Obsidian" ~/vaults/second-brain
+  else
+    obsidian --no-sandbox &
+  fi
+}
+
 # Load local machine-specific configuration
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
