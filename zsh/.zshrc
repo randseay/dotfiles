@@ -118,6 +118,11 @@ alias mx="mise x --"
 alias mls="mise ls"
 alias msync="mise sync"
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 # Launch Obsidian vault, ensuring SSH keys are loaded first for Obsidian Sync
 function brain() {
   # ssh-add -l exits 0 (keys loaded), 1 (agent running, no keys), or 2 (no agent/stale socket).

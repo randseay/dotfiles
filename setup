@@ -123,30 +123,29 @@ else
     # Install direnv (needed for zsh config)
     if ! command -v direnv &> /dev/null; then
         log_info "Installing direnv..."
-        if command -v apt &> /dev/null; then
-            # Ubuntu/Debian
+        if command -v brew &> /dev/null; then
+            brew install direnv
+        elif command -v apt &> /dev/null; then
             sudo apt update && sudo apt install -y direnv
         elif command -v snap &> /dev/null; then
-            # Snap-based systems
             sudo snap install direnv
-        elif command -v brew &> /dev/null; then
-            # macOS with Homebrew
-            brew install direnv
         else
             log_warning "Could not install direnv automatically. Please install it manually:"
+            echo "  macOS: brew install direnv"
             echo "  Ubuntu/Debian: sudo apt install direnv"
             echo "  Snap: sudo snap install direnv"
-            echo "  macOS: brew install direnv"
         fi
     else
         log_success "direnv already installed"
     fi
-    
+
     # Install eza (modern ls replacement)
     if ! command -v eza &> /dev/null; then
         log_info "Installing eza (modern ls replacement)..."
-        if command -v apt &> /dev/null; then
-            # Ubuntu/Debian
+        if command -v brew &> /dev/null; then
+            brew install eza
+        elif command -v apt &> /dev/null; then
+            sudo apt update && sudo apt install -y gpg
             sudo mkdir -p /etc/apt/keyrings
             if [ ! -f /etc/apt/keyrings/gierens.gpg ]; then
                 wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
@@ -155,33 +154,29 @@ else
             sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
             sudo apt update && sudo apt install -y eza
         elif command -v snap &> /dev/null; then
-            # Snap-based systems
             sudo snap install eza
-        elif command -v brew &> /dev/null; then
-            # macOS with Homebrew
-            brew install eza
         else
             log_warning "Could not install eza automatically. Please install it manually:"
-            echo "  Ubuntu/Debian: sudo apt install eza"
-            echo "  Snap: sudo snap install eza"
             echo "  macOS: brew install eza"
+            echo "  Ubuntu/Debian: see https://github.com/eza-community/eza/blob/main/INSTALL.md"
+            echo "  Snap: sudo snap install eza"
         fi
     else
         log_success "eza already installed"
     fi
-    
+
     # Install other modern CLI tools needed for aliases
     log_info "Installing modern CLI tools for enhanced aliases..."
-    
+
     # Install bat (enhanced cat)
     if ! command -v bat &> /dev/null && ! command -v batcat &> /dev/null; then
         log_info "Installing bat (enhanced cat)..."
-        if command -v apt &> /dev/null; then
+        if command -v brew &> /dev/null; then
+            brew install bat
+        elif command -v apt &> /dev/null; then
             sudo apt update && sudo apt install -y bat
         elif command -v snap &> /dev/null; then
             sudo snap install bat
-        elif command -v brew &> /dev/null; then
-            brew install bat
         else
             log_warning "Could not install bat automatically. Please install it manually."
         fi
@@ -195,16 +190,16 @@ else
         ln -sf "$(which batcat)" "$HOME/.local/bin/bat"
         log_info "Linked 'batcat' to '$HOME/.local/bin/bat'"
     fi
-    
+
     # Install fd (enhanced find)
     if ! command -v fd &> /dev/null && ! command -v fdfind &> /dev/null; then
         log_info "Installing fd (enhanced find)..."
-        if command -v apt &> /dev/null; then
+        if command -v brew &> /dev/null; then
+            brew install fd
+        elif command -v apt &> /dev/null; then
             sudo apt update && sudo apt install -y fd-find
         elif command -v snap &> /dev/null; then
             sudo snap install fd
-        elif command -v brew &> /dev/null; then
-            brew install fd
         else
             log_warning "Could not install fd automatically. Please install it manually."
         fi
@@ -218,16 +213,16 @@ else
         ln -sf "$(which fdfind)" "$HOME/.local/bin/fd"
         log_info "Linked 'fdfind' to '$HOME/.local/bin/fd'"
     fi
-    
+
     # Install ripgrep (enhanced grep)
     if ! command -v rg &> /dev/null; then
         log_info "Installing ripgrep (enhanced grep)..."
-        if command -v apt &> /dev/null; then
+        if command -v brew &> /dev/null; then
+            brew install ripgrep
+        elif command -v apt &> /dev/null; then
             sudo apt update && sudo apt install -y ripgrep
         elif command -v snap &> /dev/null; then
             sudo snap install ripgrep
-        elif command -v brew &> /dev/null; then
-            brew install ripgrep
         else
             log_warning "Could not install ripgrep automatically. Please install it manually."
         fi
