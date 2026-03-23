@@ -229,6 +229,20 @@ else
     else
         log_success "ripgrep already installed"
     fi
+
+    # Install tmux
+    if ! command -v tmux &> /dev/null; then
+        log_info "Installing tmux..."
+        if command -v brew &> /dev/null; then
+            brew install tmux
+        elif command -v apt &> /dev/null; then
+            sudo apt update && sudo apt install -y tmux
+        else
+            log_warning "Could not install tmux automatically. Please install it manually."
+        fi
+    else
+        log_success "tmux already installed"
+    fi
 fi
 
 # Set up zsh with Oh My Zsh (both modes need this)
@@ -313,6 +327,15 @@ if [ "$SLIM_MODE" = false ]; then
     mkdir -p "$HOME/.vim/spell/"
     cp "$DOTFILES/vim/spell/en.utf-8.spl" "$HOME/.vim/spell/"
 fi
+
+# Set up tmux configuration
+log_info "Setting up tmux configuration..."
+if [ -f "$HOME/.tmux.conf" ] && [ ! -L "$HOME/.tmux.conf" ]; then
+    log_warning ".tmux.conf already exists. Backing up..."
+    cp "$HOME/.tmux.conf" "$DOTFILES/dotfile_backups/.tmux.conf_backup_$(date +%Y%m%d_%H%M%S)"
+fi
+ln -sf "$DOTFILES/tmux/.tmux.conf" "$HOME/.tmux.conf"
+log_success "Tmux configuration linked"
 
 # Set up git configuration
 log_info "Setting up git configuration..."
