@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "mcp__linear-server__*"
     ]
-  }
+  },
+  "enabledPlugins": {
+    "slack@claude-plugins-official": true
+  },
+  "voiceEnabled": true,
+  "effortLevel": "high"
 }
