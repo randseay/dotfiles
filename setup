@@ -82,11 +82,11 @@ if [ "$SLIM_MODE" = false ]; then
         fi
 
         log_info "Installing system tools via Homebrew..."
-        brew install git vim tmux autojump
+        brew install git vim tmux autojump gh
         log_success "System tools installed"
     elif [ "$IS_LINUX" = true ]; then
         log_info "Installing system tools via apt..."
-        sudo apt update && sudo apt install -y git vim tmux autojump
+        sudo apt update && sudo apt install -y git vim tmux autojump gh
         log_success "System tools installed"
     fi
 
