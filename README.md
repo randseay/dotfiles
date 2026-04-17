@@ -13,10 +13,13 @@ A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev
 
 ## What's Included
 
-### Core Tools (via mise)
+### Core Tools (System Package Manager)
 - **Git**: Latest version
 - **Vim**: Latest version  
 - **Tmux**: Latest version
+- **Autojump**: Smart directory jumping
+
+### Development Tools (via mise)
 - **Python**: 3.12 (for prompt scripts)
 - **JavaScript Runtimes**: Node.js 20 with corepack, Bun latest
 - **Modern CLI Tools**: ripgrep, fd, bat, eza

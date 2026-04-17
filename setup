@@ -82,12 +82,19 @@ if [ "$SLIM_MODE" = false ]; then
         fi
 
         log_info "Installing system tools via Homebrew..."
-        brew install git vim tmux
+        brew install git vim tmux autojump
         log_success "System tools installed"
     elif [ "$IS_LINUX" = true ]; then
         log_info "Installing system tools via apt..."
-        sudo apt update && sudo apt install -y git vim tmux
+        sudo apt update && sudo apt install -y git vim tmux autojump
         log_success "System tools installed"
+    fi
+
+    # Initialize submodules (like powerline-fonts)
+    if [ -d "$DOTFILES/.git" ]; then
+        log_info "Initializing git submodules..."
+        git -C "$DOTFILES" submodule update --init --recursive
+        log_success "Submodules initialized"
     fi
 
     # Install mise-en-place

@@ -22,52 +22,32 @@ export DOTFILES="$HOME/dotfiles"
 # Remove symlinks
 log_info "Removing dotfile symlinks..."
 
-# Remove .zshrc symlink
-if [ -L "$HOME/.zshrc" ]; then
-    rm "$HOME/.zshrc"
-    log_success "Removed .zshrc symlink"
-fi
+for file in .zshrc .vimrc .gitconfig .hgrc; do
+    if [ -L "$HOME/$file" ]; then
+        rm "$HOME/$file"
+        log_success "Removed $file symlink"
+    fi
+done
 
-# Remove .vimrc symlink
-if [ -L "$HOME/.vimrc" ]; then
-    rm "$HOME/.vimrc"
-    log_success "Removed .vimrc symlink"
-fi
-
-# Remove .gitconfig symlink
-if [ -L "$HOME/.gitconfig" ]; then
-    rm "$HOME/.gitconfig"
-    log_success "Removed .gitconfig symlink"
-fi
-
-# Remove .hgrc symlink
-if [ -L "$HOME/.hgrc" ]; then
-    rm "$HOME/.hgrc"
-    log_success "Removed .hgrc symlink"
-fi
-
-# Restore backups if they exist
+# Restore backups if they exist (checks for timestamped backups)
 log_info "Checking for backups to restore..."
 
-if [ -f "$DOTFILES/dotfile_backups/.zshrc_backup" ]; then
-    cp "$DOTFILES/dotfile_backups/.zshrc_backup" "$HOME/.zshrc"
-    log_success "Restored .zshrc from backup"
-fi
+restore_latest_backup() {
+    local file=$1
+    # Look for both exact matches and timestamped versions
+    local latest_backup=$(ls -t "$DOTFILES/dotfile_backups/${file}_backup"* 2>/dev/null | head -n 1)
+    if [ -n "$latest_backup" ]; then
+        cp "$latest_backup" "$HOME/$file"
+        log_success "Restored $file from latest backup: $(basename "$latest_backup")"
+    else
+        log_info "No backup found for $file"
+    fi
+}
 
-if [ -f "$DOTFILES/dotfile_backups/.vimrc_backup" ]; then
-    cp "$DOTFILES/dotfile_backups/.vimrc_backup" "$HOME/.vimrc"
-    log_success "Restored .vimrc from backup"
-fi
-
-if [ -f "$DOTFILES/dotfile_backups/.gitconfig_backup" ]; then
-    cp "$DOTFILES/dotfile_backups/.gitconfig_backup" "$HOME/.gitconfig"
-    log_success "Restored .gitconfig from backup"
-fi
-
-if [ -f "$DOTFILES/dotfile_backups/.hgrc_backup" ]; then
-    cp "$DOTFILES/dotfile_backups/.hgrc_backup" "$HOME/.hgrc"
-    log_success "Restored .hgrc from backup"
-fi
+restore_latest_backup ".zshrc"
+restore_latest_backup ".vimrc"
+restore_latest_backup ".gitconfig"
+restore_latest_backup ".hgrc"
 
 # Remove vim spell directory
 if [ -d "$HOME/.vim/spell" ]; then
@@ -94,14 +74,15 @@ read -p "Do you want to remove all tools installed via mise? [y/n] " yn
 case $yn in
     [Yy]* )
         log_info "Removing mise tools..."
-        mise uninstall --all
-        log_success "Removed all mise tools"
-        ;;
-    [Nn]* )
-        log_info "Keeping mise tools installed"
+        if command -v mise &> /dev/null; then
+            mise uninstall --all
+            log_success "Removed all mise tools"
+        else
+            log_warning "mise command not found, skipping tool removal"
+        fi
         ;;
     * )
-        log_warning "Invalid response, keeping mise tools"
+        log_info "Keeping mise tools installed"
         ;;
 esac
 
@@ -110,14 +91,20 @@ read -p "Do you want to remove mise-en-place? [y/n] " yn
 case $yn in
     [Yy]* )
         log_info "Removing mise-en-place..."
-        brew uninstall mise
-        log_success "Removed mise-en-place"
-        ;;
-    [Nn]* )
-        log_info "Keeping mise-en-place installed"
+        if command -v brew &> /dev/null && brew list mise &>/dev/null; then
+            brew uninstall mise
+            log_success "Removed mise via Homebrew"
+        fi
+        
+        # Also clean up manual installation
+        if [ -d "$HOME/.local/share/mise" ] || [ -f "$HOME/.local/bin/mise" ]; then
+            rm -rf "$HOME/.local/share/mise"
+            rm -f "$HOME/.local/bin/mise"
+            log_success "Removed manual mise installation"
+        fi
         ;;
     * )
-        log_warning "Invalid response, keeping mise-en-place"
+        log_info "Keeping mise-en-place installed"
         ;;
 esac
 
@@ -128,4 +115,4 @@ echo "You can delete it manually if you no longer need it."
 echo
 echo "To completely start fresh, you may also want to:"
 echo "1. Remove Oh My Zsh: rm -rf ~/.oh-my-zsh"
-echo "2. Remove vim bundles: rm -rf ~/.vim/bundle"
+echo "2. Remove Homebrew tools: brew uninstall git vim tmux autojump eza bat fd ripgrep direnv"
