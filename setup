@@ -107,6 +107,20 @@ if [ "$SLIM_MODE" = false ]; then
         log_success "mise-en-place already installed"
     fi
 
+    # Link mise.toml to global config so tools are available everywhere
+    mkdir -p "$HOME/.config/mise"
+    if [ -f "$HOME/.config/mise/config.toml" ] && [ ! -L "$HOME/.config/mise/config.toml" ]; then
+        log_warning "~/.config/mise/config.toml already exists. Backing up..."
+        cp "$HOME/.config/mise/config.toml" "$DOTFILES/dotfile_backups/mise_config.toml_backup_$(date +%Y%m%d_%H%M%S)"
+        rm "$HOME/.config/mise/config.toml"
+    fi
+    if [ ! -L "$HOME/.config/mise/config.toml" ]; then
+        ln -sf "$DOTFILES/mise.toml" "$HOME/.config/mise/config.toml"
+        log_success "mise config linked globally"
+    else
+        log_success "mise config already linked"
+    fi
+
     # Install tools via mise
     log_info "Installing development tools via mise..."
     mise install
