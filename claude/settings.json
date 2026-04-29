@@ -8,6 +8,7 @@
   "enabledPlugins": {
     "slack@claude-plugins-official": true
   },
+  "effortLevel": "high",
   "voiceEnabled": true,
-  "effortLevel": "high"
+  "agentPushNotifEnabled": true
 }
