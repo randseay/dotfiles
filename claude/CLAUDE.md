@@ -2,6 +2,10 @@
 
 Global configuration for Claude Code sessions. This file provides preferences and conventions that apply across all projects.
 
+## Identity & Preferences
+
+@~/dotfiles/agent/AGENTS.md
+
 ## Code Style & Conventions
 
 - **Modern JavaScript**: Use ES modules (`import`/`export`) instead of CommonJS (`require`)
