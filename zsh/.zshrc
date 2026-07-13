@@ -83,11 +83,11 @@ export EDITOR='vim'
 # export ARCHFLAGS="-arch $(uname -m)"
 
 # Apply my custom things
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH=/opt/homebrew/bin:$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 export DOTFILES=$HOME/dotfiles
 
-# Setup direnv hook
-eval "$(direnv hook zsh)"
+# Setup direnv hook (only when installed; absent on some machines)
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
 # Set up custom aliases
 alias gs="git status"
@@ -107,7 +107,6 @@ alias cat="bat"
 alias find="fd"
 alias grep="rg"
 
-export PATH=/opt/homebrew/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 
 # mise
