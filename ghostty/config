@@ -29,9 +29,12 @@ window-padding-y = 6
 # titlebar would remove them). macOS-only (ignored elsewhere).
 macos-titlebar-style = tabs
 cursor-style = block
-# Shell integration otherwise switches the cursor to a bar at the prompt; keep it
-# a block everywhere. `no-cursor` merges with defaults (title/path/etc. stay on).
-shell-integration-features = no-cursor
+# no-cursor: keep a block cursor everywhere (integration otherwise makes it a bar
+#   at the prompt). ssh-terminfo: auto-install Ghostty's terminfo on hosts you SSH
+#   to (fixes "xterm-ghostty: unknown terminal type" + duplicated input remotely).
+#   ssh-env: fall back to propagating TERM/color env vars when terminfo can't be
+#   installed. These merge with defaults (title/path/etc. stay on).
+shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 mouse-hide-while-typing = true
 
 # --- Behavior ---
