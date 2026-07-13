@@ -370,6 +370,12 @@ fi
 ln -sf "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
 log_success "Ghostty configuration linked"
 
+# Silence login banners (Last login / You have mail) in new terminal sessions
+if [ ! -f "$HOME/.hushlogin" ]; then
+    touch "$HOME/.hushlogin"
+    log_info "Created ~/.hushlogin to silence login banners"
+fi
+
 # Set up git configuration
 log_info "Setting up git configuration..."
 if [ -f "$HOME/.gitconfig" ] && [ ! -L "$HOME/.gitconfig" ]; then
