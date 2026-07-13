@@ -13,8 +13,9 @@ font-style = SemiBold
 # Match italics to the semibold body weight instead of regular-weight italic.
 font-style-italic = SemiBold Italic
 
-# Auto light/dark: follows the OS appearance. `ghostty +list-themes` for more.
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+# `ghostty +list-themes` for options. For OS-driven light/dark use the form
+# `light:<theme>,dark:<theme>` (e.g. light:Rose Pine Dawn,dark:Rose Pine Moon).
+theme = Rose Pine Moon
 
 # Frosted-glass background. Opacity: 0=transparent, 1=opaque. Blur is a radius
 # (macOS-native; on Linux depends on the compositor). Keep it subtle for legibility.
@@ -23,10 +24,10 @@ background-blur = 50
 
 window-padding-x = 8
 window-padding-y = 6
-# Hide the titlebar for a chrome-less look. Traffic-light buttons still appear on
-# hover and the window keeps native corners/shadow/resize. macOS-only (ignored
-# elsewhere). For a fully borderless window use `window-decoration = none` instead.
-macos-titlebar-style = hidden
+# Slim titlebar with tabs integrated into it: minimal chrome while keeping a
+# clickable tab bar (macOS renders tabs in the titlebar, so a fully hidden
+# titlebar would remove them). macOS-only (ignored elsewhere).
+macos-titlebar-style = tabs
 cursor-style = block
 # Shell integration otherwise switches the cursor to a bar at the prompt; keep it
 # a block everywhere. `no-cursor` merges with defaults (title/path/etc. stay on).
