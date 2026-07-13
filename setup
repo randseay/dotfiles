@@ -360,6 +360,16 @@ fi
 ln -sf "$DOTFILES/tmux/.tmux.conf" "$HOME/.tmux.conf"
 log_success "Tmux configuration linked"
 
+# Set up Ghostty configuration
+log_info "Setting up Ghostty configuration..."
+mkdir -p "$HOME/.config/ghostty"
+if [ -f "$HOME/.config/ghostty/config" ] && [ ! -L "$HOME/.config/ghostty/config" ]; then
+    log_warning "ghostty config already exists. Backing up..."
+    cp "$HOME/.config/ghostty/config" "$DOTFILES/dotfile_backups/ghostty_config_backup_$(date +%Y%m%d_%H%M%S)"
+fi
+ln -sf "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
+log_success "Ghostty configuration linked"
+
 # Set up git configuration
 log_info "Setting up git configuration..."
 if [ -f "$HOME/.gitconfig" ] && [ ! -L "$HOME/.gitconfig" ]; then

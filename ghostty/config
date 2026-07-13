@@ -1,0 +1,53 @@
+# Ghostty configuration (portable via ~/dotfiles).
+# Linked to ~/.config/ghostty/config by `setup`. Works on macOS and Linux/WSL.
+# Reference: https://ghostty.org/docs/config
+# Reload after edits: Cmd+Shift+, (macOS). List options: `ghostty +show-config --default=true`.
+
+# --- Appearance ---
+# JetBrainsMono Nerd Font: ligatures + the full Nerd Font glyph set (all icons).
+# The "Mono" variant keeps icons at a single cell width so status bars stay aligned.
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 18
+# Use the SemiBold face for normal text (bold stays Bold, i.e. heavier).
+font-style = SemiBold
+# Match italics to the semibold body weight instead of regular-weight italic.
+font-style-italic = SemiBold Italic
+
+# Auto light/dark: follows the OS appearance. `ghostty +list-themes` for more.
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+# Frosted-glass background. Opacity: 0=transparent, 1=opaque. Blur is a radius
+# (macOS-native; on Linux depends on the compositor). Keep it subtle for legibility.
+background-opacity = 0.8
+background-blur = 50
+
+window-padding-x = 8
+window-padding-y = 6
+# Hide the titlebar for a chrome-less look. Traffic-light buttons still appear on
+# hover and the window keeps native corners/shadow/resize. macOS-only (ignored
+# elsewhere). For a fully borderless window use `window-decoration = none` instead.
+macos-titlebar-style = hidden
+cursor-style = block
+# Shell integration otherwise switches the cursor to a bar at the prompt; keep it
+# a block everywhere. `no-cursor` merges with defaults (title/path/etc. stay on).
+shell-integration-features = no-cursor
+mouse-hide-while-typing = true
+
+# --- Behavior ---
+scrollback-limit = 10000000
+copy-on-select = clipboard
+confirm-close-surface = false
+window-save-state = always
+
+# On macOS, let the left Option key send Alt so terminal Alt-keybinds work.
+# Ignored on Linux, so it stays portable.
+macos-option-as-alt = left
+
+# Multiplexing (panes/sessions/persistence) is delegated to herdr / zellij / tmux,
+# so Ghostty's own splits are intentionally left minimal here.
+
+# --- Machine-specific overrides ---
+# Optional, untracked. Create ~/.config/ghostty/config.local on any machine that
+# needs different settings (e.g. font-size on a 4K display). The `?` makes it
+# optional: absent -> ignored, present -> overrides the values above.
+config-file = ?config.local
