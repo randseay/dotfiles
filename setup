@@ -130,10 +130,12 @@ if [ "$SLIM_MODE" = false ]; then
     log_info "Installing fonts..."
     if [ "$IS_MACOS" = true ]; then
         cp -r "$DOTFILES/fonts/powerline-fonts/"* "$HOME/Library/Fonts/" 2>/dev/null || true
+        cp -r "$DOTFILES/fonts/jetbrains-mono-nerd-font/"* "$HOME/Library/Fonts/" 2>/dev/null || true
         log_success "Fonts installed to ~/Library/Fonts"
     elif [ "$IS_LINUX" = true ]; then
         mkdir -p "$HOME/.local/share/fonts"
         cp -r "$DOTFILES/fonts/powerline-fonts/"* "$HOME/.local/share/fonts/" 2>/dev/null || true
+        cp -r "$DOTFILES/fonts/jetbrains-mono-nerd-font/"* "$HOME/.local/share/fonts/" 2>/dev/null || true
         fc-cache -fv &>/dev/null
         log_success "Fonts installed to ~/.local/share/fonts"
     fi
