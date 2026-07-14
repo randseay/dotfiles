@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, lib, user, ... }:
 
 {
   # Determinate Systems' installer already manages the Nix daemon; letting
@@ -6,6 +6,12 @@
   nix.enable = false;
 
   nixpkgs.hostPlatform = "aarch64-darwin";
+
+  # `_1password-cli` is licensed `unfree`, so nixpkgs blocks it by default.
+  # Allow just this package by name rather than a blanket `allowUnfree = true`,
+  # so any *other* unfree package added later still needs a deliberate opt-in.
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "1password-cli" ];
 
   system.primaryUser = user;
   users.users.${user}.home = "/Users/${user}";
