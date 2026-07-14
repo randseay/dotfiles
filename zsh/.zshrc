@@ -156,3 +156,9 @@ function brain() {
 
 # Load local machine-specific configuration
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# Added by Antigravity
+export PATH="/Users/rand/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/rand/.antigravity-ide/antigravity-ide/bin:$PATH"
