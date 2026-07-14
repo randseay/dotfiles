@@ -19,10 +19,23 @@
     "figma@claude-plugins-official": true,
     "linear@claude-plugins-official": true
   },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
   "effortLevel": "high",
   "tui": "default",
   "editorMode": "vim",
+  "model": "opus[1m]",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
-  "model": "opus[1m]"
+  "voiceEnabled": true
 }
