@@ -1,29 +1,31 @@
 # Rand's Dotfiles
 
-A lean, modern dotfiles configuration using [mise-en-place](https://mise.jdx.dev/dev-tools/) for tool management.
+macOS is provisioned declaratively with **nix-darwin + home-manager**, pinned exactly via a flake. Non-macOS devboxes/CI still use a lean bash `setup --slim` + mise, since Nix isn't always available or wanted there.
 
 ## Features
 
+- **Declarative macOS provisioning**: One flake (`flake.nix` + `darwin/` + `home/`) builds system settings, Homebrew, and dotfiles as one reproducible closure. `darwin-rebuild rollback` undoes a bad change atomically.
 - **Custom Zsh Theme**: Personalized prompt with battery status, git info, and path abbreviation
-- **Modern Tool Management**: Uses [mise-en-place](https://mise.jdx.dev/dev-tools/) instead of outdated version managers
 - **macOS Optimized**: Custom macOS preferences and Apple Silicon support
-- **Easy Management**: Simple setup and uninstall scripts
 - **Clean Plugin Selection**: Only essential Oh My Zsh plugins for fast loading
-- **Flexible Installation**: Choose between full setup or lean setup
+- **Devbox/CI fallback**: `setup --slim` covers non-macOS environments where Nix isn't the right fit
 
 ## What's Included
 
-### Core Tools (System Package Manager)
-- **Git**: Latest version
-- **Vim**: Latest version  
-- **Tmux**: Latest version
-- **Autojump**: Smart directory jumping
+### macOS (via the flake)
+- **Git, Vim, Tmux, GitHub CLI, autojump, 1Password CLI**: exact versions pinned by `flake.lock`
+- **Python 3.12, Node.js (current LTS), Bun**: same — see `home/packages.nix`
+- **Modern CLI Tools**: ripgrep, fd, bat, eza, direnv
+- **Fonts**: JetBrains Mono Nerd Font, Powerline fonts — installed via nix-darwin's `fonts.packages`, not a one-time copy
+- **Homebrew**: still used for anything not in nixpkgs (managed declaratively via `nix-homebrew`, not manual `brew install`)
+
+### Devbox/CI (`./setup --slim`, no Nix)
+- **Modern CLI Tools**: ripgrep, fd, bat, eza, direnv (via system package manager)
+- Assumes heavier dev tools (git, vim, tmux, python, node) are already present
 
 ### Development Tools (via mise)
-- **Python**: 3.12 (for prompt scripts)
-- **JavaScript Runtimes**: Node.js 20 with corepack, Bun latest
-- **Modern CLI Tools**: ripgrep, fd, bat, eza
-- **direnv**: Environment management
+
+mise is no longer used for this machine's global tools — that moved to `home/packages.nix`. It's kept for **per-project** tool pinning (see [Project-Specific Configuration](#project-specific-configuration) below) — `~/dev/ai-agents`, for example, pins its own `bun`/`pm2`/`uv` versions this way.
 
 ### Custom Zsh Theme
 - Battery status with charging indicator
@@ -64,60 +66,62 @@ The setup includes enhanced aliases for common commands:
 
 ## Quick Start
 
+### macOS
+
 1. **Clone the repository**:
    ```bash
    git clone git@github.com:randseay/dotfiles.git ~/dotfiles
-   ```
-
-2. **Navigate into the dotfiles**
-   ```bash
    cd ~/dotfiles
    ```
 
-3. **Choose your setup mode**:
-   
-   **Full setup (recommended for fresh machines):**
+2. **First time on this Mac** — installs Nix (Determinate Systems installer) and does the first `darwin-rebuild switch`:
    ```bash
-   ./setup
+   ./bootstrap.sh
    ```
-   
-   **Slim setup (for devbox/deterministic environments):**
-   ```bash
-   ./setup --slim
-   ```
+   If this is a *new* machine (not `rands-mac-mini`), add its hostname to `knownHosts` in `flake.nix` first — see [Adding a New Mac](#adding-a-new-mac).
 
-4. **Restart your terminal** or run:
+3. **Every change after that**:
    ```bash
-   source ~/.zshrc
+   ./rebuild.sh
    ```
 
-## Setup Modes
+4. **Open a new terminal** — your current shell predates the switch and won't pick up the new `PATH`.
 
-### Full Setup (`./setup`)
-Installs everything needed for a complete development environment:
-- Homebrew package manager
-- mise-en-place for tool management
-- All development tools (git, vim, tmux, python, node, bun, etc.)
-- Fonts for custom prompt
-- Vim configuration
-- macOS preferences
-- Zsh and git configuration
+`bootstrap.sh`/`rebuild.sh` both auto-detect the current hostname via `scutil`, so neither needs editing per-machine.
 
-### Slim Setup (`./setup --slim`)
-Configuration-only mode for environments where heavy development tools are already available:
-- **Installs**: Oh My Zsh (required for zsh configuration)
-- **Installs**: direnv (required for zsh configuration)
-- **Installs**: Modern CLI tools (eza, bat, fd, ripgrep) for enhanced aliases
-- **Installs**: Custom zsh theme and plugins
-- **Configures**: Zsh and git settings
-- **Skips**: Heavy development tools (git, vim, tmux, python, node, etc.), fonts, vim config, macOS preferences
-- **Perfect for**: devbox, Docker containers, CI/CD environments
+### Devbox / CI (no Nix)
+
+```bash
+./setup --slim
+source ~/.zshrc
+```
 
 ### Help and Options
 ```bash
 ./setup --help          # Show all available options
-./setup --slim          # Configuration-only mode
-./setup                 # Full setup mode (default)
+./setup --slim          # Configuration-only mode, no Nix (devbox/CI)
+```
+
+## Adding a New Mac
+
+1. Add the machine's hostname to `knownHosts` in `flake.nix` (one line).
+2. **Before running `bootstrap.sh` there**: audit that machine's existing Homebrew state (`brew leaves`, `brew list --cask`) and add anything worth keeping to `homebrew.brews`/`casks` in `darwin/configuration.nix`. `homebrew.onActivation.cleanup = "zap"` removes anything installed but not declared — on the *first* switch, that means anything from that machine's prior life that isn't already accounted for.
+3. If the macOS username differs from `rand`, update `user` in `flake.nix`.
+4. Run `./bootstrap.sh`.
+
+## Validating Without Applying
+
+Check that the flake builds before touching the system — useful after any edit:
+```bash
+nix flake check --no-build
+nix build ".#darwinConfigurations.$(scutil --get LocalHostName).system" --dry-run
+```
+
+## Rolling Back
+
+nix-darwin and home-manager keep generations, so a bad `./rebuild.sh` is reversible:
+```bash
+darwin-rebuild rollback
 ```
 
 ## Tool Management
@@ -175,12 +179,13 @@ python = "3.11"
 bun = "1.0"
 ```
 
-mise will automatically use these versions when you're in that directory.
+mise will automatically use these versions when you're in that directory. This is the still-current way to pin per-project tool versions — the machine's own global tools moved to Nix, but project-level mise usage is unaffected.
 
 ## Uninstalling
 
-To remove the dotfiles setup:
+**macOS**: there's no single "uninstall" — `darwin-rebuild rollback` reverts the last `./rebuild.sh`. To fully remove Nix itself, see the [Determinate Nix uninstaller](https://determinate.systems/nix-installer/). `./uninstall` only undoes the legacy bash `setup` script and doesn't know about anything nix-darwin/home-manager manage — don't use it on a Nix-provisioned Mac.
 
+**Devbox/CI** (`./setup --slim` only, no Nix involved):
 ```bash
 ./uninstall
 ```
@@ -189,13 +194,18 @@ To remove the dotfiles setup:
 
 ### Adding New Aliases
 
-Edit `zsh/.zshrc` and add your aliases in the aliases section.
+Edit `zsh/.zshrc` and add your aliases in the aliases section. Takes effect immediately (live-linked), no rebuild needed.
 
 ### Modifying the Theme
 
-Edit `zsh/rand2.zsh-theme` to customize your prompt appearance.
+Edit `zsh/rand2.zsh-theme` to customize your prompt appearance. Also live-linked.
 
-### Adding New Tools
+### Adding New Tools (macOS)
+
+1. Add the package to `home/packages.nix`
+2. Run `./rebuild.sh`
+
+### Adding New Tools (devbox/CI, no Nix)
 
 1. Add to `mise.toml`
 2. Run `mise sync`
@@ -238,7 +248,9 @@ echo "your-email@example.com ssh-ed25519 $(cat ~/.ssh/id_ed25519_signing.pub)" >
 
 #### 3. Update Git Config
 
-Edit `~/.gitconfig` and update the signing key path:
+**macOS**: `~/.gitconfig` is generated by home-manager's `programs.git` module now — edit `home/git.nix`'s `settings.user.signingkey` instead, then run `./rebuild.sh`. Editing `~/.gitconfig` directly won't stick.
+
+**Devbox/CI** (`./setup --slim`): edit `~/.gitconfig` (symlinked from `git/.gitconfig`) directly:
 
 ```ini
 [user]
@@ -293,9 +305,9 @@ git submodule update --init --recursive
 
 ## Requirements
 
-- **Full setup**: macOS (tested on Apple Silicon and Intel)
-  - Installs all tools via Homebrew and mise-en-place
-- **Slim setup**: Any Unix-like system
+- **macOS** (Apple Silicon; Intel needs one line changed — `nixpkgs.hostPlatform` in `darwin/configuration.nix`)
+  - `./bootstrap.sh` installs Nix (Determinate Systems installer) and everything else via the flake
+- **Slim setup** (`./setup --slim`, no Nix): any Unix-like system
   - Installs essential tools (Oh My Zsh, direnv, modern CLI tools) via package manager
   - Assumes heavy development tools (git, vim, tmux, python, node) are pre-installed
 - Internet connection for initial setup
@@ -304,30 +316,32 @@ git submodule update --init --recursive
 ## Troubleshooting
 
 ### Python Scripts Not Working
-Ensure Python 3.12+ is installed via mise:
+**macOS**: confirm `python312` is in `home/packages.nix` and run `./rebuild.sh`.
+**Devbox/CI**: ensure Python 3.12+ is installed via mise:
 ```bash
 mise use python@3.12
 ```
 
 ### Fonts Not Displaying
-Install fonts manually:
+**macOS**: fonts come from nix-darwin's `fonts.packages` in `darwin/configuration.nix` — run `./rebuild.sh`, then check `fc-list | grep -i jetbrains`. If they're not there, the package name/attribute may have changed upstream in nixpkgs.
+**Devbox/CI or manual fallback**: install fonts directly:
 ```bash
 cp -r fonts/powerline-fonts/* ~/Library/Fonts/
 ```
 
 ### Tool Not Found
-Check if the tool is installed:
+**macOS**: check whether the tool is in `home/packages.nix` (or a `programs.*` module), add it, and run `./rebuild.sh`.
+**Devbox/CI**: check if the tool is installed:
 ```bash
 mise ls
 ```
-
 Install missing tools:
 ```bash
 mise sync
 ```
 
 ### Zsh Plugins Not Working
-Ensure plugins are installed in the custom directory:
+Oh My Zsh itself and the `zsh-autosuggestions`/`zsh-syntax-highlighting` plugins are **not** yet nix-managed (a deliberate scope cut — see `home/zsh.nix`'s comment) — they still come from the same Oh My Zsh installer / plugin git-clones as before, on both macOS and devbox/CI. Ensure plugins are installed in the custom directory:
 ```bash
 ls ~/.oh-my-zsh/custom/plugins/
 ```
@@ -336,7 +350,7 @@ Reinstall if needed:
 ```bash
 ./setup --slim  # For slim mode
 # or
-./setup         # For full mode
+./setup         # For full mode (macOS pre-Nix-migration path — still installs Oh My Zsh/plugins)
 ```
 
 ### Shell Configuration Issues
@@ -369,16 +383,16 @@ If you get errors about Oh My Zsh not loading or direnv not found:
 ### Common Setup Issues
 
 #### **Commands Not Found After Setup**
-If you see errors like "Command 'eza' not found" after running the setup:
+If you see errors like "Command 'eza' not found" after running `./bootstrap.sh`/`./rebuild.sh` on macOS:
 
-**Problem**: You're still in bash, but the setup script linked your zsh configuration with aliases.
+**Problem**: Your current shell predates the switch and still has the old `PATH`.
 
-**Solution**: Switch to zsh to use your configuration:
+**Solution**: Open a new terminal window/tab.
+
+If you see the same thing after `./setup --slim` on a devbox: you're still in bash, but the setup script linked your zsh configuration with aliases — switch to zsh:
 ```bash
 zsh
 ```
-
-**Why this happens**: The setup script configures zsh, but you need to actually be running zsh for those configurations to take effect.
 
 #### **Cannot Change Default Shell**
 If you get permission errors when trying to change your default shell:
