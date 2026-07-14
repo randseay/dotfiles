@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Personal dotfiles repo for macOS. Manages zsh configuration, a custom Oh My Zsh theme, Python prompt scripts, git config, vim config, and AI agent skills. Uses [mise-en-place](https://mise.jdx.dev/dev-tools/) for tool version management.
+Personal dotfiles repo for macOS. Manages zsh configuration, a custom Oh My Zsh theme, Python prompt scripts, git config, vim config, and AI agent skills. Machine provisioning is a flake (`flake.nix` + `darwin/` + `home/`) using nix-darwin and home-manager. mise-en-place is still used for per-project tool pinning (e.g. `~/dev/ai-agents`'s own `mise.toml`), but no longer manages this machine's global tools — that's `home/packages.nix` now.
 
 ## Key Architecture
 
@@ -22,11 +22,11 @@ These scripts are invoked as shell aliases defined in `zsh/.zshrc` and called fr
 
 ### Setup System
 
-Single `setup` script at repo root with two modes:
-- `./setup` - Full mode (macOS only): Homebrew, mise, all dev tools, fonts, vim, macOS prefs
-- `./setup --slim` - Config-only mode (cross-platform): Oh My Zsh, direnv, modern CLI tools, zsh/git config
+**macOS (current):** `flake.nix` defines `darwinConfigurations` (nix-darwin + home-manager, one entry per `knownHosts` hostname) and `homeConfigurations."rand@linux"` (standalone home-manager, no nix-darwin — for devbox/CI use, not yet exercised). `darwin/configuration.nix` holds system-level config (macOS defaults, fonts, declarative Homebrew via `nix-homebrew`). `home/*.nix` holds one module per concern (`zsh.nix`, `git.nix`, `tmux.nix`, `vim.nix`, `ghostty.nix`, `claude.nix`, `packages.nix`); `home.nix` is the entry point and wires them together per `profile` ("full" on macOS, "slim" on Linux). Run `./bootstrap.sh` once on a new Mac (installs Nix, does the first `darwin-rebuild switch`); `./rebuild.sh` for every change after that — both auto-detect the current hostname via `scutil`.
 
-The setup script symlinks config files into place: `zsh/.zshrc` to `~/.zshrc`, the theme to `~/.oh-my-zsh/custom/themes/`, and `claude/CLAUDE.md` to `~/.claude/CLAUDE.md` (along with vim, tmux, ghostty, and git config). Because these are symlinks, edits to the repo files take effect immediately. Any pre-existing real file is backed up to `dotfile_backups/` before linking.
+Every raw dotfile link (`.zshrc`, `.vimrc`, `.tmux.conf`, ghostty config, Claude config) uses home-manager's `config.lib.file.mkOutOfStoreSymlink`, which points straight at this repo rather than copying into the Nix store — edits to the repo files still take effect immediately, no rebuild needed, matching the old setup script's behavior.
+
+**Legacy bash `setup`/`uninstall`/`lib/utils.sh`** still exist at repo root but are no longer used on macOS — pending deletion once the migration fully settles (tracked in GitHub issues). `agent/setup` is still live, just retargeted: home-manager invokes it as an activation hook (`home/claude.nix`) instead of the old `setup` script calling it directly.
 
 ### Agent Skills
 
@@ -43,4 +43,4 @@ Skills in `agent/skills/` are symlinked to `~/.claude/skills/` and `~/.agent/ski
 
 - Python scripts use `#!/usr/bin/env python3` and write output via `sys.stdout.write()` (no trailing newline)
 - Zsh color codes use Oh My Zsh's `$FG[nnn]` 256-color format
-- The `mise.toml` at repo root defines global tool versions (Python 3.12 is required for prompt scripts)
+- Prompt scripts require Python 3.12, provided by `home/packages.nix` (full profile) now, not mise. The repo-root `mise.toml` is legacy — kept only because `~/dev/ai-agents` still depends on the `mise` binary being installed, not because anything in this repo reads it anymore
