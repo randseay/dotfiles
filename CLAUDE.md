@@ -26,7 +26,7 @@ Single `setup` script at repo root with two modes:
 - `./setup` - Full mode (macOS only): Homebrew, mise, all dev tools, fonts, vim, macOS prefs
 - `./setup --slim` - Config-only mode (cross-platform): Oh My Zsh, direnv, modern CLI tools, zsh/git config
 
-The setup script copies (not symlinks) `zsh/.zshrc` to `~/.zshrc` and the theme to `~/.oh-my-zsh/custom/themes/`. The `claude/CLAUDE.md` is symlinked to `~/.claude/CLAUDE.md`. Backups go to `dotfile_backups/`.
+The setup script symlinks config files into place: `zsh/.zshrc` to `~/.zshrc`, the theme to `~/.oh-my-zsh/custom/themes/`, and `claude/CLAUDE.md` to `~/.claude/CLAUDE.md` (along with vim, tmux, ghostty, and git config). Because these are symlinks, edits to the repo files take effect immediately. Any pre-existing real file is backed up to `dotfile_backups/` before linking.
 
 ### Agent Skills
 
@@ -34,10 +34,10 @@ Skills in `agent/skills/` are symlinked to `~/.claude/skills/` and `~/.agent/ski
 
 ## After Modifying Files
 
-- **Theme changes** (`zsh/rand2.zsh-theme`): Must be re-copied to `~/.oh-my-zsh/custom/themes/rand2.zsh-theme` to take effect. Run: `cp zsh/rand2.zsh-theme ~/.oh-my-zsh/custom/themes/`
-- **Zshrc changes** (`zsh/.zshrc`): Must be re-copied to `~/.zshrc`. Run: `cp zsh/.zshrc ~/.zshrc`
+- **Theme changes** (`zsh/rand2.zsh-theme`): Symlinked, so edits are live. Start a new shell (or `source ~/.zshrc`) to see them.
+- **Zshrc changes** (`zsh/.zshrc`): Symlinked, so edits are live. Run `source ~/.zshrc` or open a new terminal for running shells to pick them up.
 - **Python prompt scripts**: Changes take effect immediately (invoked by path from aliases)
-- **Test prompt changes**: Run `source ~/.zshrc` in a terminal after copying
+- **Test prompt changes**: Run `source ~/.zshrc` in a terminal after editing
 
 ## Conventions
 
