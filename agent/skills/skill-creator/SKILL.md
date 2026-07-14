@@ -1,7 +1,6 @@
 ---
 name: skill-creator
-description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends an AI agent's capabilities with specialized knowledge, workflows, or tool integrations.
-license: Complete terms in LICENSE.txt
+description: Creates and improves skills — modular capability packages that extend agents with specialized workflows, domain knowledge, and bundled resources. Use when asked to create a new skill, update or improve an existing skill, or design the structure and content of a skill directory.
 ---
 
 # Skill Creator
