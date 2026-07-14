@@ -19,7 +19,7 @@ theme = Rose Pine Moon
 
 # Frosted-glass background. Opacity: 0=transparent, 1=opaque. Blur is a radius
 # (macOS-native; on Linux depends on the compositor). Keep it subtle for legibility.
-background-opacity = 0.8
+background-opacity = 0.85
 background-blur = 50
 
 window-padding-x = 8
