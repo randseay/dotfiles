@@ -1,41 +1,55 @@
 {
+  "agentPushNotifEnabled": true,
+  "editorMode": "vim",
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "linear@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "repo": "anthropics/skills",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/Users/rand/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ]
+  },
+  "model": "opus[1m]",
   "permissions": {
     "allow": [
       "Bash(ls:*)",
       "mcp__linear-server__*"
     ]
   },
-  "enabledPlugins": {
-    "slack@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "github@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true,
-    "commit-commands@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "linear@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    }
-  },
-  "effortLevel": "high",
+  "remoteControlAtStartup": true,
   "tui": "default",
-  "editorMode": "vim",
-  "model": "opus[1m]",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
-  "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
   "voiceEnabled": true
 }
