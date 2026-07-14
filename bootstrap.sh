@@ -4,7 +4,9 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-HOST="rands-mac-mini"
+HOST="$(scutil --get LocalHostName)"
+# If this hostname isn't in `knownHosts` in flake.nix yet (e.g. a new Mac),
+# add it there first — one line, no other file needs to change.
 
 echo "==> Step 1: Determinate Nix"
 if command -v nix >/dev/null 2>&1; then

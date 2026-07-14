@@ -19,9 +19,14 @@
     let
       user = "rand";
       dotfilesDir = "/Users/rand/dotfiles";
-    in
-    {
-      darwinConfigurations."rands-mac-mini" = nix-darwin.lib.darwinSystem {
+
+      # Every Mac this flake is meant to run on. `bootstrap.sh`/`rebuild.sh`
+      # auto-detect the current machine's hostname at runtime — add a new
+      # hostname here (one line) when setting up on another Mac, rather than
+      # hand-editing a single hardcoded name in multiple files.
+      knownHosts = [ "rands-mac-mini" ];
+
+      mkDarwinHost = _hostname: nix-darwin.lib.darwinSystem {
         specialArgs = { inherit user dotfilesDir; };
         modules = [
           ./darwin/configuration.nix
@@ -35,6 +40,9 @@
           }
         ];
       };
+    in
+    {
+      darwinConfigurations = nixpkgs.lib.genAttrs knownHosts mkDarwinHost;
 
       # Standalone home-manager for Linux devboxes/CI — replaces `setup --slim`.
       # Activate with: home-manager switch --flake .#rand@linux
