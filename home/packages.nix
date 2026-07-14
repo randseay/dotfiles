@@ -22,7 +22,7 @@
     _1password-cli
     vim
     python312
-    nodejs_22 # nodejs_20 hit end-of-life in this nixpkgs revision and is now flagged insecure
+    nodejs_24 # nodejs_20 hit end-of-life and was flagged insecure; 24 is the current Active LTS
     bun
     ffmpeg
   ] else [ ]);
