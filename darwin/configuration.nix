@@ -17,12 +17,8 @@
     NSGlobalDomain = {
       ApplePressAndHoldEnabled = false;
       KeyRepeat = 1;
-      InitialKeyRepeat = 1.5; # verify at build time: nix-darwin may require an int here
+      InitialKeyRepeat = 2; # nix-darwin requires an int; nearest to the original 1.5
     };
-    # verify at build time: attribute names/types here (autohide-delay,
-    # expose-animation-duration) match nix-darwin's dock module as of
-    # nix-darwin-26.05 to the best of my knowledge, but weren't build-checked
-    # on this machine (no local Nix installation to run `nix flake check`).
     dock = {
       autohide-delay = 0.0;
       expose-animation-duration = 0.1;
