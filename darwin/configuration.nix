@@ -47,6 +47,12 @@
   nix-homebrew = {
     enable = true;
     inherit user;
+    # This machine already has a real Homebrew install at /opt/homebrew.
+    # autoMigrate hands its management over to nix-homebrew instead of
+    # deleting and reinstalling from scratch — installed packages (herdr,
+    # ghostty, ngrok, orbstack) are kept, only the Homebrew installation
+    # itself is replaced.
+    autoMigrate = true;
   };
 
   homebrew = {
