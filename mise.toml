@@ -23,7 +23,7 @@ direnv = "latest"
 [env]
 # Environment variables
 EDITOR = "vim"
-DOTFILES = "~/dotfiles"
+DOTFILES = "{{config_root}}"
 
 # Python environment
 PYTHONUNBUFFERED = "1"

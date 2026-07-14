@@ -4,6 +4,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load
 ZSH_THEME="rand2"
 
+# mise must activate before oh-my-zsh loads (below) so mise-managed tools,
+# e.g. direnv, are on PATH by the time the `direnv` plugin's presence check runs.
+export PATH="$HOME/.local/bin:$PATH"
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -83,7 +90,7 @@ export EDITOR='vim'
 # export ARCHFLAGS="-arch $(uname -m)"
 
 # Apply my custom things
-export PATH=/opt/homebrew/bin:$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH=/opt/homebrew/bin:$HOME/bin:$PATH
 export DOTFILES=$HOME/dotfiles
 
 # Setup direnv hook (only when installed; absent on some machines)
@@ -107,12 +114,7 @@ alias cat="bat"
 alias find="fd"
 alias grep="rg"
 
-export PATH="$HOME/.local/bin:$PATH"
-
 # mise
-if command -v mise &> /dev/null; then
-  eval "$(mise activate zsh)"
-fi
 alias mx="mise x --"
 alias mls="mise ls"
 alias msync="mise sync"
