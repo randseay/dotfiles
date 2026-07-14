@@ -1,0 +1,21 @@
+[ui]
+agent_panel_sort = "spaces"
+
+# Debounce state-change notifications (both toast and sound). Herdr only notifies if the pane
+# is still in the same state after this delay, so Claude's transient working↔blocked flicker
+# is swallowed and only sustained done / needs-input states ping. Default is 1s.
+[ui.toast]
+delay_seconds = 5
+
+[keys]
+# GNU screen-style prefix. Shadows readline beginning-of-line; double-tap ctrl+a to send a literal one.
+prefix = "ctrl+a"
+
+# Agent layer, all under prefix+ctrl. Not shift+ (shift+digit emits "!@#…", which the
+# indexed matcher never sees as 1..9) and not alt+ (claimed globally by Wispr Flow).
+# Focus the Nth agent in the panel: prefix, then ctrl+1..9.
+focus_agent = "prefix+ctrl+1..9"
+# Cycle agents: n = next, p = previous (matches next_tab/previous_tab mnemonic).
+# Not ctrl+j/ctrl+k — those alias newline (LF) / kill and don't fire in prefix mode.
+next_agent = "prefix+ctrl+n"
+previous_agent = "prefix+ctrl+p"

@@ -13,6 +13,7 @@ in
   ] ++ lib.optionals isFull [
     ./vim.nix
     ./ghostty.nix
+    ./herdr.nix
   ];
 
   home.username = "rand";

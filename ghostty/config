@@ -50,6 +50,13 @@ macos-option-as-alt = left
 # Multiplexing (panes/sessions/persistence) is delegated to herdr / zellij / tmux,
 # so Ghostty's own splits are intentionally left minimal here.
 
+# --- Quick terminal (quake-style drop-down) ---
+# Replaces the iTerm hotkey-window habit. `global:` makes the chord fire even when
+# Ghostty is unfocused (needs macOS Accessibility permission on first use). macOS has
+# no double-tap-modifier trigger, so this is a real chord. Appearance knobs
+# (quick-terminal-position/-animation-duration/-autohide) are left at defaults.
+keybind = global:alt+space=toggle_quick_terminal
+
 # --- Machine-specific overrides ---
 # Optional, untracked. Create ~/.config/ghostty/config.local on any machine that
 # needs different settings (e.g. font-size on a 4K display). The `?` makes it
