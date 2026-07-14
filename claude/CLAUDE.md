@@ -6,6 +6,14 @@ Global configuration for Claude Code sessions. This file provides preferences an
 
 @~/dotfiles/agent/AGENTS.md
 
+## Opinions
+
+@~/dotfiles/OPINIONS.md
+
+## Voice Profile
+
+@~/dotfiles/VOICE.md
+
 ## Code Style & Conventions
 
 - **Modern JavaScript**: Use ES modules (`import`/`export`) instead of CommonJS (`require`)
