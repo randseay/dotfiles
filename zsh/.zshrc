@@ -158,7 +158,7 @@ function brain() {
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Added by Antigravity
-export PATH="/Users/rand/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # Added by Antigravity IDE
-export PATH="/Users/rand/.antigravity-ide/antigravity-ide/bin:$PATH"
+export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
