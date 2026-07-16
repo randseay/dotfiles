@@ -45,10 +45,22 @@
     defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false
   '';
 
+  # nix-darwin kills Dock on every activation that touches `dock.*` above; Apple's
+  # own Dock.agent plist only relaunches it on-demand, which isn't firing reliably
+  # on this machine, so Cmd+Tab dies with it. Force the relaunch as a safety net.
+  #
   # Unlike Dock, nix-darwin never restarts anything for `_HIHideMenuBar` — the
   # value gets written but the menu-bar-owning process keeps its old cached
   # decision until reloaded. Killall'ing it (no logout needed) is the documented fix.
   system.activationScripts.postActivation.text = ''
+    dockAgent="gui/$(id -u ${user})/com.apple.Dock.agent"
+    dockRunning() { launchctl print "$dockAgent" 2>/dev/null | grep -q "state = running"; }
+    if ! dockRunning; then
+      launchctl kickstart -k "$dockAgent" || true
+      sleep 1
+      dockRunning || killall -qu ${user} Dock || true
+    fi
+
     killall -qu ${user} SystemUIServer || true
     killall -qu ${user} Finder || true
   '';
