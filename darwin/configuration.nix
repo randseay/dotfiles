@@ -27,10 +27,13 @@
       # because a shell `defaults write` needed a logout to fully take effect.
       KeyRepeat = 2;
       InitialKeyRepeat = 15;
+      _HIHideMenuBar = true;
     };
     dock = {
+      autohide = true;
       autohide-delay = 0.0;
       expose-animation-duration = 0.1;
+      orientation = "left";
     };
   };
 
@@ -40,6 +43,14 @@
     chflags nohidden "/Users/${user}/Library/"
     defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
     defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false
+  '';
+
+  # Unlike Dock, nix-darwin never restarts anything for `_HIHideMenuBar` — the
+  # value gets written but the menu-bar-owning process keeps its old cached
+  # decision until reloaded. Killall'ing it (no logout needed) is the documented fix.
+  system.activationScripts.postActivation.text = ''
+    killall -qu ${user} SystemUIServer || true
+    killall -qu ${user} Finder || true
   '';
 
   fonts.packages = [
