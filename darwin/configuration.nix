@@ -22,8 +22,11 @@
   system.defaults = {
     NSGlobalDomain = {
       ApplePressAndHoldEnabled = false;
-      KeyRepeat = 1;
-      InitialKeyRepeat = 2; # nix-darwin requires an int; nearest to the original 1.5
+      # 2 / 15 are the fastest values Apple's System Settings sliders expose; the
+      # old script's 1 / 1.5 was faster than the UI allows and only seemed to work
+      # because a shell `defaults write` needed a logout to fully take effect.
+      KeyRepeat = 2;
+      InitialKeyRepeat = 15;
     };
     dock = {
       autohide-delay = 0.0;
