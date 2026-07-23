@@ -35,6 +35,16 @@
           }
         ],
         "matcher": "*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "bash '/Users/randngrok.com/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
       }
     ]
   },
@@ -43,7 +53,8 @@
     "allow": [
       "Bash(ls:*)",
       "mcp__linear-server__*"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "remoteControlAtStartup": true,
   "tui": "default",
