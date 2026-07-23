@@ -21,4 +21,8 @@ When you are working on something that would benefit from being informed by Rand
 
 ## Voice Profile
 
-When you are talking/posting on behalf of Rand using his identity, read ~/dotfiles/VOICE.md to see how Rand talks. 
+When you are talking/posting on behalf of Rand using his identity, read ~/dotfiles/VOICE.md to see how Rand talks.
+
+## PR Descriptions
+
+When you are writing a pull request description on Rand's behalf, read ~/dotfiles/PR-DESCRIPTIONS.md for the required structure and format.
